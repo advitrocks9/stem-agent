@@ -1,0 +1,260 @@
+[
+  {
+    "id": "us-phone",
+    "difficulty": "med",
+    "prompt": "A regex that matches US phone numbers in any of these forms: '(123) 456-7890', '123-456-7890', '123.456.7890'. Reject any other formatting and partial matches. Output ONLY the regex (no slashes, no quotes).",
+    "positives": [
+      "(123) 456-7890",
+      "555-867-5309",
+      "415.867.5309"
+    ],
+    "negatives": [
+      "1234567890",
+      "123 456 7890",
+      "(123)-456-7890",
+      "abc-def-ghij",
+      "123-45-6789"
+    ]
+  },
+  {
+    "id": "strong-pw",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a strong password: at least 8 characters, contains at least one lowercase letter, one uppercase letter, one digit, and one of !@#$%^&*. Reject anything missing one of those. Output ONLY the regex.",
+    "positives": [
+      "Abcdef1!",
+      "P@ssw0rd9",
+      "Hunter2!x"
+    ],
+    "negatives": [
+      "password",
+      "Abcdefgh",
+      "abcdef1!",
+      "ABCDEF1!",
+      "Abcdef1x",
+      "Abc1!"
+    ]
+  },
+  {
+    "id": "iso-date",
+    "difficulty": "med",
+    "prompt": "A regex that matches an ISO date 'YYYY-MM-DD' for years 1900..2099, months 01..12, days 01..31. No need to validate days-per-month. Output ONLY the regex.",
+    "positives": [
+      "2024-04-29",
+      "1999-12-31",
+      "2099-01-01"
+    ],
+    "negatives": [
+      "2024-13-01",
+      "2024-04-32",
+      "24-04-29",
+      "2024/04/29",
+      "1899-04-29"
+    ]
+  },
+  {
+    "id": "hex-color",
+    "difficulty": "easy",
+    "prompt": "A regex that matches a CSS hex color: '#' followed by exactly 3 or 6 hex digits. Case insensitive. Output ONLY the regex.",
+    "positives": [
+      "#fff",
+      "#FFFFFF",
+      "#a1b2c3"
+    ],
+    "negatives": [
+      "fff",
+      "#ggg",
+      "#1234",
+      "#12345",
+      "#1234567"
+    ]
+  },
+  {
+    "id": "semver",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a semver version: MAJOR.MINOR.PATCH where each is one or more digits, optionally followed by a hyphen and a pre-release tag of letters/digits/dots (e.g., 'beta.1'). Output ONLY the regex.",
+    "positives": [
+      "1.0.0",
+      "10.20.30",
+      "1.2.3-beta",
+      "1.2.3-beta.1",
+      "0.0.0"
+    ],
+    "negatives": [
+      "1.0",
+      "1.0.0.0",
+      "v1.0.0",
+      "1.0.0-",
+      "1.2.3-!"
+    ]
+  },
+  {
+    "id": "ipv4",
+    "difficulty": "hard",
+    "prompt": "A regex that matches an IPv4 address: four octets 0..255 separated by dots. Reject octets outside the range. Output ONLY the regex.",
+    "positives": [
+      "0.0.0.0",
+      "192.168.1.1",
+      "255.255.255.255"
+    ],
+    "negatives": [
+      "256.0.0.1",
+      "192.168.1",
+      "192.168.1.1.1",
+      "192.168.01.1",
+      "1.2.3.999"
+    ]
+  },
+  {
+    "id": "email-edu",
+    "difficulty": "med",
+    "prompt": "A regex that matches an email ending in '.edu' (e.g., 'name@dept.uni.edu'). Local part: letters, digits, dots, underscores, hyphens. Domain: letters, digits, hyphens, dots. Output ONLY the regex.",
+    "positives": [
+      "a@b.edu",
+      "name.surname@cs.imperial.edu",
+      "a_b-c@d.edu"
+    ],
+    "negatives": [
+      "a@b.com",
+      "a@b",
+      "a@b.edu.uk",
+      "@b.edu",
+      "a@.edu"
+    ]
+  },
+  {
+    "id": "mac-addr",
+    "difficulty": "med",
+    "prompt": "A regex that matches a MAC address: six pairs of hex digits separated by colons or hyphens (consistent separator). Output ONLY the regex.",
+    "positives": [
+      "aa:bb:cc:dd:ee:ff",
+      "AA:BB:CC:DD:EE:FF",
+      "01-23-45-67-89-AB"
+    ],
+    "negatives": [
+      "aa:bb:cc:dd:ee",
+      "aa:bb:cc:dd:ee:ff:00",
+      "aa-bb:cc-dd:ee-ff",
+      "ZZ:bb:cc:dd:ee:ff"
+    ]
+  },
+  {
+    "id": "uk-postcode",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a UK postcode in canonical form 'LETTER+DIGIT+ DIGIT+LETTER+LETTER' loosely: 1-2 letters, 1-2 digits (with optional letter at end of first part), space, then digit and 2 letters. e.g., 'SW1A 1AA', 'M1 1AE', 'EC1A 1BB'. Case insensitive. Output ONLY the regex.",
+    "positives": [
+      "SW1A 1AA",
+      "M1 1AE",
+      "EC1A 1BB",
+      "B33 8TH"
+    ],
+    "negatives": [
+      "SW1A1AA",
+      "SW1A 1A",
+      "12345",
+      "M11 1AE 1",
+      "abc def"
+    ]
+  },
+  {
+    "id": "balanced-paren",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a string of letters wrapped in matching single parentheses, optionally with a single inner pair, e.g., '(abc)' or '(ab(c)d)'. Reject mismatched or deeper nesting. Output ONLY the regex.",
+    "positives": [
+      "(abc)",
+      "(ab(c)d)",
+      "(x(y)z)"
+    ],
+    "negatives": [
+      "(abc",
+      "abc)",
+      "(((a)))",
+      "()",
+      "(a(b(c)d)e)"
+    ]
+  },
+  {
+    "id": "leading-zero-int",
+    "difficulty": "easy",
+    "prompt": "A regex that matches a non-negative integer with no leading zeros (single zero is fine). Output ONLY the regex.",
+    "positives": [
+      "0",
+      "1",
+      "42",
+      "1000000"
+    ],
+    "negatives": [
+      "01",
+      "007",
+      "-1",
+      "1.0",
+      ""
+    ]
+  },
+  {
+    "id": "camel-id",
+    "difficulty": "easy",
+    "prompt": "A regex that matches a lowerCamelCase identifier: starts with a lowercase letter, then any letters/digits, must contain at least one uppercase letter (so not pure lowercase). Output ONLY the regex.",
+    "positives": [
+      "myVar",
+      "fooBar",
+      "aB"
+    ],
+    "negatives": [
+      "MyVar",
+      "myvar",
+      "1myVar",
+      "_myVar",
+      ""
+    ]
+  },
+  {
+    "id": "iso-time",
+    "difficulty": "med",
+    "prompt": "A regex that matches a 24-hour time HH:MM where HH is 00..23 and MM is 00..59. Output ONLY the regex.",
+    "positives": [
+      "00:00",
+      "09:30",
+      "23:59"
+    ],
+    "negatives": [
+      "24:00",
+      "12:60",
+      "9:30",
+      "12:5",
+      "12-30"
+    ]
+  },
+  {
+    "id": "git-sha",
+    "difficulty": "easy",
+    "prompt": "A regex that matches a git short SHA: exactly 7 hex characters, lowercase only. Output ONLY the regex.",
+    "positives": [
+      "abc1234",
+      "0000000",
+      "deadbee"
+    ],
+    "negatives": [
+      "ABC1234",
+      "abc12345",
+      "abc123",
+      "xyz1234",
+      "abc 234"
+    ]
+  },
+  {
+    "id": "no-tabs",
+    "difficulty": "med",
+    "prompt": "A regex that matches a non-empty line with no tab characters. Anchor it. Output ONLY the regex.",
+    "positives": [
+      "hello world",
+      "abc123",
+      "single"
+    ],
+    "negatives": [
+      "",
+      "with\ttab",
+      "leading\tword",
+      "trailing\t"
+    ]
+  }
+]

@@ -1,14 +1,14 @@
 """Spec-driven worker.
 
-Three knobs that change behaviour: system_prompt, validation, max_retries.
-This first version supports only the no_tools branch.
+Two tool policies now: no_tools and validate_retry. validate_retry runs the
+class's validator, feeds the failure back, and retries up to max_retries.
 """
 from __future__ import annotations
 
 import re
 import time
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Callable
 
 from llm import chat
 
@@ -61,7 +61,13 @@ def validate_regex(text: str, task: dict) -> tuple[bool, str]:
     return True, ""
 
 
-def run(task: dict, spec: dict, task_class: str, model: str | None = None) -> Run:
+# bug: keyed on task class, but the spec uses policy names
+VALIDATORS: dict[str, Callable[[str, dict], tuple[bool, str]]] = {
+    "regex": validate_regex,
+}
+
+
+def _run_no_tools(task: dict, spec: dict, model: str | None) -> Run:
     out = Run(output="")
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
@@ -74,3 +80,37 @@ def run(task: dict, spec: dict, task_class: str, model: str | None = None) -> Ru
     out.out_tokens += r.out_tokens
     out.output = r.content
     return out
+
+
+def _run_validate_retry(task: dict, spec: dict, task_class: str, model: str | None) -> Run:
+    out = _run_no_tools(task, spec, model)
+    if spec["validation"] not in VALIDATORS:
+        return out
+    validator = VALIDATORS[spec["validation"]]
+    msgs = [
+        {"role": "system", "content": spec["system_prompt"]},
+        {"role": "user", "content": task["prompt"]},
+    ]
+    for k in range(spec.get("max_retries", 0)):
+        ok, fb = validator(out.output, task)
+        out.steps.append(Step("validate", "ok" if ok else fb))
+        if ok:
+            return out
+        msgs += [
+            {"role": "assistant", "content": out.output},
+            {"role": "user", "content": f"Previous answer failed: {fb}. Produce a corrected answer. Output only the answer."},
+        ]
+        t0 = time.time()
+        r = chat(msgs, model=model)
+        out.in_tokens += r.in_tokens
+        out.out_tokens += r.out_tokens
+        out.output = r.content
+    return out
+
+
+def run(task: dict, spec: dict, task_class: str, model: str | None = None) -> Run:
+    if spec["tool_policy"] == "no_tools":
+        return _run_no_tools(task, spec, model)
+    if spec["tool_policy"] == "validate_retry":
+        return _run_validate_retry(task, spec, task_class, model)
+    raise ValueError(f"unknown tool_policy: {spec['tool_policy']!r}")

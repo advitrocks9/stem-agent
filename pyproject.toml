@@ -1,0 +1,6 @@
+[project]
+name = "stem-agent"
+version = "0.1.0"
+description = "spec-driven worker that differentiates into a class specialist"
+requires-python = ">=3.12"
+dependencies = []

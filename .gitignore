@@ -1,0 +1,13 @@
+.claude/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.cache/
+.DS_Store
+PLAN.md
+SUBMISSION.md
+notes/
+results/
+*.local

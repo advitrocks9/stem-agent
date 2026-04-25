@@ -42,6 +42,9 @@ def _strip_fence(s: str) -> str:
         s = s.split("\n", 1)[1] if "\n" in s else s[3:]
         if s.endswith("```"):
             s = s[:-3]
+        s = s.strip()
+    if len(s) >= 2 and s.startswith("`") and s.endswith("`") and "\n" not in s:
+        s = s[1:-1]
     return s.strip()
 
 
@@ -61,9 +64,10 @@ def validate_regex(text: str, task: dict) -> tuple[bool, str]:
     return True, ""
 
 
-# bug: keyed on task class, but the spec uses policy names
-VALIDATORS: dict[str, Callable[[str, dict], tuple[bool, str]]] = {
-    "regex": validate_regex,
+# Pair the policy with the validator it implies. Mismatched pairs fall
+# through as no-ops so the meta-agent gets a clean signal next iter.
+_VALIDATOR = {
+    ("testcases", "regex"): validate_regex,
 }
 
 
@@ -84,9 +88,9 @@ def _run_no_tools(task: dict, spec: dict, model: str | None) -> Run:
 
 def _run_validate_retry(task: dict, spec: dict, task_class: str, model: str | None) -> Run:
     out = _run_no_tools(task, spec, model)
-    if spec["validation"] not in VALIDATORS:
-        return out
-    validator = VALIDATORS[spec["validation"]]
+    validator = _VALIDATOR.get((spec["validation"], task_class))
+    if validator is None:
+        return out  # mismatched policy/class is a no-op
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
         {"role": "user", "content": task["prompt"]},

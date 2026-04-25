@@ -136,6 +136,9 @@ def evolve(task_class: str, iters: int = 6, out_dir: Path = Path("runs"), seed: 
             print(f"  iter {i}: APOPTOSIS smoke: {why}")
             continue
         ce = evaluate(child, dev, task_class, label=f"{task_class}/iter{i}")
+        # Tried strict improvement (`>`) here first. Killed the regex specialist
+        # because validate_retry can fix a *test* item without moving the *dev*
+        # score on a 12-task dev set. Back to monotone (`>=`).
         if ce.score < parent_eval.score:
             history.append({"iter": i, "spec": child, "rejected": "regression", "child_score": ce.score})
             print(f"  iter {i}: ROLLBACK ({ce.score:.0%} < {parent_eval.score:.0%})")

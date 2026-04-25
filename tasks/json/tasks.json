@@ -1,0 +1,512 @@
+[
+  {
+    "id": "crash-startup",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: App crashes on startup after upgrade to 2.4\nBody: Since upgrading from 2.3 to 2.4 the app fails to start with a NullPointerException in MainActivity.onCreate. Reproduces on every launch on every device we've tested. This was working in 2.3.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "critical",
+      "kind": "regression",
+      "area": "frontend"
+    }
+  },
+  {
+    "id": "typo-readme",
+    "difficulty": "easy",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Typo in README install section\nBody: 'pip instal' should be 'pip install' in the install command on line 23 of README.md.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "docs",
+      "area": "docs"
+    }
+  },
+  {
+    "id": "feat-dark-mode",
+    "difficulty": "easy",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Add dark mode toggle to settings page\nBody: Would be nice to have a dark theme. The settings page currently has no theme option.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "feature",
+      "area": "frontend"
+    }
+  },
+  {
+    "id": "api-500",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: /api/users/{id} returns 500 when id contains uppercase\nBody: GET /api/users/ABC123 returns 500 with a stacktrace. lowercase ids work. Started about a week ago.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "high",
+      "kind": "bug",
+      "area": "api"
+    }
+  },
+  {
+    "id": "ci-flaky",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: integration-tests.yml flakes on Postgres setup\nBody: The integration-tests workflow on GitHub Actions fails on the postgres healthcheck about 1 in 5 runs. Local runs are stable.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "med",
+      "kind": "bug",
+      "area": "infra"
+    }
+  },
+  {
+    "id": "how-to-config",
+    "difficulty": "easy",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: How do I set the cache directory?\nBody: I want to point the cache to /tmp instead of ~/.cache. Is there a config flag or env var?",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "question",
+      "area": "docs"
+    }
+  },
+  {
+    "id": "data-loss",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Migration drops user.preferences silently\nBody: Running migrate from 1.4 to 1.5 the column user.preferences is dropped without warning. Two production tenants have lost data.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "critical",
+      "kind": "bug",
+      "area": "backend"
+    }
+  },
+  {
+    "id": "lint-rule",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Add ESLint rule for unused exports\nBody: Codebase has accumulated dead exports. Suggest enabling 'no-unused-vars' on exports in our shared eslint config.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "feature",
+      "area": "tooling"
+    }
+  },
+  {
+    "id": "perf-search",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Search endpoint p95 latency went from 80ms to 1.2s on Tuesday\nBody: After Tuesday's deploy /api/search p95 jumped from 80ms to 1200ms. No code changes touched search directly. Index size unchanged.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "high",
+      "kind": "regression",
+      "area": "api"
+    }
+  },
+  {
+    "id": "broken-link",
+    "difficulty": "easy",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Broken link in CONTRIBUTING.md\nBody: The 'Style guide' link in CONTRIBUTING.md returns 404.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "docs",
+      "area": "docs"
+    }
+  },
+  {
+    "id": "auth-bypass",
+    "difficulty": "hard",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Admin endpoint accessible without auth header in 1.6.1\nBody: GET /admin/users/all returns the user list when called with no Authorization header. Only happens on 1.6.1; 1.6.0 was fine.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "critical",
+      "kind": "regression",
+      "area": "api"
+    }
+  },
+  {
+    "id": "rate-limit",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Add rate limit headers to public API responses\nBody: Clients can't tell their remaining quota. Adding X-RateLimit-Remaining and X-RateLimit-Reset would unblock several integrations.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "med",
+      "kind": "feature",
+      "area": "api"
+    }
+  },
+  {
+    "id": "prod-down",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: All EU-region prod nodes returning 503 since 14:20 UTC\nBody: Pager fired. Health checks failing in eu-west-1 and eu-central-1. US regions unaffected. Suspected related to today's terraform apply.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "critical",
+      "kind": "bug",
+      "area": "infra"
+    }
+  },
+  {
+    "id": "ux-spinner",
+    "difficulty": "easy",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Spinner doesn't disappear after upload completes\nBody: After file upload finishes the loading spinner remains for ~5s before going away. Network tab shows the request done. Cosmetic only.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "bug",
+      "area": "frontend"
+    }
+  },
+  {
+    "id": "support-q",
+    "difficulty": "med",
+    "prompt": "Extract metadata from this issue. Output ONLY a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other).\n\nTitle: Is the SDK threadsafe?\nBody: We want to share a single client across worker threads. Couldn't find a clear answer in docs.",
+    "schema": {
+      "severity": [
+        "low",
+        "med",
+        "high",
+        "critical"
+      ],
+      "kind": [
+        "bug",
+        "feature",
+        "docs",
+        "question",
+        "regression"
+      ],
+      "area": [
+        "frontend",
+        "backend",
+        "api",
+        "docs",
+        "infra",
+        "tooling",
+        "other"
+      ]
+    },
+    "gold": {
+      "severity": "low",
+      "kind": "question",
+      "area": "docs"
+    }
+  }
+]

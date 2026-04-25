@@ -6,7 +6,8 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from agent import Run, run, validate_regex
+from agent import Run, run, validate_regex, validate_schema, _strip_fence
+import json
 
 
 @dataclass
@@ -39,9 +40,22 @@ def split(tasks: list[dict]) -> dict[str, list[dict]]:
     return {"demo": tasks[:3], "dev": tasks[3:9], "test": tasks[9:]}
 
 
+def _score_json_full(task: dict, output: str) -> tuple[bool, str]:
+    ok, fb = validate_schema(output, task)
+    if not ok:
+        return False, fb
+    obj = json.loads(_strip_fence(output))
+    diffs = [(k, obj[k], task["gold"][k]) for k in task["gold"] if obj[k] != task["gold"][k]]
+    if diffs:
+        return False, "; ".join(f"{k}: {a!r} vs gold {g!r}" for k, a, g in diffs)
+    return True, ""
+
+
 def score_one(task: dict, run_out: Run, task_class: str) -> tuple[bool, str]:
     if task_class == "regex":
         return validate_regex(run_out.output, task)
+    if task_class == "json":
+        return _score_json_full(task, run_out.output)
     raise ValueError(f"unknown class: {task_class}")
 
 

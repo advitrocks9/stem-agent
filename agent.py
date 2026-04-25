@@ -5,6 +5,7 @@ class's validator, feeds the failure back, and retries up to max_retries.
 """
 from __future__ import annotations
 
+import json
 import re
 import time
 from dataclasses import dataclass, field
@@ -48,6 +49,22 @@ def _strip_fence(s: str) -> str:
     return s.strip()
 
 
+def validate_schema(text: str, task: dict) -> tuple[bool, str]:
+    raw = _strip_fence(text)
+    try:
+        obj = json.loads(raw)
+    except json.JSONDecodeError as e:
+        return False, f"not valid JSON: {e.msg}"
+    schema = task["schema"]
+    missing = [k for k in schema if k not in obj]
+    if missing:
+        return False, f"missing fields: {missing}"
+    bad = [f"{k}={obj[k]!r} not in {v}" for k, v in schema.items() if obj[k] not in v]
+    if bad:
+        return False, "; ".join(bad)
+    return True, ""
+
+
 def validate_regex(text: str, task: dict) -> tuple[bool, str]:
     pat = _strip_fence(text)
     try:
@@ -68,6 +85,7 @@ def validate_regex(text: str, task: dict) -> tuple[bool, str]:
 # through as no-ops so the meta-agent gets a clean signal next iter.
 _VALIDATOR = {
     ("testcases", "regex"): validate_regex,
+    ("schema",    "json"):  validate_schema,
 }
 
 

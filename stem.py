@@ -10,7 +10,7 @@ from evolve import evolve
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--class", dest="task_class", required=True, choices=["regex"])
+    ap.add_argument("--class", dest="task_class", required=True, choices=["regex", "json"])
     ap.add_argument("--iters", type=int, default=6)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", type=Path, default=Path("runs"))

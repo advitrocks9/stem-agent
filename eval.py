@@ -35,9 +35,37 @@ def load(task_class: str) -> list[dict]:
     return json.loads(Path(f"tasks/{task_class}/tasks.json").read_text())
 
 
+# Hand-picked splits per class. Dev keeps the harder regressions and crits but
+# mixes in low/med items so the meta-agent doesn't learn "everything is critical".
+_SPLITS = {
+    "regex": {
+        "demo": {"us-phone", "strong-pw", "email-edu"},
+        "dev":  {"ipv4", "html-attr", "iso-time", "no-tabs", "iso-date", "csv-field"},
+    },
+    "json": {
+        "demo": {"feat-dark-mode", "support-q", "ci-flaky", "api-500", "prod-down"},
+        "dev":  {"crash-startup", "auth-bypass", "billing-double-charge", "data-loss",
+                 "memory-leak-worker", "regress-pasted-code",
+                 "typo-readme", "how-to-config", "lint-rule", "broken-link"},
+    },
+}
+
+
+def _detect_class(tasks: list[dict]) -> str:
+    if "schema" in tasks[0]:
+        return "json"
+    if "positives" in tasks[0]:
+        return "regex"
+    raise ValueError("cannot detect task class")
+
+
 def split(tasks: list[dict]) -> dict[str, list[dict]]:
-    # dumb split for now: first 3 demo, next 6 dev, rest test
-    return {"demo": tasks[:3], "dev": tasks[3:9], "test": tasks[9:]}
+    cls = _detect_class(tasks)
+    cfg = _SPLITS[cls]
+    demo = [t for t in tasks if t["id"] in cfg["demo"]]
+    dev = [t for t in tasks if t["id"] in cfg["dev"]]
+    test = [t for t in tasks if t["id"] not in cfg["demo"] and t["id"] not in cfg["dev"]]
+    return {"demo": demo, "dev": dev, "test": test}
 
 
 def _score_json_full(task: dict, output: str) -> tuple[bool, str]:

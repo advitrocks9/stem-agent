@@ -42,10 +42,11 @@ The worker spec has exactly four fields, no others:
   validation:    one of "none", "schema", "testcases".
                  schema only matches the json class (parses output, checks fields).
                  testcases only matches the regex class (compiles the regex, runs against given examples).
-  tool_policy:   one of "no_tools", "validate_retry".
+  tool_policy:   one of "no_tools", "validate_retry", "code_exec".
                  no_tools: one LLM call.
                  validate_retry: run the validator after the LLM call; on failure feed the
                                  reason back and retry up to max_retries times.
+                 code_exec: the worker is given a python_exec tool and may use it during the loop.
   max_retries:   integer in [0, 4].
 
 You will see the task class, three demo tasks, the current spec, and a list of dev tasks
@@ -109,7 +110,7 @@ def _propose(task_class: str, demos: list[dict], current_spec: dict,
 
 ALLOWED_FIELDS = {"system_prompt", "validation", "tool_policy", "max_retries"}
 ALLOWED_VALIDATIONS = {"none", "schema", "testcases"}
-ALLOWED_TOOL_POLICIES = {"no_tools", "validate_retry"}
+ALLOWED_TOOL_POLICIES = {"no_tools", "validate_retry", "code_exec"}
 
 
 def merge(parent: dict, edit: dict) -> dict:

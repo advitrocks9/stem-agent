@@ -61,10 +61,15 @@ Heuristics that matter:
   - If outputs frequently fail to parse or fail their tests, validate_retry with the matching
     validator is the obvious move. validate_retry helps only if the validator can recognise the
     error; it cannot recognise "wrong category" or "wrong number".
+  - If the bottleneck is the worker's own arithmetic or multi-step reasoning, code_exec is the
+    move. The worker can call python_exec to compute values precisely.
   - If outputs are well-formed but make wrong judgements (severity, kind), the system_prompt
     needs to carry rules and worked examples. Validation cannot help that case.
   - Larger max_retries costs tokens with diminishing returns past 2 unless the worker is close
     to the answer and just needs a nudge.
+  - When you turn on code_exec, the worker still picks whether to call the tool. Edit
+    system_prompt at the same time so it actually uses python_exec; otherwise you'll get
+    a spec that *can* compute but doesn't.
 """
 
 

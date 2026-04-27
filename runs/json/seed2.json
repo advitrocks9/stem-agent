@@ -1,0 +1,233 @@
+{
+  "task_class": "json",
+  "seed_index": 2,
+  "iters_planned": 8,
+  "iters_run": 6,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.47619047619047616,
+  "specialist_spec": {
+    "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 1.0,
+  "frontier": [
+    {
+      "hash": "a9511f96",
+      "iter": 3,
+      "score": 1.0,
+      "tokens": 291.0833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "a9591581",
+      "iter": 2,
+      "score": 0.75,
+      "tokens": 224.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', and 'broken-link' as 'docs'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "3ec9f0ab",
+      "iter": 1,
+      "score": 0.5,
+      "tokens": 192.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.).",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "3ec9f0ab",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.)."
+      },
+      "reason": "The current system_prompt is too generic and does not provide guidance on how to categorize issues correctly, leading to value-mismatch errors. Providing rules and examples should improve judgement.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 2305,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.).",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "a9591581",
+      "parent_hash": "3ec9f0ab",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', and 'broken-link' as 'docs'."
+      },
+      "reason": "The current system_prompt lacks specific examples that guide judgment for ambiguous cases, which could improve accuracy in assigning values to 'kind' and 'area'.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 2689,
+      "out_tokens": 291,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes or security issues, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', and 'broken-link' as 'docs'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "a9511f96",
+      "parent_hash": "a9591581",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues."
+      },
+      "reason": "The worker is making errors in judgment about severity and kind, so the system prompt should include more detailed guidelines and examples for these fields to improve accuracy.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 3493,
+      "out_tokens": 289,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "859120d2",
+      "parent_hash": "a9511f96",
+      "edit": {
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The outputs are failing due to parsing and missing fields, which can be addressed by adding schema validation and enabling retries.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3493,
+      "out_tokens": 289,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "859120d2",
+      "parent_hash": "a9511f96",
+      "edit": {
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker is failing on [parse-fail], [missing-field], and [value-not-allowed] errors, which can be addressed by using schema validation and retrying.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3493,
+      "out_tokens": 289,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "859120d2",
+      "parent_hash": "a9511f96",
+      "edit": {
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "Adding schema validation and retry attempts can help catch and correct parse and missing field errors.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3493,
+      "out_tokens": 289,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Use these guidelines: Severity: critical for crashes, security issues, or data loss, high for major functionality loss, med for partial loss, low for minor issues. Kind: regression if it reverts a fix or re-introduces a previous issue, bug for new issues, feature for enhancements, docs for documentation-related issues, question for inquiries. Area: based on the affected component (frontend, backend, etc.). Examples: 'how-to-config' should be classified as 'docs', 'lint-rule' as 'tooling', 'broken-link' as 'docs'. For example, a 'node-upgrade' affecting infrastructure should be at least 'med' severity if it impacts deployment, and a 'billing-double-charge' is 'critical' as it impacts financial transactions and might be a 'regression' if it reintroduces solved issues.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

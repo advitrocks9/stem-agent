@@ -2,58 +2,58 @@
   "task_class": "json",
   "seed_index": 1,
   "iters_planned": 8,
-  "iters_run": 8,
+  "iters_run": 7,
   "stop_cause": "plateau",
-  "seed_test_score": 0.42857142857142855,
-  "specialist_test_score": 0.47619047619047616,
+  "seed_test_score": 0.47619047619047616,
+  "specialist_test_score": 0.42857142857142855,
   "specialist_spec": {
-    "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-    "validation": "schema",
-    "tool_policy": "validate_retry",
-    "max_retries": 2
+    "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
   },
-  "specialist_dev_score": 0.6666666666666666,
+  "specialist_dev_score": 0.8333333333333334,
   "frontier": [
     {
-      "hash": "d51a4756",
+      "hash": "5454df49",
       "iter": 4,
-      "score": 0.6666666666666666,
-      "tokens": 351.0833333333333,
+      "score": 0.8333333333333334,
+      "tokens": 391.0833333333333,
       "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
-      }
-    },
-    {
-      "hash": "02e5877c",
-      "iter": 5,
-      "score": 0.6666666666666666,
-      "tokens": 351.0833333333333,
-      "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-        "validation": "schema",
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'.",
+        "validation": "none",
         "tool_policy": "no_tools",
-        "max_retries": 2
+        "max_retries": 0
       }
     },
     {
-      "hash": "88ecf8cd",
+      "hash": "71729ca6",
       "iter": 2,
-      "score": 0.5,
-      "tokens": 289.0833333333333,
+      "score": 0.6666666666666666,
+      "tokens": 277.0833333333333,
       "spec": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. Consider the issue's description and context to determine the correct values.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "3445c472",
+      "iter": 1,
+      "score": 0.5,
+      "tokens": 225.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. Kind includes bug, feature, docs, question, regression. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra. Consider the issue's description and context to determine the correct values.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "hash": "46e35c36",
       "iter": 0,
-      "score": 0.3333333333333333,
+      "score": 0.25,
       "tokens": 124.08333333333333,
       "spec": {
         "system_prompt": "Read the task and return only the requested output.",
@@ -73,8 +73,8 @@
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 0.3333333333333333,
-      "n_pass": 4,
+      "dev_score": 0.25,
+      "n_pass": 3,
       "n_total": 12,
       "in_tokens": 1489,
       "out_tokens": 277,
@@ -87,22 +87,22 @@
     },
     {
       "iter": 1,
-      "spec_hash": "09c3f9bf",
+      "spec_hash": "3445c472",
       "parent_hash": "46e35c36",
       "edit": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}."
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. Kind includes bug, feature, docs, question, regression. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra. Consider the issue's description and context to determine the correct values."
       },
-      "reason": "The worker consistently outputs well-formed JSON but makes incorrect judgments on severity, kind, and area, indicating the need for more guidance in the system prompt.",
+      "reason": "The worker frequently misjudges categories like severity and kind, so provide specific rules and examples in the system prompt to improve judgement accuracy.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 0.4166666666666667,
-      "n_pass": 5,
+      "dev_score": 0.5,
+      "n_pass": 6,
       "n_total": 12,
-      "in_tokens": 3469,
-      "out_tokens": 278,
+      "in_tokens": 2701,
+      "out_tokens": 281,
       "spec": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. Kind includes bug, feature, docs, question, regression. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra. Consider the issue's description and context to determine the correct values.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -110,165 +110,140 @@
     },
     {
       "iter": 2,
-      "spec_hash": "88ecf8cd",
-      "parent_hash": "09c3f9bf",
+      "spec_hash": "71729ca6",
+      "parent_hash": "3445c472",
       "edit": {
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. Consider the issue's description and context to determine the correct values."
       },
-      "reason": "The worker is making incorrect judgments about 'kind' and 'severity', suggesting that additional retries with feedback could help it refine its outputs.",
+      "reason": "The worker is consistently misjudging the 'kind' and 'severity' fields, which suggests that additional rules and examples in the system prompt may improve accuracy.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 0.5,
-      "n_pass": 6,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
       "n_total": 12,
-      "in_tokens": 3469,
-      "out_tokens": 278,
+      "in_tokens": 3325,
+      "out_tokens": 298,
       "spec": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. Consider the issue's description and context to determine the correct values.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "iter": 3,
-      "spec_hash": "7f668125",
-      "parent_hash": "88ecf8cd",
+      "spec_hash": "ee30057f",
+      "parent_hash": "71729ca6",
       "edit": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues or security vulnerabilities, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. Use 'regression' for issues caused by recent changes that broke existing functionality. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}."
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values."
       },
-      "reason": "The worker is making consistent misjudgments in categorizing 'kind' and 'severity'; improving the system_prompt with more detailed rules and examples should help guide its decision-making.",
+      "reason": "The system prompt needs more examples or rules to address the frequent value mismatches, especially for the 'kind' and 'area' fields.",
       "accepted": true,
       "rejection": "dominated",
       "on_frontier": false,
-      "dev_score": 0.5,
-      "n_pass": 6,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
       "n_total": 12,
-      "in_tokens": 3925,
-      "out_tokens": 281,
+      "in_tokens": 3805,
+      "out_tokens": 302,
       "spec": {
-        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues or security vulnerabilities, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. Use 'regression' for issues caused by recent changes that broke existing functionality. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "iter": 4,
-      "spec_hash": "d51a4756",
-      "parent_hash": "7f668125",
+      "spec_hash": "5454df49",
+      "parent_hash": "ee30057f",
       "edit": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'."
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'."
       },
-      "reason": "The current issue is primarily misclassification of 'kind' and 'severity', suggesting the worker needs more guidance on categorization rules.",
+      "reason": "The worker consistently makes errors in judgement regarding the area and kind of issues, indicating that the system prompt needs more detailed guidance and examples to improve accuracy.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 0.6666666666666666,
-      "n_pass": 8,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
       "n_total": 12,
-      "in_tokens": 4213,
-      "out_tokens": 282,
+      "in_tokens": 4693,
+      "out_tokens": 301,
       "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "iter": 5,
-      "spec_hash": "02e5877c",
-      "parent_hash": "d51a4756",
+      "spec_hash": "7e995e50",
+      "parent_hash": "5454df49",
       "edit": {
-        "tool_policy": "no_tools"
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' is a bug related to backend, so area should be 'backend'. 'how-to-config' involves documentation, so area should be 'docs'."
       },
-      "reason": "The current system prompt is already detailed, but the outputs are not aligning with the expected categories, indicating a need for more precise judgment, which cannot be addressed by validation alone.",
-      "accepted": true,
-      "rejection": "",
-      "on_frontier": true,
+      "reason": "The failed tasks indicate the worker is making incorrect judgments regarding the 'area' field, which cannot be corrected through validation. Enhancing the system prompt with additional rules and examples for 'area' should help improve the accuracy of these judgments.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
       "dev_score": 0.6666666666666666,
       "n_pass": 8,
       "n_total": 12,
-      "in_tokens": 4213,
-      "out_tokens": 282,
+      "in_tokens": 5113,
+      "out_tokens": 305,
       "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-        "validation": "schema",
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' is a bug related to backend, so area should be 'backend'. 'how-to-config' involves documentation, so area should be 'docs'.",
+        "validation": "none",
         "tool_policy": "no_tools",
-        "max_retries": 2
+        "max_retries": 0
       }
     },
     {
       "iter": 6,
-      "spec_hash": "99a42ed4",
-      "parent_hash": "02e5877c",
+      "spec_hash": "66802ae0",
+      "parent_hash": "5454df49",
       "edit": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. Pay special attention to distinguishing between 'bug' and 'regression', as well as accurately identifying the 'area' using context clues from the description. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'."
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. When determining the area, consider where the issue primarily affects or originates from. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' involves backend processing, hence 'backend' is the correct area."
       },
-      "reason": "The current worker is misjudging categories like 'kind' and 'area', so adjusting the system prompt to include more detailed instructions and examples might help clarify these distinctions.",
+      "reason": "The worker needs better guidance on determining the correct area, which is a frequent source of mismatches.",
       "accepted": false,
       "rejection": "regression",
       "on_frontier": false,
-      "dev_score": 0.5833333333333334,
-      "n_pass": 7,
+      "dev_score": 0.75,
+      "n_pass": 9,
       "n_total": 12,
-      "in_tokens": 4573,
-      "out_tokens": 282,
+      "in_tokens": 5101,
+      "out_tokens": 300,
       "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. Pay special attention to distinguishing between 'bug' and 'regression', as well as accurately identifying the 'area' using context clues from the description. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
-        "validation": "schema",
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. When determining the area, consider where the issue primarily affects or originates from. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' involves backend processing, hence 'backend' is the correct area.",
+        "validation": "none",
         "tool_policy": "no_tools",
-        "max_retries": 2
+        "max_retries": 0
       }
     },
     {
       "iter": 7,
-      "spec_hash": "d1a29e11",
-      "parent_hash": "02e5877c",
+      "spec_hash": "667e9796",
+      "parent_hash": "5454df49",
       "edit": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Use these examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for specific context or keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Be particularly careful with choosing 'regression' and 'area' from nuanced context clues."
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' is a high severity bug in 'backend', not 'infra'. 'how-to-config' is related to 'docs', not 'other'."
       },
-      "reason": "The worker is making errors in judgement on 'kind' and 'area' which cannot be addressed by validation.",
-      "accepted": false,
-      "rejection": "regression",
-      "on_frontier": false,
-      "dev_score": 0.5,
-      "n_pass": 6,
-      "n_total": 12,
-      "in_tokens": 4429,
-      "out_tokens": 282,
-      "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Use these examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for specific context or keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Be particularly careful with choosing 'regression' and 'area' from nuanced context clues.",
-        "validation": "schema",
-        "tool_policy": "no_tools",
-        "max_retries": 2
-      }
-    },
-    {
-      "iter": 8,
-      "spec_hash": "6b3f2594",
-      "parent_hash": "02e5877c",
-      "edit": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making, such as: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Additionally, provide examples for each area to clarify the context: 'frontend' when related to UI/UX, 'backend' when involving server-side logic, 'api' for interfacing issues, 'docs' for documentation, 'infra' for infrastructure-related tasks, and 'tooling' for development tools. Use these examples for more accurate classification."
-      },
-      "reason": "The worker is making wrong judgments on 'kind' and 'area', indicating it needs more detailed guidance and examples in the system prompt.",
+      "reason": "The worker misclassified the area in multiple cases; more examples in the system prompt should guide it better.",
       "accepted": true,
       "rejection": "dominated",
       "on_frontier": false,
-      "dev_score": 0.6666666666666666,
-      "n_pass": 8,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
       "n_total": 12,
-      "in_tokens": 5089,
-      "out_tokens": 282,
+      "in_tokens": 5101,
+      "out_tokens": 293,
       "spec": {
-        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making, such as: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Additionally, provide examples for each area to clarify the context: 'frontend' when related to UI/UX, 'backend' when involving server-side logic, 'api' for interfacing issues, 'docs' for documentation, 'infra' for infrastructure-related tasks, and 'tooling' for development tools. Use these examples for more accurate classification.",
-        "validation": "schema",
+        "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'. 'memory-leak-worker' is a high severity bug in 'backend', not 'infra'. 'how-to-config' is related to 'docs', not 'other'.",
+        "validation": "none",
         "tool_policy": "no_tools",
-        "max_retries": 2
+        "max_retries": 0
       }
     }
   ]

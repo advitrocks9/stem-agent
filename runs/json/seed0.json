@@ -5,70 +5,58 @@
   "iters_run": 8,
   "stop_cause": "iter_cap",
   "seed_test_score": 0.42857142857142855,
-  "specialist_test_score": 0.47619047619047616,
+  "specialist_test_score": 0.5714285714285714,
   "specialist_spec": {
-    "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+    "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'.",
     "validation": "none",
     "tool_policy": "no_tools",
     "max_retries": 0
   },
-  "specialist_dev_score": 1.0,
+  "specialist_dev_score": 0.8333333333333334,
   "frontier": [
     {
-      "hash": "817bb271",
-      "iter": 4,
-      "score": 1.0,
-      "tokens": 379.0833333333333,
-      "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
-        "validation": "none",
-        "tool_policy": "no_tools",
-        "max_retries": 0
-      }
-    },
-    {
-      "hash": "659ec933",
-      "iter": 5,
-      "score": 1.0,
-      "tokens": 379.0833333333333,
-      "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
-        "validation": "schema",
-        "tool_policy": "no_tools",
-        "max_retries": 0
-      }
-    },
-    {
-      "hash": "5ce875d0",
-      "iter": 6,
-      "score": 1.0,
-      "tokens": 379.0833333333333,
-      "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
-      }
-    },
-    {
-      "hash": "04709a8a",
-      "iter": 3,
-      "score": 0.9166666666666666,
-      "tokens": 345.0833333333333,
-      "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'.",
-        "validation": "none",
-        "tool_policy": "no_tools",
-        "max_retries": 0
-      }
-    },
-    {
-      "hash": "2bfe025f",
-      "iter": 1,
+      "hash": "9fa8556c",
+      "iter": 7,
       "score": 0.8333333333333334,
-      "tokens": 315.0833333333333,
+      "tokens": 436.0833333333333,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'.",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "103bc898",
+      "iter": 4,
+      "score": 0.75,
+      "tokens": 367.0833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "2cec3d37",
+      "iter": 2,
+      "score": 0.5833333333333334,
+      "tokens": 250.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "d19ffcb6",
+      "iter": 1,
+      "score": 0.5,
+      "tokens": 222.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach, set severity to critical and kind to regression; if it involves a typo in documentation, set kind to docs.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -111,22 +99,22 @@
     },
     {
       "iter": 1,
-      "spec_hash": "2bfe025f",
+      "spec_hash": "d19ffcb6",
       "parent_hash": "46e35c36",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach, set severity to critical and kind to regression; if it involves a typo in documentation, set kind to docs."
       },
-      "reason": "The worker is consistently producing well-formed JSON but making incorrect classifications, indicating a need for clearer guidance on classification rules.",
+      "reason": "The current system_prompt is too vague and doesn't guide the model to make correct judgments, which leads to frequent value-mismatch errors. Adding explicit rules and examples for each field will help improve accuracy.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 0.8333333333333334,
-      "n_pass": 10,
+      "dev_score": 0.5,
+      "n_pass": 6,
       "n_total": 12,
-      "in_tokens": 3781,
-      "out_tokens": 282,
+      "in_tokens": 2665,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'.",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach, set severity to critical and kind to regression; if it involves a typo in documentation, set kind to docs.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -134,22 +122,22 @@
     },
     {
       "iter": 2,
-      "spec_hash": "d3b9b878",
-      "parent_hash": "2bfe025f",
+      "spec_hash": "2cec3d37",
+      "parent_hash": "d19ffcb6",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. If the issue involves malfunction or unexpected behavior, it's likely a 'bug'. If it involves a new functionality request, it's a 'feature'. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Memory leaks typically impact 'backend' or 'infra'. 10) Data loss issues are 'critical' and usually 'bug' or 'regression'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata."
       },
-      "reason": "The current outputs are well-formed but make incorrect judgements on the 'kind' and 'area' fields, indicating a need for better guidance in the system prompt.",
-      "accepted": false,
-      "rejection": "regression",
-      "on_frontier": false,
-      "dev_score": 0.75,
-      "n_pass": 9,
+      "reason": "The frequent value-mismatch errors suggest the need for more detailed guidance in the system_prompt to improve judgement on severity, kind, and area.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
       "n_total": 12,
-      "in_tokens": 4525,
-      "out_tokens": 283,
+      "in_tokens": 3001,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. If the issue involves malfunction or unexpected behavior, it's likely a 'bug'. If it involves a new functionality request, it's a 'feature'. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Memory leaks typically impact 'backend' or 'infra'. 10) Data loss issues are 'critical' and usually 'bug' or 'regression'.",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -157,22 +145,22 @@
     },
     {
       "iter": 3,
-      "spec_hash": "04709a8a",
-      "parent_hash": "2bfe025f",
+      "spec_hash": "0a45d242",
+      "parent_hash": "2cec3d37",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs."
       },
-      "reason": "The outputs are well-formed but make incorrect judgements on 'kind' and 'area', indicating a need for clearer rules or examples.",
+      "reason": "The worker is making errors in judgement about severity and kind, suggesting it needs clearer guidelines and examples for accurate classification.",
       "accepted": true,
-      "rejection": "",
-      "on_frontier": true,
-      "dev_score": 0.9166666666666666,
-      "n_pass": 11,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
       "n_total": 12,
-      "in_tokens": 4141,
-      "out_tokens": 282,
+      "in_tokens": 3733,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'.",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -180,22 +168,22 @@
     },
     {
       "iter": 4,
-      "spec_hash": "817bb271",
-      "parent_hash": "04709a8a",
+      "spec_hash": "103bc898",
+      "parent_hash": "0a45d242",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly."
       },
-      "reason": "The errors seem to arise from incorrect judgments on severity and area classifications which are well-formed but incorrect; improving the system_prompt with more examples can clarify these classifications.",
+      "reason": "Adding more detailed rules and examples to the system prompt should help the model make correct judgements on severity and kind, which are the main sources of value-mismatch errors.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
-      "dev_score": 1.0,
-      "n_pass": 12,
+      "dev_score": 0.75,
+      "n_pass": 9,
       "n_total": 12,
-      "in_tokens": 4549,
-      "out_tokens": 281,
+      "in_tokens": 4405,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly.",
         "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
@@ -203,95 +191,94 @@
     },
     {
       "iter": 5,
-      "spec_hash": "659ec933",
-      "parent_hash": "817bb271",
+      "spec_hash": "285b1b74",
+      "parent_hash": "103bc898",
       "edit": {
-        "validation": "schema"
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed. Use 'critical' for severe impacts like financial loss or security risks."
       },
-      "reason": "Outputs are likely well-formed JSON but might fail due to misjudgements in severity, kind, or area, so adding schema validation will help catch such issues.",
+      "reason": "The current errors are due to misclassification in kind and severity, which suggests the need for improved guidance in the system prompt regarding the distinction between 'bug' and 'regression', as well as 'high' and 'critical' severity.",
       "accepted": true,
-      "rejection": "",
-      "on_frontier": true,
-      "dev_score": 1.0,
-      "n_pass": 12,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
       "n_total": 12,
-      "in_tokens": 4549,
-      "out_tokens": 281,
+      "in_tokens": 4777,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
-        "validation": "schema",
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed. Use 'critical' for severe impacts like financial loss or security risks.",
+        "validation": "none",
         "tool_policy": "no_tools",
         "max_retries": 0
       }
     },
     {
       "iter": 6,
-      "spec_hash": "5ce875d0",
-      "parent_hash": "659ec933",
+      "spec_hash": "63b86895",
+      "parent_hash": "285b1b74",
       "edit": {
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks."
       },
-      "reason": "The outputs might be failing to match the expected JSON schema or not parsing correctly, so using validate_retry can help catch and correct these errors.",
+      "reason": "The current system prompt does not emphasize what constitutes a regression strongly enough, leading to misclassification of regressions as bugs. Adding a stronger emphasis on regression will help guide the worker's judgement.",
       "accepted": true,
-      "rejection": "",
-      "on_frontier": true,
-      "dev_score": 1.0,
-      "n_pass": 12,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
       "n_total": 12,
-      "in_tokens": 4549,
-      "out_tokens": 281,
+      "in_tokens": 4945,
+      "out_tokens": 278,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "iter": 7,
-      "spec_hash": "419775e1",
-      "parent_hash": "5ce875d0",
+      "spec_hash": "9fa8556c",
+      "parent_hash": "63b86895",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) API 500 errors are high severity and classified as 'bug', 'api'. 14) Flaky CI tests are medium severity and considered 'bug', 'infra'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'."
       },
-      "reason": "The worker struggles with correct judgement in classifying severity, kind, and area, which indicates the system prompt needs more guidance or examples.",
-      "accepted": false,
-      "rejection": "regression",
-      "on_frontier": false,
-      "dev_score": 0.9166666666666666,
-      "n_pass": 11,
+      "reason": "The system prompt needs to clearly differentiate when to use 'regression' over 'bug', especially since this distinction is causing value mismatches.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
       "n_total": 12,
-      "in_tokens": 4993,
-      "out_tokens": 280,
+      "in_tokens": 5233,
+      "out_tokens": 281,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) API 500 errors are high severity and classified as 'bug', 'api'. 14) Flaky CI tests are medium severity and considered 'bug', 'infra'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     },
     {
       "iter": 8,
-      "spec_hash": "f299a748",
-      "parent_hash": "5ce875d0",
+      "spec_hash": "ef0f5200",
+      "parent_hash": "9fa8556c",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) Server errors like 500 are usually 'high' severity and 'bug'. 14) Flaky tests in CI are 'med' severity and 'bug' in 'infra'."
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'. For example, if an issue is due to a new update causing an existing feature to malfunction, it should be 'regression', whereas if the issue is due to a flaw or fault in the system independently of updates, it should be 'bug'."
       },
-      "reason": "The worker is making wrong judgements on severity and kind, which validation cannot help with. Improving rules and examples in the system_prompt can guide better judgements.",
+      "reason": "The current system_prompt is detailed but still results in value mismatches, indicating a need for clearer guidelines or examples distinguishing 'bug' from 'regression'.",
       "accepted": false,
       "rejection": "regression",
       "on_frontier": false,
-      "dev_score": 0.9166666666666666,
-      "n_pass": 11,
+      "dev_score": 0.75,
+      "n_pass": 9,
       "n_total": 12,
-      "in_tokens": 5017,
-      "out_tokens": 280,
+      "in_tokens": 5833,
+      "out_tokens": 281,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) Server errors like 500 are usually 'high' severity and 'bug'. 14) Flaky tests in CI are 'med' severity and 'bug' in 'infra'.",
-        "validation": "schema",
-        "tool_policy": "validate_retry",
-        "max_retries": 2
+        "system_prompt": "Extract metadata from the issue and return a JSON object with fields: severity (one of: low, med, high, critical), kind (one of: bug, feature, docs, question, regression), area (one of: frontend, backend, api, docs, infra, tooling, other). Consider the context and details provided in the issue to determine the correct values. For example, if the issue describes a security breach or major outage, set severity to critical; if it involves a typo or minor clarification in documentation, set kind to docs; if a feature is incomplete or regresses functionality, set kind to regression. Use keywords and context clues to accurately determine the metadata. For instance, if an issue causes previous functionality to break, it should be classified as a 'regression'; if an issue involves user questions or configuration guidance, set kind to 'question'. Be particularly attentive to severity indicators, which distinguish critical issues such as security breaches or outages from lower-priority bugs. Specific examples: a crash on startup or security vulnerability should be 'critical'; an issue that causes a feature to revert to a previous state is a 'regression'; when the issue is about documentation or configuration, it should be identified as 'docs' or 'question' accordingly. Ensure 'regression' is used for issues where functionality has reverted or regressed, such as when a previous feature stops working after an update or change. Use 'critical' for severe impacts like financial loss or security risks. Specifically, classify issues where a past feature's functionality is broken after an update as 'regression', not 'bug'. For example, if an issue is due to a new update causing an existing feature to malfunction, it should be 'regression', whereas if the issue is due to a flaw or fault in the system independently of updates, it should be 'bug'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
       }
     }
   ]

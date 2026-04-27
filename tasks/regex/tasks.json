@@ -3,258 +3,272 @@
     "id": "us-phone",
     "difficulty": "med",
     "prompt": "A regex that matches US phone numbers in any of these forms: '(123) 456-7890', '123-456-7890', '123.456.7890'. Reject any other formatting and partial matches. Output ONLY the regex (no slashes, no quotes).",
-    "positives": [
-      "(123) 456-7890",
-      "555-867-5309",
-      "415.867.5309"
-    ],
-    "negatives": [
-      "1234567890",
-      "123 456 7890",
-      "(123)-456-7890",
-      "abc-def-ghij",
-      "123-45-6789"
-    ]
+    "positives": ["(123) 456-7890", "555-867-5309", "415.867.5309"],
+    "negatives": ["1234567890", "123 456 7890", "(123)-456-7890", "abc-def-ghij", "123-45-6789"]
   },
   {
     "id": "strong-pw",
     "difficulty": "hard",
     "prompt": "A regex that matches a strong password: at least 8 characters, contains at least one lowercase letter, one uppercase letter, one digit, and one of !@#$%^&*. Reject anything missing one of those. Output ONLY the regex.",
-    "positives": [
-      "Abcdef1!",
-      "P@ssw0rd9",
-      "Hunter2!x"
-    ],
-    "negatives": [
-      "password",
-      "Abcdefgh",
-      "abcdef1!",
-      "ABCDEF1!",
-      "Abcdef1x",
-      "Abc1!"
-    ]
+    "positives": ["Abcdef1!", "P@ssw0rd9", "Hunter2!x"],
+    "negatives": ["password", "Abcdefgh", "abcdef1!", "ABCDEF1!", "Abcdef1x", "Abc1!"]
   },
   {
     "id": "iso-date",
     "difficulty": "med",
     "prompt": "A regex that matches an ISO date 'YYYY-MM-DD' for years 1900..2099, months 01..12, days 01..31. No need to validate days-per-month. Output ONLY the regex.",
-    "positives": [
-      "2024-04-29",
-      "1999-12-31",
-      "2099-01-01"
-    ],
-    "negatives": [
-      "2024-13-01",
-      "2024-04-32",
-      "24-04-29",
-      "2024/04/29",
-      "1899-04-29"
-    ]
+    "positives": ["2024-04-29", "1999-12-31", "2099-01-01"],
+    "negatives": ["2024-13-01", "2024-04-32", "24-04-29", "2024/04/29", "1899-04-29"]
   },
   {
     "id": "hex-color",
     "difficulty": "easy",
     "prompt": "A regex that matches a CSS hex color: '#' followed by exactly 3 or 6 hex digits. Case insensitive. Output ONLY the regex.",
-    "positives": [
-      "#fff",
-      "#FFFFFF",
-      "#a1b2c3"
-    ],
-    "negatives": [
-      "fff",
-      "#ggg",
-      "#1234",
-      "#12345",
-      "#1234567"
-    ]
+    "positives": ["#fff", "#FFFFFF", "#a1b2c3"],
+    "negatives": ["fff", "#ggg", "#1234", "#12345", "#1234567"]
   },
   {
     "id": "semver",
     "difficulty": "hard",
     "prompt": "A regex that matches a semver version: MAJOR.MINOR.PATCH where each is one or more digits, optionally followed by a hyphen and a pre-release tag of letters/digits/dots (e.g., 'beta.1'). Output ONLY the regex.",
-    "positives": [
-      "1.0.0",
-      "10.20.30",
-      "1.2.3-beta",
-      "1.2.3-beta.1",
-      "0.0.0"
-    ],
-    "negatives": [
-      "1.0",
-      "1.0.0.0",
-      "v1.0.0",
-      "1.0.0-",
-      "1.2.3-!"
-    ]
+    "positives": ["1.0.0", "10.20.30", "1.2.3-beta", "1.2.3-beta.1", "0.0.0"],
+    "negatives": ["1.0", "1.0.0.0", "v1.0.0", "1.0.0-", "1.2.3-!"]
   },
   {
     "id": "ipv4",
     "difficulty": "hard",
     "prompt": "A regex that matches an IPv4 address: four octets 0..255 separated by dots. Reject octets outside the range. Output ONLY the regex.",
-    "positives": [
-      "0.0.0.0",
-      "192.168.1.1",
-      "255.255.255.255"
-    ],
-    "negatives": [
-      "256.0.0.1",
-      "192.168.1",
-      "192.168.1.1.1",
-      "192.168.01.1",
-      "1.2.3.999"
-    ]
+    "positives": ["0.0.0.0", "192.168.1.1", "255.255.255.255"],
+    "negatives": ["256.0.0.1", "192.168.1", "192.168.1.1.1", "192.168.01.1", "1.2.3.999"]
   },
   {
     "id": "email-edu",
     "difficulty": "med",
     "prompt": "A regex that matches an email ending in '.edu' (e.g., 'name@dept.uni.edu'). Local part: letters, digits, dots, underscores, hyphens. Domain: letters, digits, hyphens, dots. Output ONLY the regex.",
-    "positives": [
-      "a@b.edu",
-      "name.surname@cs.imperial.edu",
-      "a_b-c@d.edu"
-    ],
-    "negatives": [
-      "a@b.com",
-      "a@b",
-      "a@b.edu.uk",
-      "@b.edu",
-      "a@.edu"
-    ]
+    "positives": ["a@b.edu", "name.surname@cs.imperial.edu", "a_b-c@d.edu"],
+    "negatives": ["a@b.com", "a@b", "a@b.edu.uk", "@b.edu", "a@.edu"]
   },
   {
     "id": "mac-addr",
     "difficulty": "med",
     "prompt": "A regex that matches a MAC address: six pairs of hex digits separated by colons or hyphens (consistent separator). Output ONLY the regex.",
-    "positives": [
-      "aa:bb:cc:dd:ee:ff",
-      "AA:BB:CC:DD:EE:FF",
-      "01-23-45-67-89-AB"
-    ],
-    "negatives": [
-      "aa:bb:cc:dd:ee",
-      "aa:bb:cc:dd:ee:ff:00",
-      "aa-bb:cc-dd:ee-ff",
-      "ZZ:bb:cc:dd:ee:ff"
-    ]
+    "positives": ["aa:bb:cc:dd:ee:ff", "AA:BB:CC:DD:EE:FF", "01-23-45-67-89-AB"],
+    "negatives": ["aa:bb:cc:dd:ee", "aa:bb:cc:dd:ee:ff:00", "aa-bb:cc-dd:ee-ff", "ZZ:bb:cc:dd:ee:ff"]
   },
   {
     "id": "uk-postcode",
     "difficulty": "hard",
     "prompt": "A regex that matches a UK postcode in canonical form 'LETTER+DIGIT+ DIGIT+LETTER+LETTER' loosely: 1-2 letters, 1-2 digits (with optional letter at end of first part), space, then digit and 2 letters. e.g., 'SW1A 1AA', 'M1 1AE', 'EC1A 1BB'. Case insensitive. Output ONLY the regex.",
-    "positives": [
-      "SW1A 1AA",
-      "M1 1AE",
-      "EC1A 1BB",
-      "B33 8TH"
-    ],
-    "negatives": [
-      "SW1A1AA",
-      "SW1A 1A",
-      "12345",
-      "M11 1AE 1",
-      "abc def"
-    ]
+    "positives": ["SW1A 1AA", "M1 1AE", "EC1A 1BB", "B33 8TH"],
+    "negatives": ["SW1A1AA", "SW1A 1A", "12345", "M11 1AE 1", "abc def"]
   },
   {
     "id": "balanced-paren",
     "difficulty": "hard",
     "prompt": "A regex that matches a string of letters wrapped in matching single parentheses, optionally with a single inner pair, e.g., '(abc)' or '(ab(c)d)'. Reject mismatched or deeper nesting. Output ONLY the regex.",
-    "positives": [
-      "(abc)",
-      "(ab(c)d)",
-      "(x(y)z)"
-    ],
-    "negatives": [
-      "(abc",
-      "abc)",
-      "(((a)))",
-      "()",
-      "(a(b(c)d)e)"
-    ]
+    "positives": ["(abc)", "(ab(c)d)", "(x(y)z)"],
+    "negatives": ["(abc", "abc)", "(((a)))", "()", "(a(b(c)d)e)"]
   },
   {
     "id": "leading-zero-int",
     "difficulty": "easy",
     "prompt": "A regex that matches a non-negative integer with no leading zeros (single zero is fine). Output ONLY the regex.",
-    "positives": [
-      "0",
-      "1",
-      "42",
-      "1000000"
-    ],
-    "negatives": [
-      "01",
-      "007",
-      "-1",
-      "1.0",
-      ""
-    ]
+    "positives": ["0", "1", "42", "1000000"],
+    "negatives": ["01", "007", "-1", "1.0", ""]
   },
   {
     "id": "camel-id",
     "difficulty": "easy",
     "prompt": "A regex that matches a lowerCamelCase identifier: starts with a lowercase letter, then any letters/digits, must contain at least one uppercase letter (so not pure lowercase). Output ONLY the regex.",
-    "positives": [
-      "myVar",
-      "fooBar",
-      "aB"
-    ],
-    "negatives": [
-      "MyVar",
-      "myvar",
-      "1myVar",
-      "_myVar",
-      ""
-    ]
+    "positives": ["myVar", "fooBar", "aB"],
+    "negatives": ["MyVar", "myvar", "1myVar", "_myVar", ""]
   },
   {
     "id": "iso-time",
     "difficulty": "med",
     "prompt": "A regex that matches a 24-hour time HH:MM where HH is 00..23 and MM is 00..59. Output ONLY the regex.",
-    "positives": [
-      "00:00",
-      "09:30",
-      "23:59"
-    ],
-    "negatives": [
-      "24:00",
-      "12:60",
-      "9:30",
-      "12:5",
-      "12-30"
-    ]
+    "positives": ["00:00", "09:30", "23:59"],
+    "negatives": ["24:00", "12:60", "9:30", "12:5", "12-30"]
   },
   {
     "id": "git-sha",
     "difficulty": "easy",
     "prompt": "A regex that matches a git short SHA: exactly 7 hex characters, lowercase only. Output ONLY the regex.",
-    "positives": [
-      "abc1234",
-      "0000000",
-      "deadbee"
-    ],
-    "negatives": [
-      "ABC1234",
-      "abc12345",
-      "abc123",
-      "xyz1234",
-      "abc 234"
-    ]
+    "positives": ["abc1234", "0000000", "deadbee"],
+    "negatives": ["ABC1234", "abc12345", "abc123", "xyz1234", "abc 234"]
   },
   {
     "id": "no-tabs",
     "difficulty": "med",
     "prompt": "A regex that matches a non-empty line with no tab characters. Anchor it. Output ONLY the regex.",
-    "positives": [
-      "hello world",
-      "abc123",
-      "single"
-    ],
-    "negatives": [
-      "",
-      "with\ttab",
-      "leading\tword",
-      "trailing\t"
-    ]
+    "positives": ["hello world", "abc123", "single"],
+    "negatives": ["", "with\ttab", "leading\tword", "trailing\t"]
+  },
+  {
+    "id": "slug",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a URL slug: lowercase letters, digits, and hyphens, no leading or trailing hyphen, no consecutive hyphens. Output ONLY the regex.",
+    "positives": ["hello-world", "my-cool-post-2024", "abc", "a1b2"],
+    "negatives": ["-hello", "hello-", "hello--world", "Hello-World", "hi_there", "", "hello world"]
+  },
+  {
+    "id": "html-attr",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a single HTML attribute of the form key=\"value\" OR key='value' where key is letters/digits/hyphens and the quote characters must match. Output ONLY the regex.",
+    "positives": ["class=\"btn\"", "id='main'", "data-x=\"a\"", "x=\"\""],
+    "negatives": ["class=\"btn'", "id=main", "='a'", "class=\"a", "class=a\"", "class= 'a'"]
+  },
+  {
+    "id": "float-sci",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a signed scientific-notation float with optional sign, mandatory decimal point, and mandatory exponent. e.g., '1.5e10', '-3.14E-2', '+0.0e0'. Output ONLY the regex.",
+    "positives": ["1.5e10", "-3.14E-2", "+0.0e0", "0.5e+5"],
+    "negatives": ["1e10", "1.5", "1.5e", "1.e10", "1.5e10.5", "abc"]
+  },
+  {
+    "id": "csv-field",
+    "difficulty": "hard",
+    "prompt": "A regex that matches a single CSV field: either an unquoted run of characters with no commas/quotes/newlines, or a double-quoted string in which a literal double-quote is escaped as \"\". Output ONLY the regex.",
+    "positives": ["abc", "", "\"hello\"", "\"a,b\"", "\"he said \"\"hi\"\"\""],
+    "negatives": ["a,b", "\"unterminated", "abc\"", "\"a\"b", "a\"b"]
+  },
+  {
+    "id": "iso-leap-month",
+    "difficulty": "hard",
+    "prompt": "A regex matching the prefix YYYY-MM of an ISO date for years 2000..2099 and months 01..12. Output ONLY the regex.",
+    "positives": ["2000-01", "2099-12", "2024-04"],
+    "negatives": ["2024-13", "2024-00", "2100-01", "1999-12", "2024-4", "2024/04"]
+  },
+  {
+    "id": "url-http",
+    "difficulty": "med",
+    "prompt": "A regex that matches an absolute http or https URL with no query or fragment, e.g. 'https://example.com/path'. Reject ftp, missing scheme, or paths only. Output ONLY the regex.",
+    "positives": ["http://a.com", "https://b.io/foo", "https://www.example.co.uk/a/b"],
+    "negatives": ["ftp://x.com", "example.com", "/foo/bar", "https://", "https://a.com?q=1"]
+  },
+  {
+    "id": "ipv6-simple",
+    "difficulty": "hard",
+    "prompt": "A regex for a fully-expanded IPv6 address: eight groups of exactly four hex digits separated by colons. No ::-shorthand. Output ONLY the regex.",
+    "positives": ["2001:0db8:85a3:0000:0000:8a2e:0370:7334", "fe80:0000:0000:0000:0000:0000:0000:0001"],
+    "negatives": ["2001:db8::1", "1:2:3:4:5:6:7", "ZZZZ:0db8:85a3:0000:0000:8a2e:0370:7334", "2001:0db8:85a3:0000:0000:8a2e:0370"]
+  },
+  {
+    "id": "even-int",
+    "difficulty": "easy",
+    "prompt": "A regex that matches a non-negative even integer with no leading zeros (0 itself is fine). Output ONLY the regex.",
+    "positives": ["0", "2", "10", "1248", "100"],
+    "negatives": ["1", "01", "002", "-2", "3", "10.0", ""]
+  },
+  {
+    "id": "abba-pal","difficulty":"hard",
+    "prompt": "A regex that matches a 4-letter palindrome over lowercase letters (positions 1=4 and 2=3), e.g. 'abba', 'noon'. Output ONLY the regex.",
+    "positives": ["abba", "noon", "abba", "tttt"],
+    "negatives": ["abc", "abcd", "abca", "abAB", "abbac", ""]
+  },
+  {
+    "id": "iso-datetime",
+    "difficulty": "hard",
+    "prompt": "A regex for a UTC ISO datetime exactly in the form YYYY-MM-DDTHH:MM:SSZ for years 2000..2099, months 01..12, days 01..31, hours 00..23, minutes/seconds 00..59. Output ONLY the regex.",
+    "positives": ["2024-04-29T13:30:00Z", "2099-12-31T23:59:59Z", "2000-01-01T00:00:00Z"],
+    "negatives": ["2024-04-29 13:30:00Z", "2024-13-01T00:00:00Z", "2024-04-29T24:00:00Z", "2024-04-29T13:30:00", "1999-04-29T13:30:00Z"]
+  },
+  {
+    "id": "id-token-snake",
+    "difficulty": "easy",
+    "prompt": "A regex for a snake_case identifier: lowercase letters, digits, underscores, must start with a letter, no double underscores, no trailing underscore. Output ONLY the regex.",
+    "positives": ["x", "foo_bar", "a1_b2", "alpha_beta_gamma"],
+    "negatives": ["_x", "x_", "foo__bar", "Foo", "1foo", "foo-bar", ""]
+  },
+  {
+    "id": "vowel-cluster",
+    "difficulty": "med",
+    "prompt": "A regex that matches a single English word made of lowercase letters that contains at least three consecutive vowels (aeiou). Output ONLY the regex.",
+    "positives": ["queue", "beautiful", "aeiou", "soiree"],
+    "negatives": ["hello", "rhythm", "aeu", "world"]
+  },
+  {
+    "id": "year-bce",
+    "difficulty": "med",
+    "prompt": "A regex matching a year of the form '1234 BCE' or '1234 CE' where the number is 1 to 4 digits with no leading zeros (zero year not allowed). Output ONLY the regex.",
+    "positives": ["1 BCE", "44 BCE", "2024 CE", "9999 CE"],
+    "negatives": ["0 BCE", "01 BCE", "2024", "2024 AD", "12345 CE", " 1 BCE"]
+  },
+  {
+    "id": "yes-no-ans",
+    "difficulty": "easy",
+    "prompt": "A regex matching exactly 'yes', 'no', or 'maybe' (case-insensitive), and nothing else. Output ONLY the regex.",
+    "positives": ["yes", "No", "MAYBE", "Yes"],
+    "negatives": ["yess", " yes", "yes!", "y", "yesno", ""]
+  },
+  {
+    "id": "kebab-id",
+    "difficulty": "med",
+    "prompt": "A regex for kebab-case: lowercase letters and digits separated by single hyphens, no leading/trailing hyphen, no double hyphens, must contain at least one hyphen. Output ONLY the regex.",
+    "positives": ["a-b", "foo-bar-baz", "my-cool-thing-2"],
+    "negatives": ["foo", "-foo", "foo-", "foo--bar", "FOO-BAR", "foo_bar"]
+  },
+  {
+    "id": "long-double",
+    "difficulty": "med",
+    "prompt": "A regex matching a string consisting of doubled letters: a 6-character lowercase string where each pair of adjacent characters is the same letter (e.g. 'aabbcc'). Output ONLY the regex.",
+    "positives": ["aabbcc", "xxyyzz", "aaaabb", "zzzzaa"],
+    "negatives": ["abcabc", "aabbc", "aabbcde", "AABBCC", ""]
+  },
+  {
+    "id": "currency-amt",
+    "difficulty": "med",
+    "prompt": "A regex matching a US dollar amount like $1,234.56 or $0.99: leading $, optional thousands grouped with commas, mandatory two-decimal cents. Output ONLY the regex.",
+    "positives": ["$0.99", "$1,234.56", "$12.00", "$1,000,000.00"],
+    "negatives": ["$1234.56", "$1,2,3.45", "1.99", "$1.5", "$,123.45", "$1,234"]
+  },
+  {
+    "id": "tag-balanced",
+    "difficulty": "hard",
+    "prompt": "A regex matching a single non-nested HTML element with matching open/close tag for one of {b, i, em, strong}, no attributes, with arbitrary text inside that doesn't contain '<' or '>'. Output ONLY the regex.",
+    "positives": ["<b>x</b>", "<em>hello world</em>", "<i>1</i>", "<strong>ok</strong>"],
+    "negatives": ["<b>x</i>", "<b><i>x</i></b>", "<div>x</div>", "<b x='1'>y</b>", "<b>x<y>z</b>"]
+  },
+  {
+    "id": "uppercase-acronym",
+    "difficulty": "med",
+    "prompt": "A regex matching a 2-to-5 character all-uppercase acronym (no digits, no punctuation). Output ONLY the regex.",
+    "positives": ["AI", "JVM", "HTTPS", "USA", "GPT"],
+    "negatives": ["A", "AIBOTS", "Ai", "GPT4", "g.p.t.", "AI "]
+  },
+  {
+    "id": "filename-img",
+    "difficulty": "easy",
+    "prompt": "A regex matching an image filename ending in .png, .jpg, or .jpeg (case-insensitive). The base name is at least one letter/digit/_/-. Output ONLY the regex.",
+    "positives": ["pic.jpg", "IMG_001.PNG", "a-1.jpeg", "x.JPG"],
+    "negatives": ["pic.gif", ".jpg", "pic.jpgg", "pic.txt", "pic"]
+  },
+  {
+    "id": "ssn-us",
+    "difficulty": "med",
+    "prompt": "A regex matching a US social security number in the form NNN-NN-NNNN. Output ONLY the regex.",
+    "positives": ["123-45-6789", "001-01-0001"],
+    "negatives": ["123456789", "12-34-5678", "123-456-789", "abc-de-fghi", "123 45 6789"]
+  },
+  {
+    "id": "no-three-same",
+    "difficulty": "hard",
+    "prompt": "A regex matching a non-empty string of lowercase letters with no three identical consecutive letters (e.g. 'aab' is fine, 'aaab' is not). Output ONLY the regex.",
+    "positives": ["a", "ab", "aab", "abccba", "aabb"],
+    "negatives": ["aaa", "aaab", "baaa", "abccc", ""]
+  },
+  {
+    "id": "comment-cpp",
+    "difficulty": "med",
+    "prompt": "A regex matching a single C++ line comment: '//' followed by any characters except newline, with no leading whitespace. Output ONLY the regex.",
+    "positives": ["//x", "// hello world", "//"],
+    "negatives": [" //x", "/x", "/* x */", "//\nfoo", "/x/x"]
+  },
+  {
+    "id": "json-num",
+    "difficulty": "hard",
+    "prompt": "A regex for a JSON number: optional minus, no leading zeros (or just 0), optional decimal part, optional exponent (e/E with optional sign). Output ONLY the regex.",
+    "positives": ["0", "-0", "1", "1.5", "-1.5e10", "1.5E-10", "0.0", "12.34"],
+    "negatives": ["01", "+1", "1.", ".5", "1e", "1.5.6", "abc", "--1"]
   }
 ]

@@ -122,14 +122,15 @@ def _score_math(task: dict, output: str) -> tuple[bool, str]:
 
 
 def _score_json_full(task: dict, output: str) -> tuple[bool, str]:
-    """validate_schema + check the output's values match the task's gold dict."""
+    """validate_schema first, then gold-match. The two failure modes get
+    different tags so the meta-agent can tell which lever to pull."""
     ok, fb = validate_schema(output, task)
     if not ok:
-        return False, fb
+        return False, fb  # already carries [parse-fail] / [missing-field] / [value-not-allowed]
     obj = json.loads(_strip_fence(output))
     diffs = [(k, obj[k], task["gold"][k]) for k in task["gold"] if obj[k] != task["gold"][k]]
     if diffs:
-        return False, "; ".join(f"{k}: {a!r} vs gold {g!r}" for k, a, g in diffs)
+        return False, "[value-mismatch] " + "; ".join(f"{k}: predicted {a!r} but gold is {g!r}" for k, a, g in diffs)
     return True, ""
 
 

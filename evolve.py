@@ -50,8 +50,15 @@ The worker spec has exactly four fields, no others:
   max_retries:   integer in [0, 4].
 
 You will see the task class, three demo tasks, the current spec, and a list of dev tasks
-that the worker just failed (with the per-task feedback). Propose ONE structured edit.
-Output ONLY a JSON object:
+that the worker just failed. Each failure carries a tag in square brackets:
+  [parse-fail]         output didn't parse as the expected format
+  [missing-field]      JSON output missing a required key
+  [value-not-allowed]  JSON value outside the allowed set for that field
+  [value-mismatch]     output is well-formed but the value doesn't match gold (e.g. wrong category)
+Validation+retry only helps the first three. [value-mismatch] is a judgement error and only
+prompt-level rules or worked examples can move it.
+
+Propose ONE structured edit. Output ONLY a JSON object:
 
   {"reason": "<one sentence why this should help>", "edit": {<field>: <new value>, ...}}
 

@@ -81,18 +81,24 @@ def validate_regex(text: str, task: dict) -> tuple[bool, str]:
 
 
 def validate_schema(text: str, task: dict) -> tuple[bool, str]:
+    """Tagged feedback so the meta-agent can target the right fix.
+
+    Three failure tags: [parse-fail], [missing-field], [value-not-allowed].
+    A schema-only validator can never see [wrong-but-legal-value] errors;
+    those surface only at scoring time against the gold (eval._score_json_full).
+    """
     raw = _strip_fence(text)
     try:
         obj = json.loads(raw)
     except json.JSONDecodeError as e:
-        return False, f"not valid JSON: {e.msg}"
+        return False, f"[parse-fail] not valid JSON: {e.msg}"
     schema = task["schema"]
     missing = [k for k in schema if k not in obj]
     if missing:
-        return False, f"missing fields: {missing}"
+        return False, f"[missing-field] {missing}"
     bad = [f"{k}={obj[k]!r} not in {v}" for k, v in schema.items() if obj[k] not in v]
     if bad:
-        return False, "; ".join(bad)
+        return False, f"[value-not-allowed] {'; '.join(bad)}"
     return True, ""
 
 

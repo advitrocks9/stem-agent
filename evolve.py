@@ -70,6 +70,8 @@ Heuristics that matter:
   - When you turn on code_exec, the worker still picks whether to call the tool. Edit
     system_prompt at the same time so it actually uses python_exec; otherwise you'll get
     a spec that *can* compute but doesn't.
+  - Under code_exec, max_retries caps the number of tool-call rounds (turn budget = 2 + max_retries,
+    capped at 8). Higher values let the worker iterate when its first python attempt has a bug.
 """
 
 

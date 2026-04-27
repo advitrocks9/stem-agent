@@ -185,16 +185,17 @@ def _run_validate_retry(task: dict, spec: dict, task_class: str, model: str | No
     return out
 
 
-CODE_EXEC_TURN_CAP = 7  # the worker can call python_exec up to this many times
-
 def _run_code_exec(task: dict, spec: dict, model: str | None) -> Run:
-    """Multi-turn ReAct with the python_exec tool available."""
+    """Multi-turn ReAct with python_exec available. max_retries caps tool calls."""
     out = Run(output="")
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
         {"role": "user", "content": task["prompt"]},
     ]
-    for turn in range(CODE_EXEC_TURN_CAP):
+    # 1 initial LLM call plus up to max_retries tool-call rounds, plus a final
+    # call to consume the last tool result. Cap at 8 to keep token spend sane.
+    turn_cap = min(8, 2 + spec.get("max_retries", 0))
+    for turn in range(turn_cap):
         t0 = time.time()
         r = chat(msgs, model=model, tools=[PYTHON_TOOL_SCHEMA])
         out.in_tokens += r.in_tokens

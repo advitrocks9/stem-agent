@@ -1,0 +1,252 @@
+{
+  "task_class": "regex",
+  "seed_index": 0,
+  "iters_planned": 8,
+  "iters_run": 7,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.7142857142857143,
+  "specialist_test_score": 0.8095238095238095,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+    "validation": "testcases",
+    "tool_policy": "validate_retry",
+    "max_retries": 4
+  },
+  "specialist_dev_score": 1.0,
+  "frontier": [
+    {
+      "hash": "ec0a44db",
+      "iter": 4,
+      "score": 1.0,
+      "tokens": 312.3333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 4
+      }
+    },
+    {
+      "hash": "221701f3",
+      "iter": 3,
+      "score": 0.9166666666666666,
+      "tokens": 247.25,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "ba66587e",
+      "iter": 1,
+      "score": 0.8333333333333334,
+      "tokens": 168.16666666666666,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.5833333333333334,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 415,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "ba66587e",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker frequently produces regexes that fail on test cases, indicating that it could benefit from validate_retry to iteratively refine its output based on feedback.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 2018,
+      "out_tokens": 718,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "999245e7",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided."
+      },
+      "reason": "The worker is failing regex tasks due to incorrect logic and pattern matching, suggesting it needs more guidance on crafting regex patterns correctly.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 2182,
+      "out_tokens": 763,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "221701f3",
+      "parent_hash": "999245e7",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "The outputs are failing the testcases due to incorrect matches, indicating the current retry strategy is insufficient.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 2967,
+      "out_tokens": 899,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "ec0a44db",
+      "parent_hash": "221701f3",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker failed to correctly generate a regex for IPv4 addresses because it does not properly account for the valid range of each octet. Increasing max_retries may give the worker more opportunities to refine its output based on validation feedback.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 3748,
+      "out_tokens": 1069,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "b6183f17",
+      "parent_hash": "ec0a44db",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested regex output. Ensure the regex meets all specified conditions by constructing it carefully. Consider edge cases and test against both positive and negative examples provided. If unsure, review regex syntax and examples."
+      },
+      "reason": "The worker consistently fails to produce correct regexes, indicating a need for better understanding of regex construction rules and examples.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 5169,
+      "out_tokens": 1016,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested regex output. Ensure the regex meets all specified conditions by constructing it carefully. Consider edge cases and test against both positive and negative examples provided. If unsure, review regex syntax and examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "492d003b",
+      "parent_hash": "ec0a44db",
+      "edit": {
+        "system_prompt": "Read the task and create a regex that precisely matches the required patterns. For each task, ensure the regex meets all specified conditions by considering the different formats: phone numbers, passwords with specific character requirements, and email addresses with domain constraints. Test the regex against both positive and negative examples, refining it as necessary to pass all cases."
+      },
+      "reason": "The current system_prompt is too generic and does not provide specific guidance on constructing regex for various formats and conditions.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4345,
+      "out_tokens": 996,
+      "spec": {
+        "system_prompt": "Read the task and create a regex that precisely matches the required patterns. For each task, ensure the regex meets all specified conditions by considering the different formats: phone numbers, passwords with specific character requirements, and email addresses with domain constraints. Test the regex against both positive and negative examples, refining it as necessary to pass all cases.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 7,
+      "spec_hash": "677a3b9e",
+      "parent_hash": "ec0a44db",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Carefully analyze the examples to ensure the regex meets all specified conditions. Use clear logic to incorporate all necessary character classes and position requirements."
+      },
+      "reason": "The worker's regex outputs are well-formed but may not handle the logic for matching conditions correctly, which suggests a need for improved understanding rather than more retries.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 4946,
+      "out_tokens": 1064,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Carefully analyze the examples to ensure the regex meets all specified conditions. Use clear logic to incorporate all necessary character classes and position requirements.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 4
+      }
+    }
+  ]
+}

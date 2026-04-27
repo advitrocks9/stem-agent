@@ -1,0 +1,298 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "iters_planned": 8,
+  "iters_run": 8,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.47619047619047616,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 1.0,
+  "frontier": [
+    {
+      "hash": "817bb271",
+      "iter": 4,
+      "score": 1.0,
+      "tokens": 379.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "659ec933",
+      "iter": 5,
+      "score": 1.0,
+      "tokens": 379.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "5ce875d0",
+      "iter": 6,
+      "score": 1.0,
+      "tokens": 379.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "04709a8a",
+      "iter": 3,
+      "score": 0.9166666666666666,
+      "tokens": 345.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "2bfe025f",
+      "iter": 1,
+      "score": 0.8333333333333334,
+      "tokens": 315.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "2bfe025f",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'."
+      },
+      "reason": "The worker is consistently producing well-formed JSON but making incorrect classifications, indicating a need for clearer guidance on classification rules.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3781,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "d3b9b878",
+      "parent_hash": "2bfe025f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. If the issue involves malfunction or unexpected behavior, it's likely a 'bug'. If it involves a new functionality request, it's a 'feature'. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Memory leaks typically impact 'backend' or 'infra'. 10) Data loss issues are 'critical' and usually 'bug' or 'regression'."
+      },
+      "reason": "The current outputs are well-formed but make incorrect judgements on the 'kind' and 'area' fields, indicating a need for better guidance in the system prompt.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4525,
+      "out_tokens": 283,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. If the issue involves malfunction or unexpected behavior, it's likely a 'bug'. If it involves a new functionality request, it's a 'feature'. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Memory leaks typically impact 'backend' or 'infra'. 10) Data loss issues are 'critical' and usually 'bug' or 'regression'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "04709a8a",
+      "parent_hash": "2bfe025f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'."
+      },
+      "reason": "The outputs are well-formed but make incorrect judgements on 'kind' and 'area', indicating a need for clearer rules or examples.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4141,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "817bb271",
+      "parent_hash": "04709a8a",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'."
+      },
+      "reason": "The errors seem to arise from incorrect judgments on severity and area classifications which are well-formed but incorrect; improving the system_prompt with more examples can clarify these classifications.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4549,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "659ec933",
+      "parent_hash": "817bb271",
+      "edit": {
+        "validation": "schema"
+      },
+      "reason": "Outputs are likely well-formed JSON but might fail due to misjudgements in severity, kind, or area, so adding schema validation will help catch such issues.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4549,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "5ce875d0",
+      "parent_hash": "659ec933",
+      "edit": {
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The outputs might be failing to match the expected JSON schema or not parsing correctly, so using validate_retry can help catch and correct these errors.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4549,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 7,
+      "spec_hash": "419775e1",
+      "parent_hash": "5ce875d0",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) API 500 errors are high severity and classified as 'bug', 'api'. 14) Flaky CI tests are medium severity and considered 'bug', 'infra'."
+      },
+      "reason": "The worker struggles with correct judgement in classifying severity, kind, and area, which indicates the system prompt needs more guidance or examples.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4993,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) API 500 errors are high severity and classified as 'bug', 'api'. 14) Flaky CI tests are medium severity and considered 'bug', 'infra'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 8,
+      "spec_hash": "f299a748",
+      "parent_hash": "5ce875d0",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) Server errors like 500 are usually 'high' severity and 'bug'. 14) Flaky tests in CI are 'med' severity and 'bug' in 'infra'."
+      },
+      "reason": "The worker is making wrong judgements on severity and kind, which validation cannot help with. Improving rules and examples in the system_prompt can guide better judgements.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 5017,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: Severity: low, med, high, critical based on impact. Kind: bug, feature, docs, question, regression based on issue type. Area: frontend, backend, api, docs, infra, tooling based on affected domain. Examples: 1) A startup crash is 'critical', 'regression', 'frontend'. 2) A README typo is 'low', 'docs', 'docs'. 3) A config question is 'low', 'question', 'docs'. 4) A lint rule change is 'low', 'feature', 'tooling'. 5) A broken link in docs is 'low', 'docs', 'docs'. 6) An auth bypass is 'critical', 'regression', 'api'. 7) A billing double-charge is 'critical', 'regression', 'backend'. 8) Pasted code regression is 'high', 'regression', 'frontend'. 9) Data loss should be considered 'bug' instead of 'regression'. 10) Memory leaks in worker processes typically affect 'backend'. 11) Infrastructure upgrades typically have 'med' severity and affect 'infra'. 12) Tooling updates generally have 'low' severity and affect 'tooling'. 13) Server errors like 500 are usually 'high' severity and 'bug'. 14) Flaky tests in CI are 'med' severity and 'bug' in 'infra'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

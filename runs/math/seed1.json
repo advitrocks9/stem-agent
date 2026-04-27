@@ -1,0 +1,159 @@
+{
+  "task_class": "math",
+  "seed_index": 1,
+  "iters_planned": 8,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.625,
+  "specialist_test_score": 0.7916666666666666,
+  "specialist_spec": {
+    "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+    "validation": "none",
+    "tool_policy": "code_exec",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.6666666666666666,
+  "frontier": [
+    {
+      "hash": "a35d8afd",
+      "iter": 1,
+      "score": 0.6666666666666666,
+      "tokens": 821.5,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 62.916666666666664,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 755,
+      "out_tokens": 1466,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "a35d8afd",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      },
+      "reason": "The worker is failing tasks that require precise arithmetic and multi-step reasoning, indicating a need for computational assistance.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 9858,
+      "out_tokens": 3896,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "0d1f7228",
+      "parent_hash": "a35d8afd",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is reaching the turn cap frequently, indicating it needs more iterations to reach the correct answer.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 20885,
+      "out_tokens": 6268,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "0d1f7228",
+      "parent_hash": "a35d8afd",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is frequently reaching the turn cap, indicating it needs more iterations to arrive at a correct solution.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 97314,
+      "out_tokens": 53531,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "0d1f7228",
+      "parent_hash": "a35d8afd",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is running out of turns before reaching a solution, indicating it needs more attempts to use the python_exec effectively.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 22204,
+      "out_tokens": 6722,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to compute the answer precisely. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    }
+  ]
+}

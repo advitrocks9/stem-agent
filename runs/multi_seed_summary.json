@@ -1,0 +1,56 @@
+[
+  {
+    "class": "regex",
+    "seed": 0,
+    "seed_test": 0.7142857142857143,
+    "spec_test": 0.8571428571428571,
+    "stop": "plateau",
+    "iters_run": 4,
+    "frontier": 2
+  },
+  {
+    "class": "regex",
+    "seed": 1,
+    "seed_test": 0.7142857142857143,
+    "spec_test": 0.8571428571428571,
+    "stop": "plateau",
+    "iters_run": 4,
+    "frontier": 2
+  },
+  {
+    "class": "json",
+    "seed": 0,
+    "seed_test": 0.5714285714285714,
+    "spec_test": 0.47619047619047616,
+    "stop": "iter_cap",
+    "iters_run": 8,
+    "frontier": 7
+  },
+  {
+    "class": "json",
+    "seed": 1,
+    "seed_test": 0.5238095238095238,
+    "spec_test": 0.47619047619047616,
+    "stop": "iter_cap",
+    "iters_run": 8,
+    "frontier": 7
+  },
+  {
+    "class": "math",
+    "seed": 0,
+    "seed_test": 0.625,
+    "spec_test": 0.625,
+    "stop": "plateau",
+    "iters_run": 4,
+    "frontier": 2
+  },
+  {
+    "class": "math",
+    "seed": 1,
+    "seed_test": 0.625,
+    "spec_test": 0.75,
+    "stop": "iter_cap",
+    "iters_run": 8,
+    "frontier": 2
+  }
+]

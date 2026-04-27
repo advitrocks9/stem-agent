@@ -1,0 +1,182 @@
+{
+  "task_class": "math",
+  "seed_index": 0,
+  "iters_planned": 8,
+  "iters_run": 5,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.625,
+  "specialist_test_score": 0.7916666666666666,
+  "specialist_spec": {
+    "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+    "validation": "none",
+    "tool_policy": "code_exec",
+    "max_retries": 4
+  },
+  "specialist_dev_score": 0.6666666666666666,
+  "frontier": [
+    {
+      "hash": "28e04b5a",
+      "iter": 2,
+      "score": 0.6666666666666666,
+      "tokens": 1005.9166666666666,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 62.916666666666664,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 755,
+      "out_tokens": 1442,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "d3b0f8c7",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      },
+      "reason": "The worker is making arithmetic and multi-step reasoning errors, so enabling code execution should help it compute values accurately.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 43606,
+      "out_tokens": 21015,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "28e04b5a",
+      "parent_hash": "d3b0f8c7",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "Increasing max_retries will allow the worker more iterations to find the correct solution when the initial attempts fail, particularly for complex problems where multiple steps and recalculations are needed.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 12071,
+      "out_tokens": 3731,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "f7c74535",
+      "parent_hash": "28e04b5a",
+      "edit": {
+        "max_retries": 6
+      },
+      "reason": "Increasing max_retries allows more iterations, helping resolve complex tasks that hit the turn cap.",
+      "accepted": false,
+      "rejection": "parse",
+      "on_frontier": false,
+      "dev_score": 0.0,
+      "n_pass": 0,
+      "n_total": 12,
+      "in_tokens": 0,
+      "out_tokens": 0,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 6
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "f7c74535",
+      "parent_hash": "28e04b5a",
+      "edit": {
+        "max_retries": 6
+      },
+      "reason": "The worker is reaching the turn cap without producing correct results, likely due to complex calculations, so increasing max_retries will allow more iterations to reach the correct answer.",
+      "accepted": false,
+      "rejection": "parse",
+      "on_frontier": false,
+      "dev_score": 0.0,
+      "n_pass": 0,
+      "n_total": 12,
+      "in_tokens": 0,
+      "out_tokens": 0,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 6
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "f7c74535",
+      "parent_hash": "28e04b5a",
+      "edit": {
+        "max_retries": 6
+      },
+      "reason": "The worker reached the turn cap on two tasks, indicating it needs more iterations to arrive at the correct solution.",
+      "accepted": false,
+      "rejection": "parse",
+      "on_frontier": false,
+      "dev_score": 0.0,
+      "n_pass": 0,
+      "n_total": 12,
+      "in_tokens": 0,
+      "out_tokens": 0,
+      "spec": {
+        "system_prompt": "Use python_exec to compute the answer accurately, and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 6
+      }
+    }
+  ]
+}

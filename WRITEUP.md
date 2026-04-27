@@ -210,6 +210,22 @@ tool-using habit are coupled, but the spec representation treats
 them as independent.  Without a hint the meta-agent missed that
 coupling.
 
+**`max_retries` is a different knob in different branches.**  Under
+`validate_retry` it caps re-prompts; under `code_exec` (after the
+patch) it caps tool-call rounds; under `no_tools` it does nothing.
+The meta-agent treats it as a single number anyway, which works only
+because each tool_policy uses it sensibly.  It would not survive a
+fourth branch added without thought.
+
+**Pareto's main job in this experiment was rejecting "same score,
+more tokens" children, not balancing score against cost.**  In every
+run the highest-scoring frontier point was also the cheapest.  The
+real value came from the *plateau counter*: dominated children count
+toward the patience budget, so the loop stops promptly when the
+meta-agent gets stuck in wording rewrites.  I expected this to
+matter more on the score-cost trade-off and less on the stop signal;
+the opposite was true.
+
 **JSON underperformed and rebalancing the dev split helped only a
 little.**  My first JSON dev set was all critical-and-regression
 items the seed failed on.  The meta-agent learned "tag everything

@@ -1,0 +1,275 @@
+{
+  "task_class": "json",
+  "seed_index": 1,
+  "iters_planned": 8,
+  "iters_run": 8,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.47619047619047616,
+  "specialist_spec": {
+    "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+    "validation": "schema",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.6666666666666666,
+  "frontier": [
+    {
+      "hash": "d51a4756",
+      "iter": 4,
+      "score": 0.6666666666666666,
+      "tokens": 351.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "02e5877c",
+      "iter": 5,
+      "score": 0.6666666666666666,
+      "tokens": 351.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "88ecf8cd",
+      "iter": 2,
+      "score": 0.5,
+      "tokens": 289.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.3333333333333333,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "09c3f9bf",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}."
+      },
+      "reason": "The worker consistently outputs well-formed JSON but makes incorrect judgments on severity, kind, and area, indicating the need for more guidance in the system prompt.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.4166666666666667,
+      "n_pass": 5,
+      "n_total": 12,
+      "in_tokens": 3469,
+      "out_tokens": 278,
+      "spec": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "88ecf8cd",
+      "parent_hash": "09c3f9bf",
+      "edit": {
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker is making incorrect judgments about 'kind' and 'severity', suggesting that additional retries with feedback could help it refine its outputs.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 3469,
+      "out_tokens": 278,
+      "spec": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "7f668125",
+      "parent_hash": "88ecf8cd",
+      "edit": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues or security vulnerabilities, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. Use 'regression' for issues caused by recent changes that broke existing functionality. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}."
+      },
+      "reason": "The worker is making consistent misjudgments in categorizing 'kind' and 'severity'; improving the system_prompt with more detailed rules and examples should help guide its decision-making.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 3925,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and apply the following rules to categorize the issue: 1) Identify severity based on impact: 'critical' for system-wide issues or security vulnerabilities, 'high' for major features or components affected, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug', 'feature', 'docs', 'question', or 'regression'. Use 'regression' for issues caused by recent changes that broke existing functionality. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Use examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "d51a4756",
+      "parent_hash": "7f668125",
+      "edit": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'."
+      },
+      "reason": "The current issue is primarily misclassification of 'kind' and 'severity', suggesting the worker needs more guidance on categorization rules.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 4213,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "02e5877c",
+      "parent_hash": "d51a4756",
+      "edit": {
+        "tool_policy": "no_tools"
+      },
+      "reason": "The current system prompt is already detailed, but the outputs are not aligning with the expected categories, indicating a need for more precise judgment, which cannot be addressed by validation alone.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 4213,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "99a42ed4",
+      "parent_hash": "02e5877c",
+      "edit": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. Pay special attention to distinguishing between 'bug' and 'regression', as well as accurately identifying the 'area' using context clues from the description. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'."
+      },
+      "reason": "The current worker is misjudging categories like 'kind' and 'area', so adjusting the system prompt to include more detailed instructions and examples might help clarify these distinctions.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 4573,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. Pay special attention to distinguishing between 'bug' and 'regression', as well as accurately identifying the 'area' using context clues from the description. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 7,
+      "spec_hash": "d1a29e11",
+      "parent_hash": "02e5877c",
+      "edit": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Use these examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for specific context or keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Be particularly careful with choosing 'regression' and 'area' from nuanced context clues."
+      },
+      "reason": "The worker is making errors in judgement on 'kind' and 'area' which cannot be addressed by validation.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 4429,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Use these examples to guide your decision-making: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for specific context or keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Be particularly careful with choosing 'regression' and 'area' from nuanced context clues.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 8,
+      "spec_hash": "6b3f2594",
+      "parent_hash": "02e5877c",
+      "edit": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making, such as: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Additionally, provide examples for each area to clarify the context: 'frontend' when related to UI/UX, 'backend' when involving server-side logic, 'api' for interfacing issues, 'docs' for documentation, 'infra' for infrastructure-related tasks, and 'tooling' for development tools. Use these examples for more accurate classification."
+      },
+      "reason": "The worker is making wrong judgments on 'kind' and 'area', indicating it needs more detailed guidance and examples in the system prompt.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 5089,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and apply the following detailed rules to categorize the issue: 1) Identify severity based on impact: 'critical' for issues causing significant data loss or affecting core functionalities, 'high' for issues affecting major features or components, 'med' for moderate impact, and 'low' for minor issues. 2) Determine kind by identifying if it's a 'bug' (unexpected behavior), 'feature' (new or enhanced functionality), 'docs' (documentation-related), 'question' (inquiries needing clarification), or 'regression' (issues caused by recent changes that broke existing functionality). Include an example for each kind to guide your decision-making, such as: {'severity': 'low', 'kind': 'feature', 'area': 'frontend'}, {'severity': 'high', 'kind': 'bug', 'area': 'api'}, {'severity': 'med', 'kind': 'bug', 'area': 'infra'}, {'severity': 'critical', 'kind': 'regression', 'area': 'backend'}. 3) Determine area by looking for keywords like 'frontend', 'backend', 'api', 'docs', 'infra', or 'tooling'. Additionally, provide examples for each area to clarify the context: 'frontend' when related to UI/UX, 'backend' when involving server-side logic, 'api' for interfacing issues, 'docs' for documentation, 'infra' for infrastructure-related tasks, and 'tooling' for development tools. Use these examples for more accurate classification.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 2
+      }
+    }
+  ]
+}

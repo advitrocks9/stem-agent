@@ -10,8 +10,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from evolve import evolve
 
-CLASSES = ["regex", "json", "math"]
-SEEDS = [0, 1]
+CLASSES = ["regex", "json", "math", "sql"]
+SEEDS = [0, 1, 2]
 ITERS = 8
 
 

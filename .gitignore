@@ -5,6 +5,7 @@ __pycache__/
 venv/
 .env
 .cache/
+tasks/sql/fixture.db
 .DS_Store
 PLAN.md
 SUBMISSION.md

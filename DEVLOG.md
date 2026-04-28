@@ -197,6 +197,40 @@ the binding constraint is still data, not signal.  Bigger dev sets
 would let typed feedback turn into actual reliable gains rather than
 higher-variance gains.
 
+## 2026-05-04 - sql class, two bugs in the fixture
+
+Added the sql class.  Wrote a 9-user / 14-product / 25-order sqlite
+fixture and 30 tasks; ran seed evaluation.  Got 100% on demo and
+83% on dev.  Looked at the failures: two of them were tasks where
+the gold result is an empty result set ("users with no orders",
+"products never ordered").  My fixture had no users without orders
+and every product had at least one order, so gold returned 0 rows
+on both, predicted returned 0 rows because the predictions also
+landed there, and the validator's row-count check still fired.
+The actual bug was: gold had `WHERE NOT EXISTS (SELECT 1 FROM
+orders WHERE user_id = users.id)` returning 0 rows because every
+user had an order.  Adding a user without orders (Iris, country
+DE) and two products without orders (Eraser, Sticky notes) made
+the gold non-empty and the predicted vs gold comparison
+meaningful.
+
+Second bug: the seed agent got 0% on its first SQL test run.  I
+was asking it for a SQL query to a database whose schema it had
+never been told about.  Compared with regex/json/math, where the
+task itself contains all the inputs, sql is the first class where
+the *environment* (the schema) is part of the worker's effective
+prompt.  Spider/BIRD's convention is to prepend the schema to the
+user message, which keeps the seed class-agnostic while letting
+each class inject what it needs.  Added one helper (`_user_msg`
+in `agent.py`) and a `SQL_SCHEMA_PREFIX` constant; seed jumped
+from 0% to 92% on test.
+
+The class-agnostic seed stays clean (one system prompt, no
+class-specific knowledge), and the class-specific knowledge lives
+in the worker's `_user_msg` helper.  If I added a fifth class with
+its own context (a code base, a tool spec, a calendar), the same
+pattern would extend.
+
 ---
 
 Things I haven't fixed and would, with another week:

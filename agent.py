@@ -2,7 +2,7 @@
 
 Four knobs.
   system_prompt   free text
-  validation      'none' | 'schema' | 'testcases'
+  validation      'none' | 'schema' | 'testcases' | 'results'
   tool_policy     'no_tools' | 'validate_retry' | 'code_exec'
   max_retries     int in [0, 4]
 
@@ -14,11 +14,13 @@ from __future__ import annotations
 
 import json
 import re
+import sqlite3
 import subprocess
 import sys
 import textwrap
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable
 
 from llm import chat
@@ -102,11 +104,63 @@ def validate_schema(text: str, task: dict) -> tuple[bool, str]:
     return True, ""
 
 
+_SQL_FIXTURE_DB = Path(__file__).resolve().parent / "tasks/sql/fixture.db"
+_SQL_FIXTURE_SQL = Path(__file__).resolve().parent / "tasks/sql/fixture.sql"
+
+
+def _ensure_sql_fixture() -> None:
+    if _SQL_FIXTURE_DB.exists():
+        return
+    if not _SQL_FIXTURE_SQL.exists():
+        return  # no fixture, validator will fail loudly when called
+    con = sqlite3.connect(_SQL_FIXTURE_DB)
+    con.executescript(_SQL_FIXTURE_SQL.read_text())
+    con.commit()
+    con.close()
+
+
+def _run_sql(query: str) -> list[tuple]:
+    _ensure_sql_fixture()
+    con = sqlite3.connect(_SQL_FIXTURE_DB)
+    try:
+        return con.execute(query).fetchall()
+    finally:
+        con.close()
+
+
+def validate_sql(text: str, task: dict) -> tuple[bool, str]:
+    """Run predicted SQL against the fixture and compare its result set to gold's."""
+    pred_sql = _strip_fence(text)
+    if pred_sql.endswith(";"):
+        pred_sql = pred_sql[:-1]
+    try:
+        pred_rows = _run_sql(pred_sql)
+    except sqlite3.Error as e:
+        return False, f"[sql-error] {e}"
+    try:
+        gold_rows = _run_sql(task["gold_sql"])
+    except sqlite3.Error as e:
+        return False, f"[gold-bug] {e}"  # shouldn't happen; gold is hand-checked
+    pred_set = pred_rows if task.get("ordered") else sorted(map(_row_key, pred_rows))
+    gold_set = gold_rows if task.get("ordered") else sorted(map(_row_key, gold_rows))
+    if pred_set == gold_set:
+        return True, ""
+    if len(pred_rows) != len(gold_rows):
+        return False, f"[row-count] predicted {len(pred_rows)} rows, gold has {len(gold_rows)}"
+    return False, f"[result-mismatch] first 3 predicted={pred_rows[:3]}; first 3 gold={gold_rows[:3]}"
+
+
+def _row_key(row: tuple) -> tuple:
+    """Coerce floats to a stable string so 1.0 and 1 compare equal across SQLite casts."""
+    return tuple((round(c, 4) if isinstance(c, float) else c) for c in row)
+
+
 # (validation_policy, task_class) -> validator. Mismatched pairs fall through
 # as no-ops, which gives the meta-agent a clean signal next iter.
 _VALIDATOR = {
     ("testcases", "regex"): validate_regex,
     ("schema", "json"):     validate_schema,
+    ("results", "sql"):     validate_sql,
 }
 
 
@@ -147,13 +201,33 @@ PYTHON_TOOL_SCHEMA = {
 }
 
 
+# SQL tasks need the schema in context. Following Spider/BIRD convention,
+# prepend the schema to the user message rather than baking it into the
+# spec, so the seed stays class-agnostic.
+SQL_SCHEMA_PREFIX = """The database has three tables:
+
+    users(id, name, country, signup_date)
+    products(id, name, category, price)
+    orders(id, user_id, product_id, quantity, order_date)
+
+Output only the SQL query, no explanation, no surrounding text or fences.
+
+Question: """
+
+
+def _user_msg(task: dict, task_class: str) -> str:
+    if task_class == "sql":
+        return SQL_SCHEMA_PREFIX + task["prompt"]
+    return task["prompt"]
+
+
 # ----- the three branches ----------------------------------------------
 
-def _run_no_tools(task: dict, spec: dict, model: str | None) -> Run:
+def _run_no_tools(task: dict, spec: dict, task_class: str, model: str | None) -> Run:
     out = Run(output="")
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
-        {"role": "user", "content": task["prompt"]},
+        {"role": "user", "content": _user_msg(task, task_class)},
     ]
     t0 = time.time()
     r = chat(msgs, model=model)
@@ -165,13 +239,13 @@ def _run_no_tools(task: dict, spec: dict, model: str | None) -> Run:
 
 
 def _run_validate_retry(task: dict, spec: dict, task_class: str, model: str | None) -> Run:
-    out = _run_no_tools(task, spec, model)
+    out = _run_no_tools(task, spec, task_class, model)
     validator = _VALIDATOR.get((spec["validation"], task_class))
     if validator is None:
         return out  # mismatched policy/class: no-op pass-through
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
-        {"role": "user", "content": task["prompt"]},
+        {"role": "user", "content": _user_msg(task, task_class)},
     ]
     for k in range(spec.get("max_retries", 0)):
         ok, fb = validator(out.output, task)
@@ -191,12 +265,12 @@ def _run_validate_retry(task: dict, spec: dict, task_class: str, model: str | No
     return out
 
 
-def _run_code_exec(task: dict, spec: dict, model: str | None) -> Run:
+def _run_code_exec(task: dict, spec: dict, task_class: str, model: str | None) -> Run:
     """Multi-turn ReAct with python_exec available. max_retries caps tool calls."""
     out = Run(output="")
     msgs = [
         {"role": "system", "content": spec["system_prompt"]},
-        {"role": "user", "content": task["prompt"]},
+        {"role": "user", "content": _user_msg(task, task_class)},
     ]
     # 1 initial LLM call plus up to max_retries tool-call rounds, plus a final
     # call to consume the last tool result. Cap at 8 to keep token spend sane.
@@ -239,9 +313,9 @@ def run(task: dict, spec: dict, task_class: str, model: str | None = None) -> Ru
     """Pure function of (task, spec, class). Picks the branch by tool_policy."""
     tp = spec["tool_policy"]
     if tp == "no_tools":
-        return _run_no_tools(task, spec, model)
+        return _run_no_tools(task, spec, task_class, model)
     if tp == "validate_retry":
         return _run_validate_retry(task, spec, task_class, model)
     if tp == "code_exec":
-        return _run_code_exec(task, spec, model)
+        return _run_code_exec(task, spec, task_class, model)
     raise ValueError(f"unknown tool_policy: {tp!r}")

@@ -3,6 +3,7 @@
   uv run python stem.py --class regex --iters 8
   uv run python stem.py --class json  --iters 8 --seed 1
   uv run python stem.py --class math  --iters 8 --no-rollback
+  uv run python stem.py --class sql   --iters 8 --seed 0
 """
 from __future__ import annotations
 
@@ -15,7 +16,7 @@ from evolve import evolve
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Differentiate the seed into a class specialist.")
-    ap.add_argument("--class", dest="task_class", required=True, choices=["regex", "json", "math"])
+    ap.add_argument("--class", dest="task_class", required=True, choices=["regex", "json", "math", "sql"])
     ap.add_argument("--iters", type=int, default=8)
     ap.add_argument("--seed", type=int, default=0, help="random seed for meta-agent sampling")
     ap.add_argument("--out", type=Path, default=Path("runs"))

@@ -8,7 +8,7 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from agent import Run, run, validate_regex, validate_schema, _strip_fence
+from agent import Run, run, validate_regex, validate_schema, validate_sql, _strip_fence
 
 
 # Hand-picked splits keep the dev set heavy on items the seed fails on,
@@ -36,10 +36,22 @@ _SPLITS: dict[str, dict[str, set[str]]] = {
                  "compound-3-rates", "three-discounts", "clock-angle", "speed-vary", "work-vary",
                  "age-puzzle", "sphere-vol"},
     },
+    "sql": {
+        # demo covers easy/med/hard so the meta-agent sees the range.
+        # dev mixes joins, group-by, and a couple of subquery tasks.
+        "demo": {"count-users", "uk-users", "count-orders-per-user", "revenue-by-category",
+                 "top-spender-country", "second-most-popular"},
+        "dev":  {"electronics-prices", "avg-order-value", "top-3-products", "users-no-orders",
+                 "orders-per-month", "category-counts", "big-spenders", "first-orders",
+                 "users-bought-electronics", "product-never-ordered", "q4-revenue",
+                 "category-share"},
+    },
 }
 
 
 def _detect_class(tasks: list[dict]) -> str:
+    if "gold_sql" in tasks[0]:
+        return "sql"
     if "schema" in tasks[0]:
         return "json"
     if "positives" in tasks[0]:
@@ -141,6 +153,8 @@ def score_one(task: dict, run_out: Run, task_class: str) -> tuple[bool, str]:
         return _score_json_full(task, run_out.output)
     if task_class == "math":
         return _score_math(task, run_out.output)
+    if task_class == "sql":
+        return validate_sql(run_out.output, task)
     raise ValueError(f"unknown class: {task_class}")
 
 

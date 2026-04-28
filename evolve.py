@@ -39,9 +39,10 @@ META_SYSTEM = """You evolve a small worker agent's spec one structured edit at a
 
 The worker spec has exactly four fields, no others:
   system_prompt: free text, the worker's system message.
-  validation:    one of "none", "schema", "testcases".
+  validation:    one of "none", "schema", "testcases", "results".
                  schema only matches the json class (parses output, checks fields).
                  testcases only matches the regex class (compiles the regex, runs against given examples).
+                 results only matches the sql class (runs the SQL against a fixture and compares its result set to the gold result set).
   tool_policy:   one of "no_tools", "validate_retry", "code_exec".
                  no_tools: one LLM call.
                  validate_retry: run the validator after the LLM call; on failure feed the
@@ -123,7 +124,7 @@ def _propose(task_class: str, demos: list[dict], current_spec: dict,
 # ----- safeguards -------------------------------------------------------
 
 ALLOWED_FIELDS = {"system_prompt", "validation", "tool_policy", "max_retries"}
-ALLOWED_VALIDATIONS = {"none", "schema", "testcases"}
+ALLOWED_VALIDATIONS = {"none", "schema", "testcases", "results"}
 ALLOWED_TOOL_POLICIES = {"no_tools", "validate_retry", "code_exec"}
 
 

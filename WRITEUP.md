@@ -322,6 +322,134 @@ larger gap with a bigger iteration budget and a hotter meta-agent.
    archive of candidates; my budget couldn't afford it but the
    architecture supports it.
 
+## Appendix: four below-API observations from this experiment
+
+The brief asked for "deep understanding of LLM mechanics below API level".
+This is what the experiment actually let me observe, not generic LLM
+trivia.
+
+### A1. Formatting-prior leakage on raw fragments (regex backticks)
+
+`gpt-4o-mini` wraps almost every regex output in single backticks, e.g.
+` `^abc$` `.  The first version of my validator received the literal
+backticks, refused to compile them, and the regex seed baseline sat at
+17%.  Stripping a single-backtick wrap moved the baseline to ~71% on
+the same prompts and same model with no other change.
+
+I do not claim this is *caused by* BPE merges specifically.  Either
+tokenization (single backticks are a low-cost token because they appear
+in every code-fenced block in training data) or instruction-tuning
+formatting priors (the model learned that "code" means "wrap in code
+markers") could explain it.  What the experiment supports is the
+weaker claim: when the model is asked for a fragment that its training
+data almost always saw inside a markdown code-fence, its outputs leak
+the framing tokens.  Anyone receiving raw fragments from a code model
+should plan for this at the parser, not at the prompt; my fix is one
+line of `_strip_one_backtick_fence` in `agent.py` and it pays for
+itself by ~54 percentage points on the seed baseline.  For Mellum or
+any code model emitting raw refactorings, the analogous fix lives in
+the IDE-side receiver, not the prompt.
+
+### A2. Tool-availability changes the action space; the prompt picks the branch
+
+When the worker has `python_exec` available via OpenAI function-calling,
+the assistant message is one of two structural choices: free-form
+content, or a tool call.  Tool *availability* widens the action space
+the model picks from on the next token.  It does not bias the model
+toward picking tool-call.
+
+The math experiment is the cleanest demonstration of that gap.  In an
+early version, when the meta-agent proposed `tool_policy: code_exec`
+without editing `system_prompt`, the worker *could* call `python_exec`
+but mostly didn't.  Math specialist test score in that version was 50%,
+*below* seed's 62%.  After I added one sentence to the meta-agent's
+prompt instructing it to also edit the worker's system prompt
+("tool-availability and tool-using-habit are coupled in the model's
+behaviour but represented as independent fields in the spec"), the
+specialist beat seed by 12-17 pp across two seeds.
+
+The mechanism is not "tool schemas constrain every token to a different
+distribution"; that's coarse.  The mechanism is that the model has a
+strong prior toward direct-answer continuations on familiar question
+shapes, and the tool branch of the action space is selected only when
+the prompt makes the choice salient.  This is the same pattern that
+shows up in production IDE agents: enabling a tool isn't enough; the
+model needs to be told the tool is the *right* tool for the visible
+task.
+
+### A3. Decoding temperature serves different roles in a search loop
+
+The worker uses `T=0.0`; the meta-agent uses `T=0.7`.  At `T=0.0` the
+meta-agent was deterministic and the regression-rollback path was
+never exercised in early runs (every proposal was monotone-or-better).
+At `T=0.7` the proposal distribution widens enough that some
+proposals regress.  Across the nine evolution runs in `runs/`
+(3 classes x 3 seeds, 52 child proposals total), the lineage records:
+
+- 20 archive additions (children that beat or matched parent on score)
+- 9 dominated-but-accepted edits (same score, more tokens)
+- 18 regression rollbacks (child strictly worse than parent on dev)
+- 5 parse-apoptosis events (mostly the same `max_retries: 6` proposal
+  repeated across consecutive iters by the same meta-agent instance,
+  see A4 below)
+- 0 smoke-apoptosis events (the worker never crashed on a smoke task)
+
+The 18 regression rollbacks are the artefact of `T=0.7`: at `T=0.0`
+they would not have happened, and the safeguard would have been
+untested.
+
+Two things to take from this.  First: in a search loop with a
+gatekeeper, the right *role* of temperature isn't "diversity" in the
+abstract - it's "exploration that the gatekeeper can afford to
+reject".  Second: setting one temperature for the whole agent stack is
+the easy default; it's also the wrong default when you have asymmetric
+roles (deterministic worker + exploratory proposer).  This costs
+nothing extra to change in the OpenAI SDK, and the literature on
+agent-stack design rarely surfaces it explicitly.
+
+### A4. The meta-agent has no memory across rejected iterations
+
+This is the clearest below-API failure mode I observed, because it
+shows up in the lineage logs.  The meta-agent's input on each iter is:
+the system prompt, three demo tasks, the *current* parent spec, and
+the *current* dev failures.  When a child is rejected (parse-apoptosis,
+smoke-apoptosis, or regression rollback), the parent doesn't change,
+so the dev failures don't change, so the next iter's input is
+near-identical to the previous one.
+
+The meta-agent is stateless across iters: it does not see its previous
+proposal, the rejection cause, or its previous reasoning.  So when the
+input is unchanged, it pattern-matches to the same theme again.
+
+The math seed=0 lineage shows the cleanest case.  After iter 2, the
+meta-agent proposed `max_retries: 6` (out of [0,4]) with the reason
+"increasing max_retries allows more iterations".  That child was
+rejected at parse-apoptosis.  Iter 3 input was identical to iter 2's,
+because nothing had changed.  The meta-agent proposed `max_retries: 6`
+*again*, with the reason "the worker is reaching the turn cap without
+producing correct results, so increasing max_retries should help".
+Same rejection.  Iter 4 input was *still* identical.  The meta-agent
+proposed `max_retries: 6` for the third time, this time with the
+reason "the worker reached the turn cap on two tasks, indicating it
+needs more iterations".  The plateau detector finally stopped the
+loop.
+
+This is the mirror image of the failure mode the brief mentions in its
+qualifications list ("context degradation, memory drift").  Here the
+meta-agent has *too little* context-state, not too much: every iter
+sees a fresh window.  The fix would be one of: (a) include the most
+recent two rejected proposals and their rejection causes in the
+meta-agent's input; (b) keep an episodic log of "things the meta-agent
+has already tried with this parent" and surface it; (c) cool the
+temperature each consecutive rejection so the proposer is forced to
+deviate.  I have not implemented these; the observation alone was the
+finding.
+
+For an IDE agent that drives a multi-step refactor, the same pattern
+shows up as "the agent keeps re-suggesting the same fix the user
+already rejected".  The technical answer is the same: persist a
+short-term episodic memory of rejected suggestions across turns.
+
 ## References
 
 - ADAS - Hu, Lu, Clune.  *Automated Design of Agentic Systems*.  ICLR 2025.  arXiv:2408.08435.

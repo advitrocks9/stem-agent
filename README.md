@@ -2,8 +2,12 @@
 
 A small experiment in self-specializing agents. The seed is a single ReAct
 worker with a four-field spec; a meta-agent proposes structured edits to the
-spec; surviving children are placed on a Pareto frontier of (dev score,
-inference cost). Same seed and same mutator on three task classes produce
+spec; surviving children are admitted to an accepted-archive with a
+Pareto-dominance rejection rule on (dev score, inference cost). The
+score-cost tradeoff turns out not to bite for this problem -- in every
+accepted trajectory the best-scoring archive entry is also the cheapest --
+so the dominance check effectively reduces to monotone-in-score plus a
+plateau stop. Same seed and same mutator on three task classes produce
 three differently-shaped specialists.
 
 ## Setup
@@ -34,9 +38,9 @@ policy. The validator dispatch is keyed on `(policy, class)` pairs; mismatches
 fall through.
 
 `evolve.py` - meta loop. The meta-agent proposes a JSON edit over four spec
-fields. Surviving children are admitted to a Pareto frontier on (score, mean
-in-tokens per eval). The loop stops after three iterations without a new
-frontier point, or at the iter cap.
+fields. Surviving children are admitted to an archive under Pareto dominance
+on (score, mean in-tokens per eval). The loop stops after three iterations
+in a row that fail to add a non-dominated point, or at the iter cap.
 
 `eval.py` - task loader, splits, scoring. Math answers are normalised
 (strip currency symbols, prefer the last number, accept HH:MM and a/b

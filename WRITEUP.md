@@ -1,4 +1,4 @@
-# Stem agent: bounded self-modification with a Pareto stop
+# Stem agent: bounded self-modification under monotone acceptance
 
 Advit Arora.  JetBrains AI Engineering, April 2026.
 
@@ -65,7 +65,7 @@ first pass; the mutator never proposed a regression, so the rollback
 path was uncovered.  T=0.7 fixed that without breaking the structural
 constraint.
 
-### Safeguards and the Pareto frontier
+### Safeguards and acceptance
 
 A child is rejected on three signals:
 
@@ -77,19 +77,22 @@ A child is rejected on three signals:
 3. **Regression rollback** - the child's dev score is strictly below
   the parent's.
 
-Surviving children become candidate points
-`P = (dev_score, mean_in_tokens_per_eval)`.  The accepted set is the
-Pareto frontier under the partial order
-`A ≽ B  iff  A.score ≥ B.score  and  A.tokens ≤ B.tokens`, with at
-least one strict.  New points that aren't dominated are added; existing
-points the new one dominates are removed
-(`evolve.py:update_frontier`).  The reported specialist is the
-highest-scoring frontier entry, ties broken by lower tokens.
+Surviving children become points `P = (dev_score, mean in_tokens per
+eval)` in an accepted-archive.  I implement Pareto dominance over
+those points (`A ≽ B iff A.score ≥ B.score and A.tokens ≤ B.tokens`,
+strict in at least one) and reject children that any existing point
+already dominates; the reported specialist is the highest-scoring
+archive entry, ties broken by lower tokens.  In practice on this
+problem the score-cost tradeoff doesn't bite: in every accepted
+trajectory the highest-scoring point is also the cheapest, so the
+dominance check reduces to "monotone in score plus a tie-breaker on
+tokens".  The Pareto branding earns its keep only as the
+machinery that powers a clean stop signal: a plateau, defined as
+three iterations in a row that fail to add a non-dominated point.
 
-The stopping criterion counts consecutive iterations that fail to add
-a frontier point.  After three in a row the loop reports a *plateau*.
-With `iters=8` this fires often before the cap.  The cap is the safety
-net.
+The stopping criterion is the consecutive-no-new-point count.  After
+three in a row the loop terminates as a plateau.  With `iters=8`
+this fires often before the cap.
 
 `tools/safeguards_test.py` injects pathological children to exercise
 every rejection path directly, since natural runs do not always trigger
@@ -128,43 +131,67 @@ items with the harder ones.
 
 ## Results
 
-Two seeds per class, plain mean.  Total OpenAI cost for the sweep was
-roughly $1.
+Three seeds per class, mean ± standard deviation across seeds.  Total
+OpenAI cost was about $1.50 across the nine evolution runs plus the
+transfer matrix.
 
-| class | seed test (mean of 2) | specialist test | Δ | specialist `tool_policy` | specialist `validation` | system_prompt edit |
-|---|---:|---:|---:|---|---|---|
-| regex | 69% (67% / 71%) | 84% (81% / 86%) | **+15** | `validate_retry` | `testcases` | regex-specific rule in s0, unchanged in s1 |
-| json  | 43%             | 48%             | **+5**  | mixed (no_tools / validate_retry) | mixed (none / schema) | rules + worked patterns |
-| math  | 62%             | 79%             | **+17** | `code_exec` | `none` | "use python_exec for calculations" |
+| class | seed test (n=3) | specialist test (n=3) | Δ mean ± SD | per-seed Δ | specialist's spec converges to |
+|---|---:|---:|---:|---|---|
+| regex | 68% ± 2     | 84% ± 3      | **+16 ± 5.5** | +10, +19, +19 | `validate_retry`, `testcases`, `max_retries` 2-4 |
+| json  | 44% ± 3     | 49% ± 7      | **+5 ± 9.5**  | +14, -5, +5  | system_prompt rewrite, validation policy mixed |
+| math  | 62% ± 0     | 75% ± 7      | **+13 ± 7.2** | +17, +17, +5 | `code_exec` + "use python_exec" prompt nudge |
 
 Same seed, same mutator, three different specialist shapes.  The regex
 specialist enables the testcase validator and a small retry budget.
-The math specialist switches to `code_exec` and adds a one-line nudge
-to the system prompt.  The json specialist's most consistent edit is a
-prompt rewrite that adds severity definitions and worked patterns; in
-one of the two seeds it also turned on the schema validator, but
-schema-validation cannot recognise wrong-category errors so the gain
-on test was marginal.
+The math specialist switches to `code_exec` and adds a one-line nudge.
+The json specialist's most consistent edit is a system-prompt rewrite
+with severity definitions and worked patterns.  The shapes are stable
+across seeds even when the magnitudes are not.
+
+The JSON variance is the headline weakness.  +14 / -5 / +5 across
+seeds means that on at least one seed the meta-agent's prompt rewrite
+overfit dev (which hit 83% on s1) and underperformed seed on test by
+5 pp.  The class is genuinely harder than the other two: the dev set
+has 12 items and the test set 21, so a prompt rule that fits the
+dev distribution will not necessarily fit the test distribution
+unless dev is large enough to constrain the meta-agent's edits.
+This is not a bug in the loop; it is a sample-size limit on how
+much a 12-task dev split can be trusted as a signal for 21-task
+generalisation.
+
+I added typed feedback to the JSON eval halfway through (commit
+log on `2026-05-01`): instead of "wrong" the meta-agent now sees
+`[parse-fail]`, `[missing-field]`, `[value-not-allowed]`, or
+`[value-mismatch]` per task.  This is the exact distinction the
+meta-agent needs to decide whether `validate_retry` will help (it
+does for the first three) or whether only a system-prompt edit
+will (the fourth).  The mean delta moved from +5 (untyped) to +5
+(typed) which is a wash on the average, but the *variance* widened
+because the meta-agent now commits more confidently to the prompt-
+rewrite path; two of three seeds beat seed by 5+ pp, the third
+overfit and lost 5 pp.  Typed feedback gives the meta-agent a
+sharper instrument; it does not give it a bigger training set.
 
 ### Cross-class transfer (test sets)
 
+Each cell is the best-of-3-seeds specialist on the named class's test set.
+
 | spec | regex | json | math |
 |---|---:|---:|---:|
-| seed | 71% | 43% | 67% |
-| regex specialist | **86%** | 38% | 62% |
-| json specialist | 62% | **48%** | 62% |
-| math specialist | 67% | 43% | **71%** |
+| seed | 71% | 43% | 62% |
+| regex specialist | **81%** | 48% | 62% |
+| json specialist | 67% | **57%** | 67% |
+| math specialist | 71% | 38% | **83%** |
 
-The diagonal is the best entry in every row.  Every off-diagonal is
-flat or below seed.  The largest drop is the json specialist on
-regex (-9 pp): the long category-rules system prompt actively
-confuses a regex worker that just needs a pattern.  The regex
-specialist falls 5 pp on json and 5 pp on math because its prompt
-edit ("ensure the regex meets all conditions") is regex-specific
-boilerplate that adds noise to other classes.  The math specialist's
-`python_exec` mention is ignored on the other classes' tasks but its
-prompt edit shaves 4 pp off regex.  These drops are small in
-absolute terms but they go the way they should: each spec is shaped
+The diagonal is the best entry in every row.  Off-diagonal cells
+mostly fall back toward seed; the math specialist drops 5 pp on json
+because its `code_exec`+python prompt is irrelevant there and
+clutters the worker's input.  The json specialist on regex drops
+4 pp.  The two off-diagonal cells where a specialist beats seed
+(json spec on math, +5 pp; regex spec on json, +5 pp) are inside
+the per-task noise floor of these test sets and do not look
+intentional.  The strong specialization signal is the diagonal
+beating its column mean, not the off-diagonals collapsing.
 to its class.
 
 ### A lineage that actually used the safeguards
@@ -200,15 +227,13 @@ about the coupling between tool and prompt.**  In the first version,
 when the meta-agent proposed `tool_policy: code_exec` it left
 `system_prompt` alone.  The worker *could* call `python_exec` but
 often didn't, and on test the math specialist scored *below* seed
-(50 % vs 62 %).  After I added one sentence to the meta-agent's
-system prompt - "when you turn on code_exec, also edit system_prompt
-so the worker actually uses python_exec" - the meta-agent started
-proposing both edits in the same iter and the math specialist beat
-seed by 12-17 pp across two seeds.  This is the most fragile
-behaviour I observed: the worker's tool-availability and its
-tool-using habit are coupled, but the spec representation treats
-them as independent.  Without a hint the meta-agent missed that
-coupling.
+(50% vs 62%).  After I added one sentence to the meta-agent's system
+prompt asking it to edit `system_prompt` whenever it changed
+`tool_policy`, the meta-agent started proposing both edits in the
+same iter and math beat seed by 5-17 pp across three seeds.  This is
+the most fragile behaviour I observed: the worker's tool-availability
+and its tool-using habit are coupled in the model's behaviour, but
+the spec representation treats them as independent fields.
 
 **`max_retries` is a different knob in different branches.**  Under
 `validate_retry` it caps re-prompts; under `code_exec` (after the
@@ -217,14 +242,17 @@ The meta-agent treats it as a single number anyway, which works only
 because each tool_policy uses it sensibly.  It would not survive a
 fourth branch added without thought.
 
-**Pareto's main job in this experiment was rejecting "same score,
-more tokens" children, not balancing score against cost.**  In every
-run the highest-scoring frontier point was also the cheapest.  The
-real value came from the *plateau counter*: dominated children count
-toward the patience budget, so the loop stops promptly when the
-meta-agent gets stuck in wording rewrites.  I expected this to
-matter more on the score-cost trade-off and less on the stop signal;
-the opposite was true.
+**The Pareto frontier is overclaimed.**  I called the accepted-archive a
+"Pareto frontier" because that's what the dominance rule technically is.
+In this problem it never produces a real score-cost tradeoff: the
+highest-scoring archive entry is also the cheapest in every accepted
+trajectory.  So the structure I shipped reduces to monotone-in-score
+with a token-tiebreaker.  The dominance machinery is still doing one
+useful thing: it lets dominated children count toward the patience
+budget, so the loop stops promptly when the meta-agent has run out of
+ideas.  But "Pareto frontier" reads like I'm claiming I built a
+multi-objective search and the reader should expect a tradeoff curve.
+I'm not, and they shouldn't.
 
 **JSON underperformed and rebalancing the dev split helped only a
 little.**  My first JSON dev set was all critical-and-regression
@@ -245,9 +273,9 @@ demo+dev set that does not generalise well.
 accepted iff dev score strictly greater than parent.  With a 12-task
 dev set, mutations that fix a *test* item without moving the *dev*
 score get thrown away.  The regex run produced no specialist at all
-under that rule.  I switched to monotone (`≥`) plus the Pareto check,
-and added the plateau counter so the loop still terminates when the
-meta-agent stops finding new Pareto points.
+under that rule.  I switched to monotone (`≥`) plus the dominance
+check on tokens, and added the plateau counter so the loop still
+terminates when the meta-agent stops finding new archive points.
 
 **The validator dispatch was a bug.**  I keyed validators on task
 class (`{"regex": ..., "json": ...}`) but the spec uses policy names
@@ -288,11 +316,11 @@ larger gap with a bigger iteration budget and a hotter meta-agent.
    the meta-agent discovers the SQL tool the way it discovered
    `code_exec` for math, or whether the discovery only generalises
    along the existing tool path.
-4. **Run multiple proposals per iter and let Pareto pick the best,
-   instead of one proposal per iter.**  This changes the search from
-   greedy to beam-2.  ADAS does something like this with an archive
-   of candidates; my budget couldn't afford it but the architecture
-   supports it.
+4. **Run multiple proposals per iter and pick the best by archive
+   admission, instead of one proposal per iter.**  This changes the
+   search from greedy to beam-2.  ADAS does something similar with an
+   archive of candidates; my budget couldn't afford it but the
+   architecture supports it.
 
 ## References
 

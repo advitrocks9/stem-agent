@@ -281,5 +281,51 @@
         "max_retries": 0
       }
     }
-  ]
+  ],
+  "test_per_task_seed": {
+    "perf-search": false,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": false,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": true,
+    "test-flake-mock": false,
+    "perf-mobile": false,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": true,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": false
+  },
+  "test_per_task_specialist": {
+    "perf-search": true,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": true,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": true,
+    "test-flake-mock": false,
+    "perf-mobile": true,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": false,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": false
+  }
 }

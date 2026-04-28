@@ -395,6 +395,9 @@ def evolve(
         "specialist_test_score": spec_test.score,
         "specialist_spec": specialist_pt.spec,
         "specialist_dev_score": specialist_pt.score,
+        # per-task pass/fail on the test set, needed for bootstrap CIs over tasks
+        "test_per_task_seed":       {t.task_id: t.passed for t in seed_test.per_task},
+        "test_per_task_specialist": {t.task_id: t.passed for t in spec_test.per_task},
         "frontier": [
             {"hash": p.spec_hash, "iter": p.iter, "score": p.score, "tokens": p.tokens, "spec": p.spec}
             for p in sorted(frontier, key=lambda p: (-p.score, p.tokens))

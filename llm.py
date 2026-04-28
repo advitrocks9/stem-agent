@@ -11,7 +11,7 @@ import time
 from dataclasses import dataclass
 
 from dotenv import load_dotenv
-from openai import OpenAI, APIConnectionError, RateLimitError
+from openai import OpenAI, APIConnectionError, APITimeoutError, RateLimitError
 
 load_dotenv()
 
@@ -22,7 +22,8 @@ _client: OpenAI | None = None
 def client() -> OpenAI:
     global _client
     if _client is None:
-        _client = OpenAI()
+        # 60s read timeout so we don't hang forever on a stalled response.
+        _client = OpenAI(timeout=60.0)
     return _client
 
 
@@ -78,7 +79,7 @@ def chat(
                 out_tokens=usage.completion_tokens if usage else 0,
                 tool_calls=tcs,
             )
-        except (APIConnectionError, RateLimitError):
+        except (APIConnectionError, APITimeoutError, RateLimitError):
             if attempt == 0:
                 time.sleep(2)
                 continue

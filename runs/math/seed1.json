@@ -155,5 +155,57 @@
         "max_retries": 4
       }
     }
-  ]
+  ],
+  "test_per_task_seed": {
+    "pool-fill": true,
+    "mix-juice": false,
+    "avg-speed": true,
+    "chickens-cows": false,
+    "sum-consec": true,
+    "cube-vol": true,
+    "reciprocal-sum": false,
+    "unit-conv": false,
+    "work-rate": true,
+    "coin-flip-3h": false,
+    "prime-near-50": true,
+    "fact-7": true,
+    "hex-to-dec": true,
+    "simul-eqs": false,
+    "price-tax": false,
+    "miles-per-gal": true,
+    "pct-increase": true,
+    "odd-sum": true,
+    "area-triangle": true,
+    "prob-marbles": false,
+    "distance-bike": true,
+    "fence-cost": false,
+    "avg-grade": true,
+    "pct-of-x": true
+  },
+  "test_per_task_specialist": {
+    "pool-fill": true,
+    "mix-juice": false,
+    "avg-speed": true,
+    "chickens-cows": false,
+    "sum-consec": true,
+    "cube-vol": true,
+    "reciprocal-sum": true,
+    "unit-conv": true,
+    "work-rate": true,
+    "coin-flip-3h": true,
+    "prime-near-50": true,
+    "fact-7": true,
+    "hex-to-dec": true,
+    "simul-eqs": false,
+    "price-tax": false,
+    "miles-per-gal": true,
+    "pct-increase": true,
+    "odd-sum": true,
+    "area-triangle": true,
+    "prob-marbles": true,
+    "distance-bike": false,
+    "fence-cost": true,
+    "avg-grade": true,
+    "pct-of-x": false
+  }
 }

@@ -156,5 +156,51 @@
         "max_retries": 4
       }
     }
-  ]
+  ],
+  "test_per_task_seed": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": false,
+    "yes-no-ans": false,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "test_per_task_specialist": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": true,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": true,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": true,
+    "ssn-us": true
+  }
 }

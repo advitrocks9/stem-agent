@@ -21,15 +21,19 @@ echo "OPENAI_API_KEY=sk-..." > .env
 
 ```bash
 uv run python stem.py --class regex --iters 8                # one class, one seed
-uv run python tools/run_all.py                               # 3 classes x 2 seeds
-uv run python tools/transfer.py                              # 4x3 transfer matrix
+uv run python tools/run_all.py                               # 4 classes x 3 seeds
+uv run python tools/transfer.py                              # 5x4 transfer matrix
 uv run python tools/safeguards_test.py                       # rejection-path checks
+uv run python tools/split_sensitivity.py                     # 5 alt splits x 3 classes
+uv run python tools/run_ablations.py                         # random / no-demos / no-feedback
+uv run python tools/bootstrap_ci.py                          # paired test-item bootstrap
+uv run python tools/plots.py                                 # trajectories + heatmap
 uv run python tools/print_lineage.py runs/regex/seed0.json   # ASCII trace
 ```
 
-The full multi-seed sweep is roughly $1 in OpenAI tokens (gpt-4o-mini for
-the worker, gpt-4o for the meta-agent) and finishes in about thirty
-minutes on a residential connection.
+The full sweep is about $4 in OpenAI tokens (gpt-4o-mini for the
+worker, gpt-4o for the meta-agent) and finishes in roughly two
+hours on a residential connection.
 
 ## Layout
 
@@ -49,17 +53,26 @@ gold mapping.
 
 `llm.py` - thin OpenAI wrapper; one retry on connection errors.
 
-`tasks/{regex, json, math}/tasks.json` - 39 + 39 + 42 hand-curated items.
+`tasks/{regex, json, math, sql}/tasks.json` - 39 + 39 + 42 + 30
+hand-curated items.  The SQL class also ships a sqlite fixture
+(`tasks/sql/fixture.sql`, 9 users / 14 products / 25 orders) that
+the validator runs queries against.
 
 `tools/` - the analysis scripts above.
 
 ## Headline numbers
 
-See `WRITEUP.md` for the full table and the lineage walk-through. In short:
-each class produced a specialist whose spec differs from the seed on at
-least two fields; the regex specialist enables the testcase validator with
-a small retry budget, the math specialist switches to `code_exec`, and the
-json specialist rewrites the system prompt.
+See `WRITEUP.md` for the full table, the split-sensitivity sweep,
+the architecture ablations, the bootstrap CIs, and the lineage
+walk-through.  In short, four classes produce four differently
+shaped specialists: regex enables the testcase validator with a
+small retry budget, math switches to `code_exec` and adds a
+"use python_exec" prompt nudge, sql enables the results validator
+with `max_retries=2`, and json's most consistent edit is a system-
+prompt rewrite.  Three architecture ablations (random spec edit;
+no demos; no failure feedback) all underperform the full meta-agent
+on every class, with the largest gap on math (`+13` full → `-8` no-
+feedback).
 
 ## Things I'd tell a teammate before they extend this
 

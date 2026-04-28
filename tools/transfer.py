@@ -31,8 +31,14 @@ def best_specialist(task_class: str) -> dict:
 
 
 def main() -> None:
-    classes = ["regex", "json", "math"]
-    specs = {f"{c}_specialist": best_specialist(c) for c in classes}
+    classes = ["regex", "json", "math", "sql"]
+    specs = {}
+    for c in classes:
+        runs_for_c = list(Path(f"runs/{c}").glob("seed*.json"))
+        if runs_for_c:
+            specs[f"{c}_specialist"] = best_specialist(c)
+        else:
+            print(f"(no saved {c} runs, skipping that specialist)")
     specs["seed"] = SeedSpec
 
     test_sets = {c: split(load(c))["test"] for c in classes}

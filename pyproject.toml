@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "A seed agent that differentiates into a task-class specialist."
 requires-python = ">=3.12"
 dependencies = [
+    "matplotlib>=3.10.9",
     "openai>=2.33.0",
     "python-dotenv>=1.2.2",
     "pyyaml>=6.0.3",

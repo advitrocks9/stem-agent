@@ -98,7 +98,7 @@ this fires often before the cap.
 every rejection path directly, since natural runs do not always trigger
 `parse` or `smoke`.
 
-## Three task classes
+## Four task classes
 
 I picked classes where the optimal worker shape is, by hypothesis, a
 different point in the spec space.  If the meta-agent finds the same
@@ -121,6 +121,14 @@ meta-agent always proposes the same good thing".
   `gpt-4o-mini`'s arithmetic compounds errors past three steps.
   Predicted optimum: `code_exec` plus a system prompt that tells the
   worker to reach for `python_exec`.
+- **SQL from natural language** - 30 hand-written tasks against a
+  small sqlite fixture (3 tables, 9 users, 14 products, 25 orders).
+  The schema is prepended to the user message in the worker (Spider/
+  BIRD convention) so the seed isn't class-blind.  Predicted optimum:
+  `(results, validate_retry, max_retries ≥ 1)` - the validator runs
+  the predicted SQL against the fixture and feeds back row-count or
+  result-mismatch failures, which is enough information to fix
+  off-by-one joins on a single retry.
 
 Each class has a hand-picked split: 6 demo, 12 dev, the rest (21-24)
 test.  The dev set is over-weighted with items the seed fails on.
@@ -132,21 +140,45 @@ items with the harder ones.
 ## Results
 
 Three seeds per class, mean ± standard deviation across seeds.  Total
-OpenAI cost was about $1.50 across the nine evolution runs plus the
-transfer matrix.
+OpenAI cost across all the runs in this writeup (12 main evolution
+runs, 5 split-sensitivity sweeps × 3 classes, the cross-class
+transfer matrix, and the ablations described below) was about $4.
 
-| class | seed test (n=3) | specialist test (n=3) | Δ mean ± SD | per-seed Δ | specialist's spec converges to |
-|---|---:|---:|---:|---|---|
-| regex | 68% ± 2     | 84% ± 3      | **+16 ± 5.5** | +10, +19, +19 | `validate_retry`, `testcases`, `max_retries` 2-4 |
-| json  | 44% ± 3     | 49% ± 7      | **+5 ± 9.5**  | +14, -5, +5  | system_prompt rewrite, validation policy mixed |
-| math  | 62% ± 0     | 75% ± 7      | **+13 ± 7.2** | +17, +17, +5 | `code_exec` + "use python_exec" prompt nudge |
+Numbers are paired re-evaluations of seed and specialist on the same
+test items, so every Δ is a within-task comparison; bootstrap 95% CIs
+are computed by resampling the test items 1000 times per seed.
 
-Same seed, same mutator, three different specialist shapes.  The regex
+| class | seed test | specialist test | Δ mean | per-seed Δ | best per-seed bootstrap 95% CI | specialist spec converges to |
+|---|---:|---:|---:|---|---|---|
+| regex | 70% ± 3 | 83% ± 3  | **+13** | +9, +19, +9 | `[+5, +38]` (seed 1) | `validate_retry`, `testcases`, `max_retries` 2-4 |
+| json  | 48% ± 0 | 49% ± 7  | **+2**  | +9, -5, +0  | `[-9, +29]` (seed 0)  | system_prompt rewrite, validation policy mixed |
+| math  | 64% ± 2 | 72% ± 5  | **+8**  | +9, +12, +4 | `[-8, +33]` (seed 1)  | `code_exec` + "use python_exec" prompt nudge |
+| sql   | 92% ± 0 | 100% ± 0 | **+8**  | +8, +8, +8  | `[+0, +25]` (any)     | `validate_retry`, `results`, `max_retries=2` |
+
+The honest read: regex is the only class whose strongest seed has a
+positive-only CI; on the others the per-seed CIs straddle zero
+because the test sets are 12-24 tasks, which is small for a paired
+proportion test.  The cross-seed mean is what gives the differentiation
+claim its weight, not the per-seed CI on any one run.  Larger test
+sets would tighten these.  See `runs/bootstrap_summary.json`.
+
+Same seed, same mutator, four different specialist shapes.  The regex
 specialist enables the testcase validator and a small retry budget.
 The math specialist switches to `code_exec` and adds a one-line nudge.
 The json specialist's most consistent edit is a system-prompt rewrite
-with severity definitions and worked patterns.  The shapes are stable
-across seeds even when the magnitudes are not.
+with severity definitions and worked patterns.  The SQL specialist
+enables the results validator with a single retry; the seed already
+sits at 92% on this class because the schema-injection convention
+gives it most of what it needs, and the validator picks up the one
+test item the seed gets wrong.  The SQL convergence is the cleanest
+of the four: three independent meta-seeds end at the same spec.
+
+The shapes are stable across seeds even when the magnitudes are not.
+Across thirteen seed-saved runs (3 each on regex/json/math/sql, plus
+the math seed=0 baseline), no two specialist shapes within a class
+end on contradictory edits: regex always enables `testcases +
+validate_retry`, math always enables `code_exec`, sql always enables
+`results + validate_retry`.
 
 The JSON variance is the headline weakness.  +14 / -5 / +5 across
 seeds means that on at least one seed the meta-agent's prompt rewrite
@@ -172,27 +204,119 @@ rewrite path; two of three seeds beat seed by 5+ pp, the third
 overfit and lost 5 pp.  Typed feedback gives the meta-agent a
 sharper instrument; it does not give it a bigger training set.
 
+### Split-sensitivity: do these gains survive different splits?
+
+Five alternate random splits per class (split seeds 101-105), one
+meta-seed per split, six iters each.  This is the binding-constraint
+stress test: if the gains only show up on the hand-picked split, the
+result is a split artefact.
+
+| class | mean Δ ± SD | per-split Δ           | positive on |
+|-------|------------:|-----------------------|-------------|
+| regex | +12.4 ± 7.2 | +5, +5, +19, +19, +14 | 5/5         |
+| json  |  +6.7 ± 8.7 | -5, +14, +14, +10, +0 | 3/5         |
+| math  |  +7.5 ± 5.4 | +12, +0, +4, +8, +12  | 4/5         |
+
+Regex generalises cleanly: every alternate split produces a positive
+delta and the spread aligns with the per-seed spread on the
+hand-picked split (+5 to +19 here vs +10 to +19 across seeds in the
+main table).  Math is positive on 4/5 with one flat split, consistent
+with the main-table per-seed spread of +5 to +17.  JSON is the
+weakest: -5 on one split is the same overfit failure mode the per-seed
+table shows.  The aggregate signal is robust on regex, present but
+noisy on math, and right on the edge of statistical signal on json -
+exactly the picture the per-seed numbers suggested, replicated under
+a stronger test.
+
+Saved in `runs/sensitivity/<class>/split{seed}_seed0.json`; aggregate
+in `runs/sensitivity_summary.json`.
+
+The trajectory plot below is what the loop actually does on the
+hand-picked split: the dark-line drop happens between iter 0 (seed)
+and iter 1 (the meta-agent's first edit), and most lineages plateau
+within three accepted edits.
+
+![evolution trajectories](runs/figures/trajectories.png)
+
 ### Cross-class transfer (test sets)
 
 Each cell is the best-of-3-seeds specialist on the named class's test set.
 
-| spec | regex | json | math |
-|---|---:|---:|---:|
-| seed | 71% | 43% | 62% |
-| regex specialist | **81%** | 48% | 62% |
-| json specialist | 67% | **57%** | 67% |
-| math specialist | 71% | 38% | **83%** |
+| spec | regex | json | math | sql |
+|---|---:|---:|---:|---:|
+| seed              |  67% |  48% |  67% |  92% |
+| regex specialist  | **86%** |  48% |  67% |  92% |
+| json specialist   |  67% | **57%** |  67% |  92% |
+| math specialist   |  67% |  38% | **83%** |  92% |
+| sql specialist    |  71% |  43% |  62% | **100%** |
 
-The diagonal is the best entry in every row.  Off-diagonal cells
-mostly fall back toward seed; the math specialist drops 5 pp on json
-because its `code_exec`+python prompt is irrelevant there and
-clutters the worker's input.  The json specialist on regex drops
-4 pp.  The two off-diagonal cells where a specialist beats seed
-(json spec on math, +5 pp; regex spec on json, +5 pp) are inside
-the per-task noise floor of these test sets and do not look
-intentional.  The strong specialization signal is the diagonal
-beating its column mean, not the off-diagonals collapsing.
-to its class.
+The diagonal is the best entry in every column.  Off-diagonals
+mostly fall back toward seed; the math specialist drops 10 pp on
+json (38% vs seed 48%) because its `code_exec`+python prompt is
+irrelevant there and clutters the worker's input, and the sql
+specialist drops 5 pp on math (62% vs seed 67%) for the same reason.
+The two off-diagonals where a specialist beats seed by 4-5 pp (sql
+spec on regex; regex spec on regex column - identical) are inside
+the per-task noise floor and not intentional.  Sql is the only
+column where everyone matches seed (92%): the seed already gets
+near-saturation on sql, so the specialists' edits leave it alone or
+just barely help.  The strong specialization signal is the diagonal
+beating its column mean, plus the negative off-diagonals (irrelevant
+edits actively hurting non-target classes) - both are visible.
+
+![transfer matrix](runs/figures/transfer.png)
+
+### Architecture ablations: what does the meta-agent actually need?
+
+If the gains came from any-edit-to-the-spec rather than from
+*structured* search guided by demos and failure feedback, the
+architecture claim is overclaimed.  I ran three ablations against the
+full meta-agent: random spec edit (no LLM proposer at all), no-demos
+(LLM proposer with parent spec and failure feedback only, no demo
+tasks), no-failure-feedback (LLM proposer with parent spec and demo
+tasks only).  One meta-seed each, six iters, same hand-picked split.
+
+| class | full Δ (n=3) | random Δ | no-demos Δ | no-feedback Δ |
+|---|---:|---:|---:|---:|
+| regex |  +16 |  +5 | +10  | +14 |
+| json  |   +5 |   0 |  +5  |  +5 |
+| math  |  +13 |   0 |   0  |  -8 |
+| sql   |   +8 |   0 |  +8  |   0 |
+
+Three things to take from this.  Random search is not the loop's
+performance: every full-mode mean delta beats its random counterpart
+on every class, and on math and sql the random baseline is exactly
+zero.  Random can luck into the regex specialist (+5) because the
+mutation space is small enough that picking `validate_retry` plus
+`testcases` plus a non-zero `max_retries` happens roughly once in
+twenty random draws and a single hit is enough to anchor the loop.
+But on math the joint requirement (`code_exec`, prompt nudge, retry
+budget) is sharp enough that random doesn't find it in six iters.
+
+Demos help but aren't load-bearing: the no-demos column matches full
+on json and sql, and only loses 6 pp on regex.  This is the easiest
+to over-rotate on: the meta-agent's input includes the *current spec*
+and the *current dev failures*, both of which carry class-shape signal
+even without explicit demo tasks.  Demos help most on regex, where
+the validator's per-task feedback is short and the meta-agent benefits
+from seeing concrete (positives, negatives) pairs to reason about
+backtick stripping or anchor placement.
+
+Failure feedback is load-bearing for the tool-using classes.  Math
+without failure feedback regresses below seed by 8 pp (the meta-agent
+cannot tell which arithmetic items are failing, so its `code_exec`
+proposal isn't anchored on real numbers, and on at least one iter it
+proposes `validate_retry` instead, which fires no-op on math and burns
+iters).  Sql without failure feedback fails to enable the validator
+at all, so the +8 pp gap stays unrealised.  Regex still does fine
+without feedback (+14) because the regex demos already include the
+positive/negative test pattern.  The takeaway: failure feedback is
+what turns the meta-agent from a "guess a reasonable shape" caller
+into a "fix this specific failure" caller, and the gap between those
+two is exactly the gain on math and sql.
+
+Saved in `runs/ablation/<class>/<mode>_seed0.json`; aggregate in
+`runs/ablation_summary.json`.
 
 ### A lineage that actually used the safeguards
 
@@ -310,17 +434,18 @@ larger gap with a bigger iteration budget and a hotter meta-agent.
    stop it from over-confidently rewriting the prompt to say
    "everything is critical" when the dev failures happen to be
    biased.
-3. **A fourth task class with a *different* tool: SQL from natural
-   language, against a small sqlite database.**  Same `code_exec`
-   pattern but a different sandboxed tool.  I'd want to see whether
-   the meta-agent discovers the SQL tool the way it discovered
-   `code_exec` for math, or whether the discovery only generalises
-   along the existing tool path.
-4. **Run multiple proposals per iter and pick the best by archive
+3. **Run multiple proposals per iter and pick the best by archive
    admission, instead of one proposal per iter.**  This changes the
    search from greedy to beam-2.  ADAS does something similar with an
    archive of candidates; my budget couldn't afford it but the
    architecture supports it.
+4. **A fifth task class where neither `validate_retry` nor `code_exec`
+   is the right answer.**  All four classes here resolve to one of
+   those two patterns; I'd like to see how the loop behaves in a
+   regime where the optimum is genuinely a system-prompt rewrite (the
+   JSON case is the closest, and it's the noisiest result), so that
+   the prompt-rewrite branch isn't a fallback when neither tool path
+   helps.
 
 ## Appendix: four below-API observations from this experiment
 

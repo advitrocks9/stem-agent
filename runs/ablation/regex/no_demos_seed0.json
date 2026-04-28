@@ -1,0 +1,242 @@
+{
+  "task_class": "regex",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_demos",
+  "iters_planned": 6,
+  "iters_run": 5,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.7142857142857143,
+  "specialist_test_score": 0.8095238095238095,
+  "specialist_spec": {
+    "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1'. Provide detailed examples in the prompt.",
+    "validation": "testcases",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.9166666666666666,
+  "test_per_task_seed": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": false,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "test_per_task_specialist": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": true,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": true,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "frontier": [
+    {
+      "hash": "bef548b4",
+      "iter": 2,
+      "score": 0.9166666666666666,
+      "tokens": 216.0,
+      "spec": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1'. Provide detailed examples in the prompt.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "ba66587e",
+      "iter": 1,
+      "score": 0.8333333333333334,
+      "tokens": 195.75,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.5833333333333334,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 390,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "ba66587e",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The failures indicate issues with the regex syntax and logic, which can be caught by the testcases validator.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 2349,
+      "out_tokens": 793,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "bef548b4",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1'. Provide detailed examples in the prompt."
+      },
+      "reason": "The outputs are well-formed but make incorrect judgements, the system prompt needs to provide rules and examples to guide the worker.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 2592,
+      "out_tokens": 792,
+      "spec": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1'. Provide detailed examples in the prompt.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "89e8d661",
+      "parent_hash": "bef548b4",
+      "edit": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should match '0.0.0.0' and '192.168.1.1', but not '192.168.01.1'. Provide detailed examples in the prompt."
+      },
+      "reason": "The current regex does not correctly match all valid IPv4 addresses, indicating a need for improved handling of edge cases in the system prompt.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3437,
+      "out_tokens": 774,
+      "spec": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should match '0.0.0.0' and '192.168.1.1', but not '192.168.01.1'. Provide detailed examples in the prompt.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "755f8f10",
+      "parent_hash": "bef548b4",
+      "edit": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should match '0.0.0.0' and '192.168.1.1' but not '192.168.01.1'. Provide detailed examples in the prompt with specific rules for each case."
+      },
+      "reason": "The current regex does not match valid IPv4 addresses starting with zero, indicating a need for improved regex crafting. Adding more examples and specific rules in the prompt can guide the worker to create correct patterns.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3288,
+      "out_tokens": 771,
+      "spec": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should match '0.0.0.0' and '192.168.1.1' but not '192.168.01.1'. Provide detailed examples in the prompt with specific rules for each case.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "c5039785",
+      "parent_hash": "bef548b4",
+      "edit": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1', but should match '0.0.0.0' and '192.168.1.1'. Provide detailed examples in the prompt."
+      },
+      "reason": "The failures indicate that the regex pattern is not correctly matching some valid IPv4 addresses, which suggests a possible misunderstanding or oversight in the prompt rather than a parsing issue.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3476,
+      "out_tokens": 854,
+      "spec": {
+        "system_prompt": "Read the task carefully and return only the requested output. Ensure that the regex patterns correctly match or exclude all specified examples. For instance, an IPv4 regex should not match '192.168.01.1', but should match '0.0.0.0' and '192.168.1.1'. Provide detailed examples in the prompt.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

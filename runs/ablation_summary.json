@@ -1,0 +1,110 @@
+[
+  {
+    "class": "regex",
+    "mode": "random",
+    "seed_test": 0.6666666666666666,
+    "spec_test": 0.7142857142857143,
+    "delta": 0.04761904761904767,
+    "stop": "plateau",
+    "iters_run": 6
+  },
+  {
+    "class": "regex",
+    "mode": "no_demos",
+    "seed_test": 0.7142857142857143,
+    "spec_test": 0.8095238095238095,
+    "delta": 0.09523809523809523,
+    "stop": "plateau",
+    "iters_run": 5
+  },
+  {
+    "class": "regex",
+    "mode": "no_feedback",
+    "seed_test": 0.7142857142857143,
+    "spec_test": 0.8571428571428571,
+    "delta": 0.1428571428571428,
+    "stop": "iter_cap",
+    "iters_run": 6
+  },
+  {
+    "class": "json",
+    "mode": "random",
+    "seed_test": 0.42857142857142855,
+    "spec_test": 0.42857142857142855,
+    "delta": 0.0,
+    "stop": "plateau",
+    "iters_run": 5
+  },
+  {
+    "class": "json",
+    "mode": "no_demos",
+    "seed_test": 0.42857142857142855,
+    "spec_test": 0.47619047619047616,
+    "delta": 0.047619047619047616,
+    "stop": "plateau",
+    "iters_run": 6
+  },
+  {
+    "class": "json",
+    "mode": "no_feedback",
+    "seed_test": 0.42857142857142855,
+    "spec_test": 0.47619047619047616,
+    "delta": 0.047619047619047616,
+    "stop": "iter_cap",
+    "iters_run": 6
+  },
+  {
+    "class": "math",
+    "mode": "random",
+    "seed_test": 0.625,
+    "spec_test": 0.625,
+    "delta": 0.0,
+    "stop": "plateau",
+    "iters_run": 6
+  },
+  {
+    "class": "math",
+    "mode": "no_demos",
+    "seed_test": 0.625,
+    "spec_test": 0.625,
+    "delta": 0.0,
+    "stop": "plateau",
+    "iters_run": 4
+  },
+  {
+    "class": "math",
+    "mode": "no_feedback",
+    "seed_test": 0.625,
+    "spec_test": 0.5416666666666666,
+    "delta": -0.08333333333333337,
+    "stop": "plateau",
+    "iters_run": 5
+  },
+  {
+    "class": "sql",
+    "mode": "random",
+    "seed_test": 0.9166666666666666,
+    "spec_test": 0.9166666666666666,
+    "delta": 0.0,
+    "stop": "plateau",
+    "iters_run": 6
+  },
+  {
+    "class": "sql",
+    "mode": "no_demos",
+    "seed_test": 0.9166666666666666,
+    "spec_test": 1.0,
+    "delta": 0.08333333333333337,
+    "stop": "plateau",
+    "iters_run": 4
+  },
+  {
+    "class": "sql",
+    "mode": "no_feedback",
+    "seed_test": 0.9166666666666666,
+    "spec_test": 0.9166666666666666,
+    "delta": 0.0,
+    "stop": "plateau",
+    "iters_run": 3
+  }
+]

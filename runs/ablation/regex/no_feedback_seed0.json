@@ -1,0 +1,265 @@
+{
+  "task_class": "regex",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_feedback",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.7142857142857143,
+  "specialist_test_score": 0.8571428571428571,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, follow the rules for other cases.",
+    "validation": "testcases",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.9166666666666666,
+  "test_per_task_seed": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": false,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "test_per_task_specialist": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": true,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": true,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": true,
+    "ssn-us": true
+  },
+  "frontier": [
+    {
+      "hash": "ed9b0771",
+      "iter": 4,
+      "score": 0.9166666666666666,
+      "tokens": 308.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, follow the rules for other cases.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "ba66587e",
+      "iter": 1,
+      "score": 0.8333333333333334,
+      "tokens": 195.25,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.6666666666666666,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 392,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "ba66587e",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker is failing due to parsing errors and missing fields, which can be addressed by using validate_retry with the schema validation.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 2343,
+      "out_tokens": 782,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "49a11b2d",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Follow these rules to create the regex: Ensure it captures all required patterns from the positive examples and excludes all patterns from the negative examples. Use anchors and quantifiers as needed. Output ONLY the regex."
+      },
+      "reason": "The worker is failing to match the regex correctly, indicating a need for better guidance on regex construction and pattern matching.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 2918,
+      "out_tokens": 690,
+      "spec": {
+        "system_prompt": "Follow these rules to create the regex: Ensure it captures all required patterns from the positive examples and excludes all patterns from the negative examples. Use anchors and quantifiers as needed. Output ONLY the regex.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "2ddac4b7",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. For regex tasks, ensure the regex matches all given positive examples and rejects all negatives. Pay special attention to edge cases and boundary conditions. Review these examples before attempting: (123) 456-7890, P@ssw0rd9, name@dept.uni.edu."
+      },
+      "reason": "The majority of failures are due to well-formed outputs that make wrong judgements, which validation cannot help. Providing rules and examples in the prompt can guide the worker better.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3732,
+      "out_tokens": 790,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. For regex tasks, ensure the regex matches all given positive examples and rejects all negatives. Pay special attention to edge cases and boundary conditions. Review these examples before attempting: (123) 456-7890, P@ssw0rd9, name@dept.uni.edu.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "ed9b0771",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, follow the rules for other cases."
+      },
+      "reason": "The worker is failing [value-mismatch] errors which cannot be corrected by validation and retry. Enhancing the system prompt with rules and examples will help the worker produce correct regexes.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 3697,
+      "out_tokens": 758,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, follow the rules for other cases.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "c24f8f2d",
+      "parent_hash": "ed9b0771",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "Increasing max_retries can provide more opportunities for the worker to refine the regex after feedback, improving its accuracy in matching the positive and rejecting the negative examples.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4100,
+      "out_tokens": 848,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, follow the rules for other cases.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "3b23ad4c",
+      "parent_hash": "c24f8f2d",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. Pay careful attention to the format and rules provided in each prompt. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, for passwords, ensure to include all required character types. For emails ending in '.edu', check the domain format carefully. Use these examples to guide your regex construction."
+      },
+      "reason": "The worker is already using validate_retry with testcases, which should catch parsing and logic errors. However, if the worker is still failing to match the correct examples, the system_prompt may need clearer rules or examples to guide correct judgment.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4336,
+      "out_tokens": 837,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the regex matches all specified positive examples and rejects all specified negative examples. Pay careful attention to the format and rules provided in each prompt. For example, for a US phone number, match '(123) 456-7890', '123-456-7890', '123.456.7890' but reject '1234567890', '123 456 7890', etc. Similarly, for passwords, ensure to include all required character types. For emails ending in '.edu', check the domain format carefully. Use these examples to guide your regex construction.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    }
+  ]
+}

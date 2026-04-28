@@ -1,0 +1,263 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_demos",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.47619047619047616,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 0.75,
+  "test_per_task_seed": {
+    "perf-search": false,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": false,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": true,
+    "test-flake-mock": false,
+    "perf-mobile": false,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": false,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": false
+  },
+  "test_per_task_specialist": {
+    "perf-search": false,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": true,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": false,
+    "test-flake-mock": false,
+    "perf-mobile": false,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": false,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": true
+  },
+  "frontier": [
+    {
+      "hash": "04b8ef1f",
+      "iter": 3,
+      "score": 0.75,
+      "tokens": 321.0833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "81b08a35",
+      "iter": 2,
+      "score": 0.6666666666666666,
+      "tokens": 238.08333333333334,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "f784a3ac",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: 'critical' severity for security issues, 'regression' kind for issues that reoccur, and 'docs' area for documentation-related tasks. Examples: \n1. Task: crash-startup, Output: {'severity': 'critical', 'kind': 'regression', 'area': 'frontend'} \n2. Task: typo-readme, Output: {'severity': 'low', 'kind': 'docs', 'area': 'docs'}"
+      },
+      "reason": "The worker is making consistent judgement errors in severity, kind, and area, suggesting the need for more specific rules or examples in the prompt.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.0,
+      "n_pass": 0,
+      "n_total": 12,
+      "in_tokens": 2629,
+      "out_tokens": 220,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: 'critical' severity for security issues, 'regression' kind for issues that reoccur, and 'docs' area for documentation-related tasks. Examples: \n1. Task: crash-startup, Output: {'severity': 'critical', 'kind': 'regression', 'area': 'frontend'} \n2. Task: typo-readme, Output: {'severity': 'low', 'kind': 'docs', 'area': 'docs'}",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "81b08a35",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area."
+      },
+      "reason": "The worker is making consistent errors in judgement regarding severity, kind, and area, which can be improved by providing more specific guidance and examples in the system prompt.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 2857,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "04b8ef1f",
+      "parent_hash": "81b08a35",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area."
+      },
+      "reason": "The worker is making incorrect judgments on severity, kind, and area, which indicates that the system_prompt needs more comprehensive rules and examples to guide these decisions.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3853,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "5f9215d3",
+      "parent_hash": "04b8ef1f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for server-side logic or database related tasks. 8. Use 'feature' for new functionality being added. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Server-side logic updates should be 'backend' area. - New functionality should be 'feature' kind."
+      },
+      "reason": "The worker is making wrong judgements in classifying tasks; additional rules and examples in the system_prompt should guide it better.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 4465,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for server-side logic or database related tasks. 8. Use 'feature' for new functionality being added. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Server-side logic updates should be 'backend' area. - New functionality should be 'feature' kind.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "fede9e64",
+      "parent_hash": "04b8ef1f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security, data integrity issues, or major application crashes. Use 'high' severity for tasks that severely impact performance but do not compromise security or data integrity. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for tasks related to server-side logic or database issues. Here are some examples: - A security vulnerability or major crash should be 'critical' severity, 'regression' kind, and relevant 'area'. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Server-side logic issues should be 'backend' area."
+      },
+      "reason": "The current system prompt lacks specific guidance for distinguishing between 'high' and 'critical' severity, as well as for categorizing the 'area' correctly in certain contexts. Adding more detailed rules and examples can help improve judgement accuracy.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 4537,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security, data integrity issues, or major application crashes. Use 'high' severity for tasks that severely impact performance but do not compromise security or data integrity. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for tasks related to server-side logic or database issues. Here are some examples: - A security vulnerability or major crash should be 'critical' severity, 'regression' kind, and relevant 'area'. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Server-side logic issues should be 'backend' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "a0e570bd",
+      "parent_hash": "04b8ef1f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for server-side or database-related issues. When in doubt, prefer 'critical' severity for crashes, 'backend' for server-side issues, and 'feature' for enhancement requests. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Backend server issues like memory leaks should be 'backend' area. - Node upgrades often relate to 'infra' area."
+      },
+      "reason": "The current system prompt includes rules and examples but does not sufficiently guide the worker to make correct predictions for severity, kind, and area, especially for complex or ambiguous cases.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4669,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure accuracy by following these rules: 1. Use 'critical' severity for any task that involves security or data integrity issues. 2. Classify tasks as 'regression' if they involve a previously fixed issue resurfacing. 3. Use 'docs' for any documentation-related tasks. 4. Use 'frontend' for tasks related to user interface or user-facing elements. 5. Use 'tooling' for tasks related to development tools or processes. 6. Use 'infra' for infrastructure-related tasks. 7. Use 'backend' for server-side or database-related issues. When in doubt, prefer 'critical' severity for crashes, 'backend' for server-side issues, and 'feature' for enhancement requests. Here are some examples: - A security vulnerability should be 'critical' severity, 'regression' kind, and 'api' area. - A typo or missing information in documentation should be 'low' severity, 'docs' kind, and 'docs' area. - Tasks related to user interface changes should be 'frontend' area. - Development tool improvements should be 'tooling' area. - Infrastructure updates should be 'infra' area. - Backend server issues like memory leaks should be 'backend' area. - Node upgrades often relate to 'infra' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

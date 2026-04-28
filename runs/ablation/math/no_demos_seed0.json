@@ -1,0 +1,213 @@
+{
+  "task_class": "math",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_demos",
+  "iters_planned": 6,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.625,
+  "specialist_test_score": 0.625,
+  "specialist_spec": {
+    "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+    "validation": "none",
+    "tool_policy": "code_exec",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.5833333333333334,
+  "test_per_task_seed": {
+    "pool-fill": true,
+    "mix-juice": false,
+    "avg-speed": true,
+    "chickens-cows": false,
+    "sum-consec": true,
+    "cube-vol": true,
+    "reciprocal-sum": false,
+    "unit-conv": false,
+    "work-rate": true,
+    "coin-flip-3h": false,
+    "prime-near-50": true,
+    "fact-7": true,
+    "hex-to-dec": true,
+    "simul-eqs": false,
+    "price-tax": false,
+    "miles-per-gal": true,
+    "pct-increase": true,
+    "odd-sum": true,
+    "area-triangle": true,
+    "prob-marbles": false,
+    "distance-bike": true,
+    "fence-cost": false,
+    "avg-grade": true,
+    "pct-of-x": true
+  },
+  "test_per_task_specialist": {
+    "pool-fill": true,
+    "mix-juice": false,
+    "avg-speed": true,
+    "chickens-cows": false,
+    "sum-consec": false,
+    "cube-vol": true,
+    "reciprocal-sum": false,
+    "unit-conv": true,
+    "work-rate": true,
+    "coin-flip-3h": false,
+    "prime-near-50": true,
+    "fact-7": true,
+    "hex-to-dec": true,
+    "simul-eqs": false,
+    "price-tax": false,
+    "miles-per-gal": true,
+    "pct-increase": true,
+    "odd-sum": true,
+    "area-triangle": true,
+    "prob-marbles": false,
+    "distance-bike": true,
+    "fence-cost": true,
+    "avg-grade": true,
+    "pct-of-x": false
+  },
+  "frontier": [
+    {
+      "hash": "7fe32dad",
+      "iter": 1,
+      "score": 0.5833333333333334,
+      "tokens": 937.4166666666666,
+      "spec": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 62.916666666666664,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 755,
+      "out_tokens": 1428,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "7fe32dad",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      },
+      "reason": "The worker is making arithmetic and multi-step reasoning errors, indicating that enabling code execution can help it compute values more precisely.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 11249,
+      "out_tokens": 4697,
+      "spec": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "81ed3bb4",
+      "parent_hash": "7fe32dad",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "Increasing max_retries will allow the worker more iterations to reach the correct solution by using the python_exec tool.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 21738,
+      "out_tokens": 6553,
+      "spec": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "81ed3bb4",
+      "parent_hash": "7fe32dad",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "Increasing max_retries will allow the worker more iterations to refine its calculations and potentially resolve the 'turn cap reached' issue.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 21540,
+      "out_tokens": 6436,
+      "spec": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "81ed3bb4",
+      "parent_hash": "7fe32dad",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is hitting the turn cap, indicating it needs more iterations to complete the calculations accurately.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 21165,
+      "out_tokens": 6533,
+      "spec": {
+        "system_prompt": "Use the python_exec tool to perform calculations accurately for math tasks.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    }
+  ]
+}

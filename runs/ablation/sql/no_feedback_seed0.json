@@ -1,0 +1,152 @@
+{
+  "task_class": "sql",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_feedback",
+  "iters_planned": 6,
+  "iters_run": 3,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 0.9166666666666666,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "frontier": [
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 1.0,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 441,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "f2a18d24",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed."
+      },
+      "reason": "The worker is failing with well-formed outputs that do not match the gold results, likely due to judgement errors in SQL formulation. Improved system_prompt with task-specific rules and examples might help.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1639,
+      "out_tokens": 445,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "110a37e0",
+      "parent_hash": "f2a18d24",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed. Always check for aggregate functions, correct filtering conditions, and necessary joins. Example: For counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country = 'UK''."
+      },
+      "reason": "The worker is producing SQL queries that do not match the task requirements, which is a judgment error. Adding specific examples and rules to the system prompt will help guide the worker to produce correct queries.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2131,
+      "out_tokens": 439,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed. Always check for aggregate functions, correct filtering conditions, and necessary joins. Example: For counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country = 'UK''.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "f1935449",
+      "parent_hash": "110a37e0",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed. Always check for aggregate functions, correct filtering conditions, and necessary joins. Example: For counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country = 'UK''. When calculating orders per user, join the 'users' and 'orders' tables on 'user_id', and group by user name."
+      },
+      "reason": "The worker's SQL outputs are likely well-formed but often make incorrect judgements about query logic or filtering conditions, which cannot be resolved by validation. The system_prompt should include more examples and guidance to improve SQL query accuracy.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2455,
+      "out_tokens": 447,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure the SQL query matches the task requirements. For example, count users with SELECT COUNT(*), filter by country with WHERE, and join tables correctly if needed. Always check for aggregate functions, correct filtering conditions, and necessary joins. Example: For counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country = 'UK''. When calculating orders per user, join the 'users' and 'orders' tables on 'user_id', and group by user name.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

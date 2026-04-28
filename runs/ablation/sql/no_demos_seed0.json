@@ -1,0 +1,191 @@
+{
+  "task_class": "sql",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_demos",
+  "iters_planned": 6,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 1.0,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "results",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": true
+  },
+  "frontier": [
+    {
+      "hash": "21e3181c",
+      "iter": 1,
+      "score": 1.0,
+      "tokens": 151.58333333333334,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.9166666666666666,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 443,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "21e3181c",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The error indicates a SQL syntax issue, suggesting that validation with retries could help catch these errors early and correct them.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1819,
+      "out_tokens": 597,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "d8a6bbee",
+      "parent_hash": "21e3181c",
+      "edit": {
+        "tool_policy": "code_exec",
+        "system_prompt": "Read the task and use python_exec to run SQL queries and verify results, returning only the requested output.",
+        "max_retries": 3
+      },
+      "reason": "Switching to code_exec will allow the worker to run SQL queries and verify results directly, improving accuracy for tasks requiring precise SQL execution.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2167,
+      "out_tokens": 438,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to run SQL queries and verify results, returning only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "d01a2c1c",
+      "parent_hash": "d8a6bbee",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is likely facing issues with incorrect judgements on SQL result sets, so increasing max_retries allows more iterations to refine the query.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2167,
+      "out_tokens": 440,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to run SQL queries and verify results, returning only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "9ff82d87",
+      "parent_hash": "d01a2c1c",
+      "edit": {
+        "system_prompt": "Read the task carefully and use python_exec to run the necessary SQL queries. Verify your results against the expected output using examples provided: e.g., if given query X returns result Y, ensure your query produces the same result. Return only the requested output."
+      },
+      "reason": "The worker's outputs are well-formed but make wrong judgements on result value matches, indicating that the system_prompt needs more guidance or examples on how to handle specific SQL verification tasks.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2527,
+      "out_tokens": 440,
+      "spec": {
+        "system_prompt": "Read the task carefully and use python_exec to run the necessary SQL queries. Verify your results against the expected output using examples provided: e.g., if given query X returns result Y, ensure your query produces the same result. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    }
+  ]
+}

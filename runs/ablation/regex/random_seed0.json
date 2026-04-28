@@ -1,0 +1,263 @@
+{
+  "task_class": "regex",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "random",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.6666666666666666,
+  "specialist_test_score": 0.7142857142857143,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 3
+  },
+  "specialist_dev_score": 0.6666666666666666,
+  "test_per_task_seed": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": false,
+    "yes-no-ans": false,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "test_per_task_specialist": {
+    "iso-date": true,
+    "hex-color": true,
+    "semver": true,
+    "mac-addr": false,
+    "uk-postcode": true,
+    "balanced-paren": true,
+    "leading-zero-int": true,
+    "camel-id": true,
+    "git-sha": true,
+    "slug": true,
+    "iso-leap-month": true,
+    "url-http": false,
+    "even-int": false,
+    "id-token-snake": true,
+    "vowel-cluster": false,
+    "year-bce": true,
+    "yes-no-ans": false,
+    "currency-amt": true,
+    "uppercase-acronym": true,
+    "filename-img": false,
+    "ssn-us": true
+  },
+  "frontier": [
+    {
+      "hash": "bcfdc21d",
+      "iter": 1,
+      "score": 0.6666666666666666,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "bcfdc21d",
+      "iter": 2,
+      "score": 0.6666666666666666,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "bcfdc21d",
+      "iter": 3,
+      "score": 0.6666666666666666,
+      "tokens": 61.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 399,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "random-edit baseline picked max_retries=3",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 391,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "tool_policy": "no_tools"
+      },
+      "reason": "random-edit baseline picked tool_policy='no_tools'",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 389,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "random-edit baseline picked max_retries=3",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 742,
+      "out_tokens": 390,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "53e0be54",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "system_prompt": "Think briefly, then produce the requested output and nothing else."
+      },
+      "reason": "random-edit baseline picked system_prompt='Think briefly, then produce the requested output and nothing else.'",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 766,
+      "out_tokens": 402,
+      "spec": {
+        "system_prompt": "Think briefly, then produce the requested output and nothing else.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "e58320dd",
+      "parent_hash": "53e0be54",
+      "edit": {
+        "system_prompt": "You are a careful assistant. Return the requested output."
+      },
+      "reason": "random-edit baseline picked system_prompt='You are a careful assistant. Return the requested output.'",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 754,
+      "out_tokens": 429,
+      "spec": {
+        "system_prompt": "You are a careful assistant. Return the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "44e5663e",
+      "parent_hash": "53e0be54",
+      "edit": {
+        "validation": "schema"
+      },
+      "reason": "random-edit baseline picked validation='schema'",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 766,
+      "out_tokens": 409,
+      "spec": {
+        "system_prompt": "Think briefly, then produce the requested output and nothing else.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    }
+  ]
+}

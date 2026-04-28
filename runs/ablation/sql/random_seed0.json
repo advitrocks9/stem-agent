@@ -1,0 +1,221 @@
+{
+  "task_class": "sql",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "random",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 0.9166666666666666,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 3
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "frontier": [
+    {
+      "hash": "bcfdc21d",
+      "iter": 3,
+      "score": 1.0,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 456,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "random-edit baseline picked max_retries=3",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 456,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "tool_policy": "no_tools"
+      },
+      "reason": "random-edit baseline picked tool_policy='no_tools'",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 448,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "bcfdc21d",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "random-edit baseline picked max_retries=3",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 441,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "53e0be54",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "system_prompt": "Think briefly, then produce the requested output and nothing else."
+      },
+      "reason": "random-edit baseline picked system_prompt='Think briefly, then produce the requested output and nothing else.'",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1279,
+      "out_tokens": 452,
+      "spec": {
+        "system_prompt": "Think briefly, then produce the requested output and nothing else.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "e58320dd",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "system_prompt": "You are a careful assistant. Return the requested output."
+      },
+      "reason": "random-edit baseline picked system_prompt='You are a careful assistant. Return the requested output.'",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1267,
+      "out_tokens": 443,
+      "spec": {
+        "system_prompt": "You are a careful assistant. Return the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "2ea595d4",
+      "parent_hash": "bcfdc21d",
+      "edit": {
+        "validation": "schema"
+      },
+      "reason": "random-edit baseline picked validation='schema'",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 445,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "schema",
+        "tool_policy": "no_tools",
+        "max_retries": 3
+      }
+    }
+  ]
+}

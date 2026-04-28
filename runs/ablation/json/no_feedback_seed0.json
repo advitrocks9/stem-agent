@@ -1,0 +1,301 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "no_feedback",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.47619047619047616,
+  "specialist_spec": {
+    "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues that do not impact functionality, med for issues that may cause inconvenience but are not critical, high for issues causing significant disruption, and critical for issues that completely block functionality. 2) Kind: bug for errors or unintended behavior, feature for requests for new functionalities, docs for documentation-related issues, question for inquiries seeking information or clarification, regression for features that have stopped working as expected. 3) Area: frontend for issues in the user interface, backend for server-side issues, api for issues with data exchange, docs for documentation, infra for infrastructure issues, tooling for development tools, other for issues not fitting these categories. Refer to demo tasks for examples.",
+    "validation": "testcases",
+    "tool_policy": "validate_retry",
+    "max_retries": 3
+  },
+  "specialist_dev_score": 0.6666666666666666,
+  "test_per_task_seed": {
+    "perf-search": false,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": false,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": true,
+    "test-flake-mock": false,
+    "perf-mobile": false,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": false,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": false
+  },
+  "test_per_task_specialist": {
+    "perf-search": false,
+    "rate-limit": true,
+    "ux-spinner": true,
+    "release-notes-typo": true,
+    "feat-export-csv": false,
+    "csrf-bypass": true,
+    "wrong-tz": true,
+    "doc-deploy-flag": true,
+    "feat-dashboards-share": false,
+    "test-flake-mock": false,
+    "perf-mobile": false,
+    "q-quota": false,
+    "infra-disk-full": false,
+    "tooling-precommit": true,
+    "leak-token-logs": false,
+    "q-cli-config": true,
+    "api-pagination-bug": false,
+    "feat-i18n": true,
+    "ssl-cert-expire": true,
+    "feat-webhook-retry": false,
+    "doc-archi-overview": false
+  },
+  "frontier": [
+    {
+      "hash": "97d17f6b",
+      "iter": 5,
+      "score": 0.6666666666666666,
+      "tokens": 280.0833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues that do not impact functionality, med for issues that may cause inconvenience but are not critical, high for issues causing significant disruption, and critical for issues that completely block functionality. 2) Kind: bug for errors or unintended behavior, feature for requests for new functionalities, docs for documentation-related issues, question for inquiries seeking information or clarification, regression for features that have stopped working as expected. 3) Area: frontend for issues in the user interface, backend for server-side issues, api for issues with data exchange, docs for documentation, infra for infrastructure issues, tooling for development tools, other for issues not fitting these categories. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "82745c5e",
+      "iter": 2,
+      "score": 0.5833333333333334,
+      "tokens": 216.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "ec4dbc3e",
+      "iter": 3,
+      "score": 0.5833333333333334,
+      "tokens": 216.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "16e3917a",
+      "iter": 4,
+      "score": 0.5833333333333334,
+      "tokens": 216.08333333333334,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.3333333333333333,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "2f68e4ad",
+      "iter": 1,
+      "score": 0.3333333333333333,
+      "tokens": 124.08333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "2f68e4ad",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "Switching to 'validate_retry' with 'schema' validation will help catch and correct parsing and missing field errors.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 1489,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "82745c5e",
+      "parent_hash": "2f68e4ad",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples."
+      },
+      "reason": "The worker is making incorrect judgements on fields like severity and kind, which validation cannot correct. A more detailed system prompt with rules and examples is needed.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 2593,
+      "out_tokens": 285,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "ec4dbc3e",
+      "parent_hash": "82745c5e",
+      "edit": {
+        "validation": "testcases"
+      },
+      "reason": "The output frequently fails to parse correctly or misses fields, and using schema validation with validate_retry will help catch and correct these issues.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 2593,
+      "out_tokens": 285,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "16e3917a",
+      "parent_hash": "ec4dbc3e",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "The current validation method cannot catch output that is well-formed but has incorrect values, as seen in the 'value-mismatch' failures. Using schema validation will ensure correct field structure and presence, but cannot help with judgment errors. Increasing max_retries allows the system more opportunities to correct initial mistakes.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 2593,
+      "out_tokens": 285,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues, med for noticeable problems, high for severe disruptions, critical for blocking issues. 2) Kind: bug for errors, feature for new functionalities, docs for documentation issues, question for inquiries, regression for deteriorations in functionality. 3) Area: determine based on the part of the system affected. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "97d17f6b",
+      "parent_hash": "16e3917a",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues that do not impact functionality, med for issues that may cause inconvenience but are not critical, high for issues causing significant disruption, and critical for issues that completely block functionality. 2) Kind: bug for errors or unintended behavior, feature for requests for new functionalities, docs for documentation-related issues, question for inquiries seeking information or clarification, regression for features that have stopped working as expected. 3) Area: frontend for issues in the user interface, backend for server-side issues, api for issues with data exchange, docs for documentation, infra for infrastructure issues, tooling for development tools, other for issues not fitting these categories. Refer to demo tasks for examples."
+      },
+      "reason": "Current failures are due to value mismatches, which are judgment errors that can be improved by providing more detailed rules and examples in the system prompt.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 3361,
+      "out_tokens": 286,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues that do not impact functionality, med for issues that may cause inconvenience but are not critical, high for issues causing significant disruption, and critical for issues that completely block functionality. 2) Kind: bug for errors or unintended behavior, feature for requests for new functionalities, docs for documentation-related issues, question for inquiries seeking information or clarification, regression for features that have stopped working as expected. 3) Area: frontend for issues in the user interface, backend for server-side issues, api for issues with data exchange, docs for documentation, infra for infrastructure issues, tooling for development tools, other for issues not fitting these categories. Refer to demo tasks for examples.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "f51930a7",
+      "parent_hash": "97d17f6b",
+      "edit": {
+        "validation": "schema"
+      },
+      "reason": "The worker is failing with parse errors, missing fields, and value mismatches, indicating it struggles with format and allowed values. Using schema validation can help catch and correct these errors effectively.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 3361,
+      "out_tokens": 286,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue and output a JSON object with fields: severity, kind, and area. Use the following rules: 1) Severity: low for minor issues that do not impact functionality, med for issues that may cause inconvenience but are not critical, high for issues causing significant disruption, and critical for issues that completely block functionality. 2) Kind: bug for errors or unintended behavior, feature for requests for new functionalities, docs for documentation-related issues, question for inquiries seeking information or clarification, regression for features that have stopped working as expected. 3) Area: frontend for issues in the user interface, backend for server-side issues, api for issues with data exchange, docs for documentation, infra for infrastructure issues, tooling for development tools, other for issues not fitting these categories. Refer to demo tasks for examples.",
+        "validation": "schema",
+        "tool_policy": "validate_retry",
+        "max_retries": 3
+      }
+    }
+  ]
+}

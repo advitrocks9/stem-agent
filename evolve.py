@@ -93,19 +93,23 @@ class Proposal:
 
 
 def _propose(task_class: str, demos: list[dict], current_spec: dict,
-             last_failures: list[dict] | None) -> Proposal:
-    user_lines = [f"Task class: {task_class}", "", "Three demo tasks:"]
-    for d in demos[:3]:
-        user_lines.append(f"  id={d['id']}")
-        prompt = d['prompt'].replace("\n", " ")
-        user_lines.append(f"  prompt: {prompt[:240]}...")
-        if "gold" in d:
-            user_lines.append(f"  gold: {json.dumps(d['gold'])[:120]}")
-        if "positives" in d:
-            user_lines.append(f"  positives: {d['positives']}")
-            user_lines.append(f"  negatives: {d['negatives']}")
+             last_failures: list[dict] | None,
+             show_demos: bool = True,
+             show_feedback: bool = True) -> Proposal:
+    user_lines = [f"Task class: {task_class}"]
+    if show_demos:
+        user_lines += ["", "Three demo tasks:"]
+        for d in demos[:3]:
+            user_lines.append(f"  id={d['id']}")
+            prompt = d['prompt'].replace("\n", " ")
+            user_lines.append(f"  prompt: {prompt[:240]}...")
+            if "gold" in d:
+                user_lines.append(f"  gold: {json.dumps(d['gold'])[:120]}")
+            if "positives" in d:
+                user_lines.append(f"  positives: {d['positives']}")
+                user_lines.append(f"  negatives: {d['negatives']}")
     user_lines += ["", f"Current spec: {json.dumps(current_spec, indent=2)}"]
-    if last_failures:
+    if show_feedback and last_failures:
         user_lines += ["", "Last dev-eval failures:"]
         for f in last_failures[:8]:
             user_lines.append(f"  {f['task_id']}: output={f['output'][:120]!r} feedback={f['feedback']!r}")
@@ -119,6 +123,34 @@ def _propose(task_class: str, demos: list[dict], current_spec: dict,
     )
     obj = json.loads(r.content)
     return Proposal(reason=obj.get("reason", ""), edit=obj.get("edit", {}), raw=r.content)
+
+
+# random-edit baseline: replace _propose() with a random valid edit.
+# Tests how much of the gain comes from gpt-4o vs from the structured
+# search itself plus the acceptance rule.
+def _propose_random(current_spec: dict) -> Proposal:
+    """Pick one of the four spec fields and assign a random valid value."""
+    field = random.choice(list(ALLOWED_FIELDS))
+    if field == "validation":
+        new = random.choice(list(ALLOWED_VALIDATIONS))
+    elif field == "tool_policy":
+        new = random.choice(list(ALLOWED_TOOL_POLICIES))
+    elif field == "max_retries":
+        new = random.randint(0, 4)
+    elif field == "system_prompt":
+        # Pick from a small pool of generic alternates so this baseline
+        # gets to touch the prompt axis at all.
+        pool = [
+            "Read the task and return only the requested output.",
+            "Read the task carefully. Produce the answer in the format requested.",
+            "Solve the task and emit the answer alone, no explanation.",
+            "Think briefly, then produce the requested output and nothing else.",
+            "You are a careful assistant. Return the requested output.",
+        ]
+        new = random.choice(pool)
+    else:
+        new = current_spec[field]
+    return Proposal(reason=f"random-edit baseline picked {field}={new!r}", edit={field: new}, raw="")
 
 
 # ----- safeguards -------------------------------------------------------
@@ -215,6 +247,7 @@ def evolve(
     out_dir: Path = Path("runs"),
     seed: int = 0,
     skip_rollback: bool = False,
+    propose_mode: str = "full",  # 'full' | 'no_demos' | 'no_feedback' | 'random'
 ) -> dict:
     random.seed(seed)
     tasks = split(load(task_class))
@@ -222,6 +255,7 @@ def evolve(
     out_dir.mkdir(parents=True, exist_ok=True)
     run_dir = out_dir / task_class
     run_dir.mkdir(exist_ok=True)
+    save_name = f"{propose_mode}_seed{seed}.json" if propose_mode != "full" else f"seed{seed}.json"
 
     lineage: list[Node] = []
     frontier: list[Point] = []
@@ -249,7 +283,12 @@ def evolve(
             for t in parent_eval.per_task if not t.passed
         ]
         try:
-            prop = _propose(task_class, demos, parent_spec, last_fails)
+            if propose_mode == "random":
+                prop = _propose_random(parent_spec)
+            else:
+                prop = _propose(task_class, demos, parent_spec, last_fails,
+                                show_demos=(propose_mode != "no_demos"),
+                                show_feedback=(propose_mode != "no_feedback"))
         except Exception as e:
             print(f"  iter {i}: meta-agent error: {e}")
             iters_since_frontier_grew += 1
@@ -337,6 +376,7 @@ def evolve(
     summary: dict[str, Any] = {
         "task_class": task_class,
         "seed_index": seed,
+        "propose_mode": propose_mode,  # 'full' is the canonical run; others are ablations
         "iters_planned": iters,
         "iters_run": stopped_at,
         "stop_cause": stop_cause,
@@ -350,5 +390,5 @@ def evolve(
         ],
         "lineage": [asdict(n) for n in lineage],
     }
-    (run_dir / f"seed{seed}.json").write_text(json.dumps(summary, indent=2, default=str))
+    (run_dir / save_name).write_text(json.dumps(summary, indent=2, default=str))
     return summary

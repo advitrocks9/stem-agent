@@ -231,6 +231,66 @@ in the worker's `_user_msg` helper.  If I added a fifth class with
 its own context (a code base, a tool spec, a calendar), the same
 pattern would extend.
 
+## 2026-05-05 - random-edit baseline lucked into regex but not the others
+
+Wrote a random-edit ablation that picks one of the four spec
+fields and replaces it with a random valid value: validation, tool
+policy, max_retries, or one of a small pool of generic system
+prompts.  No LLM proposer at all.
+
+On regex, random hit +5pp on test, which is annoying because it
+makes the headline gain look closer to noise.  On math, json, and
+sql, random was 0pp (sql briefly hit `validate_retry+results+
+max_retries=2` on iter 4 but the dev score didn't go up because
+the seed already gets all dev items right; so the dominance check
+held it at parent score and it didn't replace the spec).
+
+The regex hit makes sense in retrospect.  The regex specialist is
+`(testcases, validate_retry, max_retries=2)`.  Picking each field
+independently from a small set, the joint probability of landing
+all three on a single mutation is roughly `1/3 * 1/3 * 1/4 ≈ 0.03`,
+i.e. one in thirty.  Six iters of random with one edit per iter
+gets two-three independent draws on each field (since random
+re-rolls one field per iter).  So on regex, six iters has a
+non-trivial probability of accidentally hitting the right
+configuration.  On math the right configuration also requires a
+specific *system prompt edit* (the "use python_exec" nudge) which
+isn't in the random pool of generic prompts; that's why random
+fails on math.
+
+Finding: the random-edit baseline is informative as a floor, not as
+a ceiling.  It tells us that the regex result is partially explained
+by "the right point exists in a small enough space that random can
+find it sometimes".  The math result is not explained by that, since
+random doesn't beat seed there.
+
+## 2026-05-06 - feedback ablation regressed math below seed
+
+Ran the no-feedback ablation: same proposer, demo tasks included,
+but the meta-agent's input strips the per-task failure feedback
+list.  On math this regressed test from `+13pp` (full) to `-8pp`
+(seed test 62%, ablated specialist 54%).  That's not just "smaller
+gain"; that's the meta-agent picking edits that hurt.
+
+The ablated meta-agent on math iter 1 proposed `validate_retry +
+results` (the SQL specialist's shape).  The validator pair
+`(results, math)` is mismatched; no validator was registered, so
+the worker falls through as a no-op and the spec is essentially
+the seed.  The dominance check on tokens then admitted this as a
+parent point because score equalled seed's score (both at the
+same dev level).  Iter 2 proposed an even noisier system prompt
+that confused the worker.  By iter 3 the loop had locked into a
+slightly worse-than-seed local optimum.
+
+The lesson is the same one A4 in the appendix names: the meta-agent
+without failure-mode signal is mostly pattern-matching.  When the
+input pattern is "this is a math class", the model knows math wants
+arithmetic correctness and proposes... whatever validator name is
+in scope.  Failure feedback is what tells it that the actual
+problem is "the worker is producing wrong arithmetic", which
+unlocks the `code_exec` proposal.  The rollback rule catches
+*regressions* but not *non-regressions on a wrong path*.
+
 ---
 
 Things I haven't fixed and would, with another week:

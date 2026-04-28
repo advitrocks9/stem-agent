@@ -1,0 +1,189 @@
+{
+  "task_class": "sql",
+  "seed_index": 0,
+  "split_seed": null,
+  "propose_mode": "full",
+  "iters_planned": 8,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 1.0,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "results",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": true
+  },
+  "frontier": [
+    {
+      "hash": "21e3181c",
+      "iter": 1,
+      "score": 1.0,
+      "tokens": 123.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.9166666666666666,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 451,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "21e3181c",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "Switching to results validation will help catch SQL errors like missing columns by running the query against a fixture.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1483,
+      "out_tokens": 524,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "c26e586f",
+      "parent_hash": "21e3181c",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause."
+      },
+      "reason": "The worker is failing due to value mismatches, indicating a need for clearer guidance on SQL judgement in the system prompt.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1627,
+      "out_tokens": 432,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "e7381b55",
+      "parent_hash": "c26e586f",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause. For tasks about counting users, ensure you specify the correct conditions in the WHERE clause, such as filtering by country or order count. Review examples like 'How many users are from the UK?' and 'How many orders has each user placed?' to understand common patterns."
+      },
+      "reason": "The current spec has a validation method and retry mechanism suited for structural or syntax issues, but the failures suggest judgement errors. Enhancing the system prompt with rules and worked examples will help the worker make correct judgements.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2263,
+      "out_tokens": 447,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause. For tasks about counting users, ensure you specify the correct conditions in the WHERE clause, such as filtering by country or order count. Review examples like 'How many users are from the UK?' and 'How many orders has each user placed?' to understand common patterns.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "7f97e891",
+      "parent_hash": "e7381b55",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause. For tasks about counting users, ensure you specify the correct conditions in the WHERE clause, such as filtering by country or order count. When computing aggregates, ensure that groupings match task requirements. Review examples like 'How many users are from the UK?' and 'How many orders has each user placed?' to understand common patterns. If unsure, carefully check the logic against similar examples."
+      },
+      "reason": "The worker is making well-formed SQL queries but the results do not match the gold data, indicating judgement errors. Adjusting the system prompt to include explicit rules and examples should guide the worker to produce correct SQL queries.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2539,
+      "out_tokens": 450,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure your SQL query correctly implements the task requirements. For example, if asked for a count, use COUNT(). When filtering, use the correct WHERE clause. For tasks about counting users, ensure you specify the correct conditions in the WHERE clause, such as filtering by country or order count. When computing aggregates, ensure that groupings match task requirements. Review examples like 'How many users are from the UK?' and 'How many orders has each user placed?' to understand common patterns. If unsure, carefully check the logic against similar examples.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

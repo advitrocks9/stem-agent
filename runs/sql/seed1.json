@@ -1,0 +1,189 @@
+{
+  "task_class": "sql",
+  "seed_index": 1,
+  "split_seed": null,
+  "propose_mode": "full",
+  "iters_planned": 8,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 1.0,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "results",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": true
+  },
+  "frontier": [
+    {
+      "hash": "21e3181c",
+      "iter": 1,
+      "score": 1.0,
+      "tokens": 123.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.9166666666666666,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 451,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "21e3181c",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "SQL errors like missing columns can be caught and corrected with validate_retry and results validation.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1483,
+      "out_tokens": 524,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "10283ea7",
+      "parent_hash": "21e3181c",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user."
+      },
+      "reason": "The worker is already using results validation and validate_retry, but it is still failing with value mismatches, indicating a need for more guidance on SQL judgment. Enhancing the system prompt with specific rules and examples can help improve accuracy.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1855,
+      "out_tokens": 435,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "1a2043c5",
+      "parent_hash": "10283ea7",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders."
+      },
+      "reason": "The worker is failing due to value mismatches, indicating a need for clearer guidelines or examples in the system prompt.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2083,
+      "out_tokens": 439,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "c7432302",
+      "parent_hash": "1a2043c5",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders. Example: For 'How many users from the UK?', use 'SELECT COUNT(*) FROM users WHERE country = 'UK''. For 'How many orders per user?', use 'SELECT user_name, COUNT(orders) FROM orders GROUP BY user_name HAVING COUNT(orders) > 0'."
+      },
+      "reason": "The worker is consistently making judgement errors related to SQL logic, which validation cannot fix. Strengthening the system prompt with more detailed rules and worked examples should improve accuracy.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2779,
+      "out_tokens": 414,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders. Example: For 'How many users from the UK?', use 'SELECT COUNT(*) FROM users WHERE country = 'UK''. For 'How many orders per user?', use 'SELECT user_name, COUNT(orders) FROM orders GROUP BY user_name HAVING COUNT(orders) > 0'.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

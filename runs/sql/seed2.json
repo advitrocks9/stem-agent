@@ -1,0 +1,190 @@
+{
+  "task_class": "sql",
+  "seed_index": 2,
+  "split_seed": null,
+  "propose_mode": "full",
+  "iters_planned": 8,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.9166666666666666,
+  "specialist_test_score": 1.0,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "results",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": false
+  },
+  "test_per_task_specialist": {
+    "product-categories": true,
+    "avg-price": true,
+    "orders-2024-08": true,
+    "max-quantity": true,
+    "users-de": true,
+    "countries-distinct": true,
+    "products-cheap": true,
+    "total-revenue": true,
+    "orders-by-uk": true,
+    "category-per-country": true,
+    "avg-spend-per-uk-user": true,
+    "streak-month": true
+  },
+  "frontier": [
+    {
+      "hash": "21e3181c",
+      "iter": 1,
+      "score": 1.0,
+      "tokens": 123.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.9166666666666666,
+      "tokens": 104.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 1255,
+      "out_tokens": 443,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "21e3181c",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker is producing outputs with SQL errors such as referencing non-existent columns. Using a validation and retry strategy with results validation can help detect such errors and allow the worker to attempt a correction.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 1483,
+      "out_tokens": 524,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "results",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "b5bfd6c1",
+      "parent_hash": "21e3181c",
+      "edit": {
+        "tool_policy": "code_exec",
+        "system_prompt": "Use the task prompt to formulate your SQL query and verify its correctness by executing it with python_exec. Return only the requested output."
+      },
+      "reason": "The worker's SQL queries need to be precise; using code_exec encourages correct calculations, especially for complex queries.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2227,
+      "out_tokens": 441,
+      "spec": {
+        "system_prompt": "Use the task prompt to formulate your SQL query and verify its correctness by executing it with python_exec. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "4730bc16",
+      "parent_hash": "b5bfd6c1",
+      "edit": {
+        "max_retries": 3
+      },
+      "reason": "The worker is already using code execution to verify the SQL queries, and results validation ensures correctness of the output. Hence, increasing max_retries will allow more attempts to fix any initial execution errors.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2227,
+      "out_tokens": 441,
+      "spec": {
+        "system_prompt": "Use the task prompt to formulate your SQL query and verify its correctness by executing it with python_exec. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "d92c0fea",
+      "parent_hash": "4730bc16",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "Increasing max_retries allows more iterations for fixing potential SQL syntax or logic errors after executing with python_exec.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 2227,
+      "out_tokens": 438,
+      "spec": {
+        "system_prompt": "Use the task prompt to formulate your SQL query and verify its correctness by executing it with python_exec. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    }
+  ]
+}

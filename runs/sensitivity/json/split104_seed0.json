@@ -1,0 +1,252 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": 104,
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.47619047619047616,
+  "specialist_test_score": 0.5714285714285714,
+  "specialist_spec": {
+    "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 0.8333333333333334,
+  "frontier": [
+    {
+      "hash": "36aa1592",
+      "iter": 5,
+      "score": 0.8333333333333334,
+      "tokens": 463.5833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "d7ba6c64",
+      "iter": 4,
+      "score": 0.75,
+      "tokens": 427.5833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "2dc4b70b",
+      "iter": 3,
+      "score": 0.6666666666666666,
+      "tokens": 372.5833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "e1b28522",
+      "iter": 2,
+      "score": 0.5,
+      "tokens": 339.5833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "947ec01a",
+      "iter": 1,
+      "score": 0.3333333333333333,
+      "tokens": 300.5833333333333,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.25,
+      "tokens": 121.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.25,
+      "n_pass": 3,
+      "n_total": 12,
+      "in_tokens": 1459,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "947ec01a",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'."
+      },
+      "reason": "The system prompt needs enhancement with specific classification rules and examples to address the frequent value-mismatch errors.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 3607,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "e1b28522",
+      "parent_hash": "947ec01a",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'."
+      },
+      "reason": "The worker is making errors in judgement related to the 'area' and 'kind' fields, which suggests that the system_prompt needs more specific guidance and examples to help it make the correct classifications.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 4075,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "2dc4b70b",
+      "parent_hash": "e1b28522",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial."
+      },
+      "reason": "The worker is making incorrect judgements on the 'area' and 'severity' fields, indicating that the system_prompt needs to better specify rules or provide examples for these cases.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.6666666666666666,
+      "n_pass": 8,
+      "n_total": 12,
+      "in_tokens": 4471,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "d7ba6c64",
+      "parent_hash": "2dc4b70b",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features."
+      },
+      "reason": "The worker is making judgement errors about the appropriate categories, suggesting the system prompt could be improved with more specific rules or examples to cover these cases.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 5131,
+      "out_tokens": 286,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "36aa1592",
+      "parent_hash": "d7ba6c64",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines."
+      },
+      "reason": "The current failures are due to misclassification in the 'area' and 'kind' fields, which indicates a need for more guidance in the system prompt to improve judgment accuracy.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 5563,
+      "out_tokens": 286,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "80cdb281",
+      "parent_hash": "36aa1592",
+      "edit": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines. \n- Infrastructure leaks should be categorized as 'infra'. \n- Architectural overviews or schema updates should be classified under 'docs'."
+      },
+      "reason": "The current system prompt can be enhanced with more targeted examples to improve judgement on 'kind' and 'area', addressing common errors seen in dev-eval mismatches.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 5875,
+      "out_tokens": 298,
+      "spec": {
+        "system_prompt": "Extract metadata from the issue. Follow these rules: 1) For severity, use 'critical' if it impacts security or major functionality, 'high' for significant issues, 'med' for moderate impact, and 'low' for minor or cosmetic issues. 2) Classify 'kind' as 'bug' for defects, 'feature' for new requests, 'docs' for documentation tasks, 'question' for inquiries, and 'regression' if the issue reoccurs. 3) For 'area', use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', and 'other' based on the issue's domain. Examples: \n- A security bypass should be 'critical', 'bug', 'api'. \n- A documentation update should be 'low', 'docs', 'docs'. \n- A feature request for frontend should be 'med', 'feature', 'frontend'. \n- An infrastructure issue or server configuration should be 'infra'. \n- Questions related to documentation should be 'docs'. \n- Bugs related to performance should be 'regression', 'frontend'. \n- If the issue affects API but is related to infrastructure, classify as 'infra'. \n- Use 'low' severity for feature requests unless they are crucial. \n- Consider 'infra' if the context involves infrastructure or deployment, even if the API is mentioned. \n- Use 'med' severity for updates that improve system performance or maintainability. \n- Documentation tasks typically belong to 'docs', even if they introduce new features. \n- When the issue involves architectural documentation, classify as 'docs'. \n- For issues related to quota management or limits, consider 'docs' if it involves explanation or guidelines. \n- Infrastructure leaks should be categorized as 'infra'. \n- Architectural overviews or schema updates should be classified under 'docs'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

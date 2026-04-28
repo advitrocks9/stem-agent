@@ -1,0 +1,160 @@
+{
+  "task_class": "regex",
+  "seed_index": 0,
+  "split_seed": 105,
+  "iters_planned": 6,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.8095238095238095,
+  "specialist_test_score": 0.9523809523809523,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "testcases",
+    "tool_policy": "validate_retry",
+    "max_retries": 2
+  },
+  "specialist_dev_score": 0.75,
+  "frontier": [
+    {
+      "hash": "ba66587e",
+      "iter": 1,
+      "score": 0.75,
+      "tokens": 185.83333333333334,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.5833333333333334,
+      "tokens": 59.833333333333336,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 718,
+      "out_tokens": 439,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "ba66587e",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      },
+      "reason": "The worker's outputs frequently fail to compile or match the test cases, indicating a need for validation and retry to refine the regex.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 2230,
+      "out_tokens": 803,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "b3c6badf",
+      "parent_hash": "ba66587e",
+      "edit": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. Return only the requested regex output. For instance, ensure that regex for 'vowel-cluster' matches strings with clusters of at least three vowels, 'long-double' should not match strings where patterns repeat, and 'ipv4' should consider leading zeros invalid in each segment."
+      },
+      "reason": "The task failures indicate consistent errors in judgment and logic rather than syntax, suggesting the need for improved prompt guidance with worked examples.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3512,
+      "out_tokens": 863,
+      "spec": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. Return only the requested regex output. For instance, ensure that regex for 'vowel-cluster' matches strings with clusters of at least three vowels, 'long-double' should not match strings where patterns repeat, and 'ipv4' should consider leading zeros invalid in each segment.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "edf9408e",
+      "parent_hash": "b3c6badf",
+      "edit": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. For instance, for 'vowel-cluster', ensure the regex matches strings with clusters of at least three vowels and does not match strings with clusters of exactly three vowels. For 'even-int', ensure the regex matches all even integers including single-digit even numbers. For 'ipv4', consider leading zeros invalid in each segment. Return only the requested regex output."
+      },
+      "reason": "The system prompt is not adequately guiding the model to output the correct regex for specific tasks, particularly those with nuanced requirements such as vowel clusters and even integers. Including task-specific rules and examples should improve regex accuracy.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4135,
+      "out_tokens": 915,
+      "spec": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. For instance, for 'vowel-cluster', ensure the regex matches strings with clusters of at least three vowels and does not match strings with clusters of exactly three vowels. For 'even-int', ensure the regex matches all even integers including single-digit even numbers. For 'ipv4', consider leading zeros invalid in each segment. Return only the requested regex output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "1d7f1131",
+      "parent_hash": "edf9408e",
+      "edit": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. For instance, for 'vowel-cluster', ensure the regex matches strings with clusters of at least three vowels and does not match strings with clusters of exactly three vowels. Use relevant examples: 'queue', 'beautiful', 'aeiou'. For 'ipv4', consider leading zeros invalid in each segment and use examples: '192.168.1.1', '10.0.0.1'. Return only the requested regex output."
+      },
+      "reason": "The failed outputs indicate misunderstanding of pattern requirements, suggesting the need for more explicit and relevant examples in the system prompt.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4043,
+      "out_tokens": 941,
+      "spec": {
+        "system_prompt": "Read the task carefully and use examples to understand the pattern. For instance, for 'vowel-cluster', ensure the regex matches strings with clusters of at least three vowels and does not match strings with clusters of exactly three vowels. Use relevant examples: 'queue', 'beautiful', 'aeiou'. For 'ipv4', consider leading zeros invalid in each segment and use examples: '192.168.1.1', '10.0.0.1'. Return only the requested regex output.",
+        "validation": "testcases",
+        "tool_policy": "validate_retry",
+        "max_retries": 2
+      }
+    }
+  ]
+}

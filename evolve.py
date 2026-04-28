@@ -248,14 +248,24 @@ def evolve(
     seed: int = 0,
     skip_rollback: bool = False,
     propose_mode: str = "full",  # 'full' | 'no_demos' | 'no_feedback' | 'random'
+    split_seed: int | None = None,
 ) -> dict:
     random.seed(seed)
-    tasks = split(load(task_class))
+    if split_seed is None:
+        tasks = split(load(task_class))
+    else:
+        from eval import random_split
+        tasks = random_split(load(task_class), split_seed)
     demos, dev, test = tasks["demo"], tasks["dev"], tasks["test"]
     out_dir.mkdir(parents=True, exist_ok=True)
     run_dir = out_dir / task_class
     run_dir.mkdir(exist_ok=True)
-    save_name = f"{propose_mode}_seed{seed}.json" if propose_mode != "full" else f"seed{seed}.json"
+    if split_seed is not None:
+        save_name = f"split{split_seed}_seed{seed}.json"
+    elif propose_mode != "full":
+        save_name = f"{propose_mode}_seed{seed}.json"
+    else:
+        save_name = f"seed{seed}.json"
 
     lineage: list[Node] = []
     frontier: list[Point] = []
@@ -376,6 +386,7 @@ def evolve(
     summary: dict[str, Any] = {
         "task_class": task_class,
         "seed_index": seed,
+        "split_seed": split_seed,  # None means hand-picked split
         "propose_mode": propose_mode,  # 'full' is the canonical run; others are ablations
         "iters_planned": iters,
         "iters_run": stopped_at,

@@ -1,0 +1,158 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": 102,
+  "iters_planned": 6,
+  "iters_run": 4,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.5714285714285714,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss or security vulnerabilities; 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings].",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 0.75,
+  "frontier": [
+    {
+      "hash": "9be4abd1",
+      "iter": 1,
+      "score": 0.75,
+      "tokens": 262.0,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss or security vulnerabilities; 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings].",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.3333333333333333,
+      "tokens": 123.0,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 1476,
+      "out_tokens": 277,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "9be4abd1",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss or security vulnerabilities; 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings]."
+      },
+      "reason": "The worker frequently misjudges the severity, kind, and area fields, indicating a need for more guidance in the system prompt to correctly interpret these categories.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3144,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss or security vulnerabilities; 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings].",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "dcdbaee2",
+      "parent_hash": "9be4abd1",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings]."
+      },
+      "reason": "The worker is making judgement errors related to severity and kind, indicating the need for improved guidance on these decisions.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3264,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: [Provide some example mappings].",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "87cbb6f5",
+      "parent_hash": "dcdbaee2",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: For a billing error, use 'critical', 'regression', 'backend'. For a test flake, use 'low', 'bug', 'tooling'. For a new API error, use 'high', 'bug', 'api'."
+      },
+      "reason": "The current system prompt lacks specific examples, which can guide the worker to make correct judgments and reduce value-mismatch errors.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3780,
+      "out_tokens": 281,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken; 'bug' for new errors; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. Examples: For a billing error, use 'critical', 'regression', 'backend'. For a test flake, use 'low', 'bug', 'tooling'. For a new API error, use 'high', 'bug', 'api'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "b51a2261",
+      "parent_hash": "87cbb6f5",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken, especially after a recent update; 'bug' for new errors that do not fit the regression pattern; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. For a billing error, use 'critical', 'regression', 'backend'. For a test flake, use 'low', 'bug', 'tooling'. For a new API error, use 'high', 'bug', 'api'. For a memory leak in worker threads, consider 'backend' over 'infra' unless it involves system-level operations. For API returning 500 errors after a recent patch, prefer 'regression' over 'bug'."
+      },
+      "reason": "The current system prompt lacks specific examples that would help the model distinguish between similar categories such as 'regression' vs 'bug' and 'infra' vs 'backend'. Adding more detailed rules and examples for these cases should reduce value mismatches.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4428,
+      "out_tokens": 282,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use these rules: 1) 'critical' severity for issues causing data loss, security vulnerabilities, or financial impact (e.g., billing errors); 'high' for major feature breakage; 'med' for noticeable but not urgent issues; 'low' for minor inconveniences or typos. 2) 'regression' for issues where a previously working feature is broken, especially after a recent update; 'bug' for new errors that do not fit the regression pattern; 'feature' for new capabilities; 'docs' for documentation issues; 'question' for support inquiries. 3) Use 'frontend', 'backend', 'api', 'docs', 'infra', 'tooling', or 'other' based on the issue's main impact area. For a billing error, use 'critical', 'regression', 'backend'. For a test flake, use 'low', 'bug', 'tooling'. For a new API error, use 'high', 'bug', 'api'. For a memory leak in worker threads, consider 'backend' over 'infra' unless it involves system-level operations. For API returning 500 errors after a recent patch, prefer 'regression' over 'bug'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

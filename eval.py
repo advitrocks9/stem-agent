@@ -70,6 +70,17 @@ def split(tasks: list[dict]) -> dict[str, list[dict]]:
     return {"demo": demo, "dev": dev, "test": test}
 
 
+def random_split(tasks: list[dict], split_seed: int) -> dict[str, list[dict]]:
+    """Same shape as the hand-picked split (6 demo / 12 dev / rest test) but
+    random task assignment, deterministic per seed. Use for split-sensitivity:
+    if the conclusions only hold with the hand-picked split, that's a finding."""
+    import random as _r
+    rng = _r.Random(split_seed)
+    shuffled = sorted(tasks, key=lambda t: t["id"])  # stable starting order
+    rng.shuffle(shuffled)
+    return {"demo": shuffled[:6], "dev": shuffled[6:18], "test": shuffled[18:]}
+
+
 def load(task_class: str) -> list[dict]:
     return json.loads(Path(f"tasks/{task_class}/tasks.json").read_text())
 

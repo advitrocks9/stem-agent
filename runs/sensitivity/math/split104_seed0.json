@@ -1,0 +1,260 @@
+{
+  "task_class": "math",
+  "seed_index": 0,
+  "split_seed": 104,
+  "propose_mode": "full",
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.5833333333333334,
+  "specialist_test_score": 0.6666666666666666,
+  "specialist_spec": {
+    "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+    "validation": "results",
+    "tool_policy": "code_exec",
+    "max_retries": 3
+  },
+  "specialist_dev_score": 1.0,
+  "test_per_task_seed": {
+    "pool-fill": true,
+    "work-rate": true,
+    "sum-consec": true,
+    "interest-monthly": false,
+    "simul-eqs": false,
+    "sphere-vol": false,
+    "prime-near-50": true,
+    "compound-int": true,
+    "speed-vary": false,
+    "pct-of-x": true,
+    "miles-per-gal": true,
+    "avg-grade": true,
+    "avg-speed": true,
+    "coin-flip-3h": false,
+    "chickens-cows": false,
+    "compound-3-rates": false,
+    "work-vary": true,
+    "clock-angle": false,
+    "age-puzzle": false,
+    "mix-juice": false,
+    "perc-of-perc": true,
+    "distance-bike": true,
+    "cube-vol": true,
+    "area-triangle": true
+  },
+  "test_per_task_specialist": {
+    "pool-fill": true,
+    "work-rate": true,
+    "sum-consec": false,
+    "interest-monthly": false,
+    "simul-eqs": true,
+    "sphere-vol": true,
+    "prime-near-50": true,
+    "compound-int": true,
+    "speed-vary": true,
+    "pct-of-x": false,
+    "miles-per-gal": true,
+    "avg-grade": true,
+    "avg-speed": true,
+    "coin-flip-3h": true,
+    "chickens-cows": false,
+    "compound-3-rates": true,
+    "work-vary": false,
+    "clock-angle": true,
+    "age-puzzle": false,
+    "mix-juice": false,
+    "perc-of-perc": true,
+    "distance-bike": false,
+    "cube-vol": true,
+    "area-triangle": true
+  },
+  "frontier": [
+    {
+      "hash": "86c5e9c9",
+      "iter": 4,
+      "score": 1.0,
+      "tokens": 345.75,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.5,
+      "tokens": 56.0,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 672,
+      "out_tokens": 368,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "71450db2",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      },
+      "reason": "The worker is making arithmetic errors, which can be mitigated by using code_exec to perform precise calculations.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4658,
+      "out_tokens": 1148,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "3314d74f",
+      "parent_hash": "71450db2",
+      "edit": {
+        "validation": "results"
+      },
+      "reason": "Adding validation will help identify and correct parsing errors or missing fields in the output.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4727,
+      "out_tokens": 1150,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "3314d74f",
+      "parent_hash": "71450db2",
+      "edit": {
+        "validation": "results"
+      },
+      "reason": "Adding validation will help catch any errors in parsing or missing fields by verifying the output format.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 6385,
+      "out_tokens": 1814,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "86c5e9c9",
+      "parent_hash": "71450db2",
+      "edit": {
+        "validation": "results",
+        "max_retries": 3
+      },
+      "reason": "Since the worker is using code_exec, it should validate the results to ensure the computations are correct, and retry if necessary.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4149,
+      "out_tokens": 976,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "56f2d3b9",
+      "parent_hash": "86c5e9c9",
+      "edit": {
+        "system_prompt": "Read the task carefully and use python_exec to perform any calculations needed to ensure accuracy. Return only the requested output."
+      },
+      "reason": "The worker should be encouraged to explicitly use the python_exec tool for calculations to avoid arithmetic errors.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4293,
+      "out_tokens": 1007,
+      "spec": {
+        "system_prompt": "Read the task carefully and use python_exec to perform any calculations needed to ensure accuracy. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "b14bb6fe",
+      "parent_hash": "86c5e9c9",
+      "edit": {
+        "system_prompt": "Read the task carefully and use python_exec to perform any necessary calculations accurately. Return only the requested output."
+      },
+      "reason": "The worker's system prompt should explicitly instruct it to use python_exec for calculations to ensure accuracy in mathematical computations.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.9166666666666666,
+      "n_pass": 11,
+      "n_total": 12,
+      "in_tokens": 4229,
+      "out_tokens": 989,
+      "spec": {
+        "system_prompt": "Read the task carefully and use python_exec to perform any necessary calculations accurately. Return only the requested output.",
+        "validation": "results",
+        "tool_policy": "code_exec",
+        "max_retries": 3
+      }
+    }
+  ]
+}

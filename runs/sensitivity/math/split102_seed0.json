@@ -1,0 +1,178 @@
+{
+  "task_class": "math",
+  "seed_index": 0,
+  "split_seed": 102,
+  "propose_mode": "full",
+  "iters_planned": 6,
+  "iters_run": 3,
+  "stop_cause": "plateau",
+  "seed_test_score": 0.5416666666666666,
+  "specialist_test_score": 0.5416666666666666,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 0.75,
+  "test_per_task_seed": {
+    "speed-vary": false,
+    "sphere-vol": false,
+    "loan-emi": true,
+    "book-ratio": true,
+    "area-triangle": true,
+    "simul-eqs": false,
+    "binom-prob": false,
+    "fence-cost": false,
+    "circle-area": true,
+    "distance-bike": true,
+    "cube-vol": true,
+    "perc-of-perc": true,
+    "pct-increase": true,
+    "three-discounts": false,
+    "avg-grade": true,
+    "price-tax": false,
+    "interest-monthly": false,
+    "pct-of-x": true,
+    "compound-int": true,
+    "sum-consec": true,
+    "compound-3-rates": false,
+    "odd-sum": true,
+    "unit-conv": false,
+    "coin-flip-3h": false
+  },
+  "test_per_task_specialist": {
+    "speed-vary": false,
+    "sphere-vol": false,
+    "loan-emi": true,
+    "book-ratio": true,
+    "area-triangle": true,
+    "simul-eqs": false,
+    "binom-prob": false,
+    "fence-cost": false,
+    "circle-area": true,
+    "distance-bike": true,
+    "cube-vol": true,
+    "perc-of-perc": true,
+    "pct-increase": true,
+    "three-discounts": false,
+    "avg-grade": true,
+    "price-tax": false,
+    "interest-monthly": false,
+    "pct-of-x": true,
+    "compound-int": true,
+    "sum-consec": true,
+    "compound-3-rates": false,
+    "odd-sum": true,
+    "unit-conv": false,
+    "coin-flip-3h": false
+  },
+  "frontier": [
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.75,
+      "tokens": 58.916666666666664,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 707,
+      "out_tokens": 1320,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "71450db2",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      },
+      "reason": "The worker is failing to perform accurate calculations for math tasks, indicating that it would benefit from being able to execute precise arithmetic operations.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 9822,
+      "out_tokens": 3781,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 2
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "7be1ab84",
+      "parent_hash": "71450db2",
+      "edit": {
+        "max_retries": 4
+      },
+      "reason": "The worker is running out of turns before reaching a solution, suggesting it needs more iterations to complete the computations.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 17549,
+      "out_tokens": 5149,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 4
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "3c791720",
+      "parent_hash": "7be1ab84",
+      "edit": {
+        "max_retries": 6
+      },
+      "reason": "Increasing the max_retries will give the worker more opportunity to iterate and correct any errors in its calculations, as the turn cap appears to be reached frequently.",
+      "accepted": false,
+      "rejection": "parse",
+      "on_frontier": false,
+      "dev_score": 0.0,
+      "n_pass": 0,
+      "n_total": 12,
+      "in_tokens": 0,
+      "out_tokens": 0,
+      "spec": {
+        "system_prompt": "Read the task and use python_exec to perform any calculations. Return only the requested output.",
+        "validation": "none",
+        "tool_policy": "code_exec",
+        "max_retries": 6
+      }
+    }
+  ]
+}

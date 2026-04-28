@@ -1,0 +1,228 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": 101,
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.47619047619047616,
+  "specialist_test_score": 0.42857142857142855,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity; Note: An isolated 'api' issue with error codes like 500 is a 'bug', not 'regression'. Similarly, 'disk-full' issues in 'infra' should be 'med' unless specified as critical.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 1.0,
+  "frontier": [
+    {
+      "hash": "ecee11a8",
+      "iter": 6,
+      "score": 1.0,
+      "tokens": 349.5833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity; Note: An isolated 'api' issue with error codes like 500 is a 'bug', not 'regression'. Similarly, 'disk-full' issues in 'infra' should be 'med' unless specified as critical.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "3f5883c7",
+      "iter": 4,
+      "score": 0.8333333333333334,
+      "tokens": 304.5833333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "b0abb650",
+      "iter": 1,
+      "score": 0.5833333333333334,
+      "tokens": 193.58333333333334,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.5,
+      "tokens": 121.58333333333333,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 1459,
+      "out_tokens": 276,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "b0abb650",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue."
+      },
+      "reason": "The worker is making incorrect judgments on the kind, area, and severity fields, indicating a need for more guidance and worked examples in the prompt.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 2323,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "fa972c36",
+      "parent_hash": "b0abb650",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. (5) If an issue affects end-user interfaces, consider 'frontend'; if it affects data handling or processing, consider 'backend'. (6) Examples: 'api-500' should be a 'bug', 'feat-webhook-retry' should have 'api' area."
+      },
+      "reason": "The worker is struggling with judgment calls on kind, area, and severity; enhance system_prompt with more specific rules and examples for better alignment.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 3007,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. (5) If an issue affects end-user interfaces, consider 'frontend'; if it affects data handling or processing, consider 'backend'. (6) Examples: 'api-500' should be a 'bug', 'feat-webhook-retry' should have 'api' area.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "2d6e9bf9",
+      "parent_hash": "b0abb650",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity."
+      },
+      "reason": "The current system prompt lacks specific guidance to improve judgement accuracy, especially on severity and category distinctions.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 2851,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "3f5883c7",
+      "parent_hash": "2d6e9bf9",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity."
+      },
+      "reason": "The current system prompt lacks sufficient examples and guidance on distinguishing between 'bug' and 'regression', and determining severity levels accurately.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 3655,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "5ef76528",
+      "parent_hash": "3f5883c7",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. If the issue is critical to system functionality, it's 'high' or 'critical'. Otherwise, judge based on the specific details given. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity."
+      },
+      "reason": "The worker is making judgement errors in classifying the kind and severity, which suggests that the system prompt needs more precise rules or examples to guide these decisions.",
+      "accepted": false,
+      "rejection": "regression",
+      "on_frontier": false,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 3979,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. If the issue is critical to system functionality, it's 'high' or 'critical'. Otherwise, judge based on the specific details given. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "ecee11a8",
+      "parent_hash": "3f5883c7",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity; Note: An isolated 'api' issue with error codes like 500 is a 'bug', not 'regression'. Similarly, 'disk-full' issues in 'infra' should be 'med' unless specified as critical."
+      },
+      "reason": "Value mismatches indicate a need for more specific rules or examples in the system prompt to guide judgment.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 1.0,
+      "n_pass": 12,
+      "n_total": 12,
+      "in_tokens": 4195,
+      "out_tokens": 278,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. Use the following rules: (1) If the issue describes a repeating problem, it's likely a 'regression', unless it's an isolated 'bug'. (2) If it involves a new feature or enhancement, it's a 'feature'. (3) Match areas to relevant keywords: 'api', 'backend', etc. (4) For severity, consider the impact level described in the issue. Examples: 'api-500' is a 'bug' in 'api' with 'high' severity; 'feat-webhook-retry' is a 'feature' in 'api' with 'med' severity; 'infra-disk-full' is a 'bug' in 'infra' with 'med' severity; 'support-q' is a 'question' in 'docs' with 'low' severity; 'feat-dark-mode' is a 'feature' in 'frontend' with 'low' severity; Note: An isolated 'api' issue with error codes like 500 is a 'bug', not 'regression'. Similarly, 'disk-full' issues in 'infra' should be 'med' unless specified as critical.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "task_class": "json",
+  "seed_index": 0,
+  "split_seed": 105,
+  "iters_planned": 6,
+  "iters_run": 6,
+  "stop_cause": "iter_cap",
+  "seed_test_score": 0.42857142857142855,
+  "specialist_test_score": 0.42857142857142855,
+  "specialist_spec": {
+    "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind. If the issue involves user interface, use 'frontend' for area. For internationalization or i18n, consider 'med' severity. For architectural overviews, always use 'docs' kind.",
+    "validation": "none",
+    "tool_policy": "no_tools",
+    "max_retries": 0
+  },
+  "specialist_dev_score": 0.8333333333333334,
+  "frontier": [
+    {
+      "hash": "2263dc88",
+      "iter": 6,
+      "score": 0.8333333333333334,
+      "tokens": 424.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind. If the issue involves user interface, use 'frontend' for area. For internationalization or i18n, consider 'med' severity. For architectural overviews, always use 'docs' kind.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "7200046d",
+      "iter": 5,
+      "score": 0.75,
+      "tokens": 384.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "8181f937",
+      "iter": 4,
+      "score": 0.5833333333333334,
+      "tokens": 323.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "f84edde4",
+      "iter": 2,
+      "score": 0.5,
+      "tokens": 257.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "4e945c53",
+      "iter": 1,
+      "score": 0.4166666666666667,
+      "tokens": 206.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "hash": "46e35c36",
+      "iter": 0,
+      "score": 0.3333333333333333,
+      "tokens": 121.5,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ],
+  "lineage": [
+    {
+      "iter": 0,
+      "spec_hash": "46e35c36",
+      "parent_hash": null,
+      "edit": {},
+      "reason": "seed",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.3333333333333333,
+      "n_pass": 4,
+      "n_total": 12,
+      "in_tokens": 1458,
+      "out_tokens": 278,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 1,
+      "spec_hash": "4e945c53",
+      "parent_hash": "46e35c36",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues."
+      },
+      "reason": "The worker is making judgement errors on category assignments, indicating a need for more explicit guidance and examples in the system prompt.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.4166666666666667,
+      "n_pass": 5,
+      "n_total": 12,
+      "in_tokens": 2478,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 2,
+      "spec_hash": "f84edde4",
+      "parent_hash": "4e945c53",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity."
+      },
+      "reason": "The current errors are related to incorrect judgments about severity, kind, and area, which can be improved by refining the system prompt with more specific examples and rules.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 3090,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure, 'high' is major impact, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. Use examples and context clues. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 3,
+      "spec_hash": "4a022f58",
+      "parent_hash": "f84edde4",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'."
+      },
+      "reason": "The system prompt needs more guidance on distinguishing between 'high' and 'critical' severity, and clear examples for 'feature' versus 'docs' kind, as these are frequent errors.",
+      "accepted": true,
+      "rejection": "dominated",
+      "on_frontier": false,
+      "dev_score": 0.5,
+      "n_pass": 6,
+      "n_total": 12,
+      "in_tokens": 3366,
+      "out_tokens": 278,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 4,
+      "spec_hash": "8181f937",
+      "parent_hash": "4a022f58",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided."
+      },
+      "reason": "The high rate of value-mismatch errors indicates a need for more precise guidance on categorization in the system prompt, potentially with additional examples or clarifications.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.5833333333333334,
+      "n_pass": 7,
+      "n_total": 12,
+      "in_tokens": 3882,
+      "out_tokens": 279,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 5,
+      "spec_hash": "7200046d",
+      "parent_hash": "8181f937",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind."
+      },
+      "reason": "The current system prompt lacks specific examples that could guide the model to make correct categorical judgments, especially for severity and kind.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.75,
+      "n_pass": 9,
+      "n_total": 12,
+      "in_tokens": 4614,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    },
+    {
+      "iter": 6,
+      "spec_hash": "2263dc88",
+      "parent_hash": "7200046d",
+      "edit": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind. If the issue involves user interface, use 'frontend' for area. For internationalization or i18n, consider 'med' severity. For architectural overviews, always use 'docs' kind."
+      },
+      "reason": "The current system_prompt already includes comprehensive rules and examples, but it seems that the worker is still misclassifying certain fields. Adding more specific rules and examples for the common mistakes might help improve accuracy.",
+      "accepted": true,
+      "rejection": "",
+      "on_frontier": true,
+      "dev_score": 0.8333333333333334,
+      "n_pass": 10,
+      "n_total": 12,
+      "in_tokens": 5094,
+      "out_tokens": 280,
+      "spec": {
+        "system_prompt": "Read the task and return only the requested output. When categorizing, remember: 'bug' is for unintended issues, 'feature' is for new requests, 'question' is for inquiries, 'regression' is for returned issues. For severity, 'critical' means system failure or severe security issues, 'high' is major impact without total failure, 'med' is moderate, and 'low' is minimal. 'area' must match one of the specified domains. If an issue is related to documentation, it should be 'docs' in kind or area. Examples: a typo in a README is 'docs' kind, a new feature idea is 'feature' kind, severe security issues are 'critical' severity, a service outage is 'critical' severity, a bug causing major inconvenience but not total failure is 'high'. For 'area', use 'tooling' for issues with tools, 'docs' for documentation, 'frontend' and 'backend' for respective issues, etc. If unsure, 'other' should be avoided. Specific examples: if a rule should be changed, it's 'low' severity; for documentation questions, use 'docs' area; architectural overviews are 'docs' kind; security bypasses are 'critical' severity and 'api' area; performance issues after an update are 'regression' kind. If the issue involves user interface, use 'frontend' for area. For internationalization or i18n, consider 'med' severity. For architectural overviews, always use 'docs' kind.",
+        "validation": "none",
+        "tool_policy": "no_tools",
+        "max_retries": 0
+      }
+    }
+  ]
+}

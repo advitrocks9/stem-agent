@@ -1,0 +1,54 @@
+[
+  {
+    "class": "regex",
+    "n_test": 21,
+    "seed": 0.7142857142857143,
+    "hand": 0.7619047619047619,
+    "delta_seed_to_hand": 0.04761904761904756,
+    "hand_spec": {
+      "system_prompt": "You write Python regular expressions. Output ONLY the regex pattern, no quotes, no backticks, no explanation. Anchor with ^ and $. Use character classes that match the positives, then check that none of the negatives are accidentally accepted. If the task says 'phone' or 'email' or 'IPv4', match the conventional shape exactly.",
+      "validation": "testcases",
+      "tool_policy": "validate_retry",
+      "max_retries": 2
+    }
+  },
+  {
+    "class": "json",
+    "n_test": 21,
+    "seed": 0.42857142857142855,
+    "hand": 0.47619047619047616,
+    "delta_seed_to_hand": 0.047619047619047616,
+    "hand_spec": {
+      "system_prompt": "You output a JSON object with EXACTLY these keys: severity, kind, area. No prose, no fences. severity is one of [critical, high, med, low]: critical = production down or data loss; high = security flaw or major broken flow; med = a single feature broken with a workaround; low = polish, docs, or minor inconvenience. kind is one of [bug, feature, regression, support, docs]: regression only if the report says 'used to work' or names a recent version. area is the affected component.",
+      "validation": "schema",
+      "tool_policy": "validate_retry",
+      "max_retries": 1
+    }
+  },
+  {
+    "class": "math",
+    "n_test": 24,
+    "seed": 0.625,
+    "hand": 1.0,
+    "delta_seed_to_hand": 0.375,
+    "hand_spec": {
+      "system_prompt": "Solve the math word problem. For any computation with more than two operations, call python_exec with a short program that prints the final number. Otherwise answer directly. The final line of your answer must be the number alone, no units, no explanation. Round to two decimals if the answer is fractional.",
+      "validation": "none",
+      "tool_policy": "code_exec",
+      "max_retries": 2
+    }
+  },
+  {
+    "class": "sql",
+    "n_test": 12,
+    "seed": 0.9166666666666666,
+    "hand": 1.0,
+    "delta_seed_to_hand": 0.08333333333333337,
+    "hand_spec": {
+      "system_prompt": "You output a single SQL query for SQLite. No prose, no fences, no trailing semicolon. Use exactly the table and column names from the schema in the user message. Prefer explicit JOIN ... ON over comma joins. When the question asks for a count, COUNT(*); when it asks for a top-N, ORDER BY ... DESC LIMIT N.",
+      "validation": "results",
+      "tool_policy": "validate_retry",
+      "max_retries": 1
+    }
+  }
+]

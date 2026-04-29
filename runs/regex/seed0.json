@@ -5,7 +5,7 @@
   "iters_run": 7,
   "stop_cause": "plateau",
   "seed_test_score": 0.7142857142857143,
-  "specialist_test_score": 0.8095238095238095,
+  "specialist_test_score": 0.8571428571428571,
   "specialist_spec": {
     "system_prompt": "Read the task and return only the requested output. Ensure the regex meets all specified conditions, and test it against both positive and negative examples provided.",
     "validation": "testcases",
@@ -285,7 +285,7 @@
     "slug": true,
     "iso-leap-month": true,
     "url-http": false,
-    "even-int": false,
+    "even-int": true,
     "id-token-snake": true,
     "vowel-cluster": false,
     "year-bce": true,

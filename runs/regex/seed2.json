@@ -4,8 +4,8 @@
   "iters_planned": 8,
   "iters_run": 7,
   "stop_cause": "plateau",
-  "seed_test_score": 0.6666666666666666,
-  "specialist_test_score": 0.8571428571428571,
+  "seed_test_score": 0.7142857142857143,
+  "specialist_test_score": 0.8095238095238095,
   "specialist_spec": {
     "system_prompt": "Read the task carefully and construct a regex that strictly matches the described requirements. Ensure that no partial matches occur and test against edge cases described in task examples. Return only the regex.",
     "validation": "testcases",

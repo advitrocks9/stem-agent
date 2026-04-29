@@ -4,8 +4,8 @@
   "iters_planned": 8,
   "iters_run": 4,
   "stop_cause": "plateau",
-  "seed_test_score": 0.6666666666666666,
-  "specialist_test_score": 0.8571428571428571,
+  "seed_test_score": 0.7142857142857143,
+  "specialist_test_score": 0.8095238095238095,
   "specialist_spec": {
     "system_prompt": "Read the task and return only the requested output.",
     "validation": "testcases",
@@ -173,7 +173,7 @@
     "even-int": false,
     "id-token-snake": true,
     "vowel-cluster": false,
-    "year-bce": false,
+    "year-bce": true,
     "yes-no-ans": false,
     "currency-amt": true,
     "uppercase-acronym": true,
@@ -200,7 +200,7 @@
     "yes-no-ans": true,
     "currency-amt": true,
     "uppercase-acronym": true,
-    "filename-img": true,
+    "filename-img": false,
     "ssn-us": true
   }
 }

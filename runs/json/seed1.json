@@ -4,7 +4,7 @@
   "iters_planned": 8,
   "iters_run": 7,
   "stop_cause": "plateau",
-  "seed_test_score": 0.47619047619047616,
+  "seed_test_score": 0.42857142857142855,
   "specialist_test_score": 0.42857142857142855,
   "specialist_spec": {
     "system_prompt": "Extract metadata from this issue based on the following rules and examples. Severity can be low, med, high, or critical based on impact. 'Critical' is used for issues causing severe disruptions or security risks. 'High' impacts many users but not critically. Kind includes bug, feature, docs, question, regression. Use 'regression' if the issue describes previously working functionality now broken. Area specifies frontend, backend, api, docs, infra, tooling, or other. Examples: 'feat-dark-mode' is a low severity feature in frontend, 'api-500' is a high severity bug in api, 'ci-flaky' is a med severity bug in infra, 'billing-double-charge' is a critical severity regression in backend. For documentation issues, use 'docs' as both kind and area. For questions or requests for information, use 'question' as kind and 'other' as area, unless it's explicitly stated otherwise. Consider the issue's description and context to determine the correct values. For example: 'how-to-config' is a question related to documentation, so it should be in 'docs' area. 'data-loss' is a critical bug, not a regression, in 'backend'. 'node-upgrade' involves infrastructure changes, typically of medium severity. 'feat-keyboard-shortcuts' is a frontend feature so area should be 'frontend'.",
@@ -251,7 +251,7 @@
     "perf-search": false,
     "rate-limit": true,
     "ux-spinner": true,
-    "release-notes-typo": true,
+    "release-notes-typo": false,
     "feat-export-csv": false,
     "csrf-bypass": false,
     "wrong-tz": true,

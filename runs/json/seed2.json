@@ -234,7 +234,7 @@
     "perf-search": false,
     "rate-limit": true,
     "ux-spinner": true,
-    "release-notes-typo": true,
+    "release-notes-typo": false,
     "feat-export-csv": false,
     "csrf-bypass": false,
     "wrong-tz": true,

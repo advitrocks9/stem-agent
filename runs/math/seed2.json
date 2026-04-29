@@ -185,7 +185,7 @@
   "test_per_task_specialist": {
     "pool-fill": true,
     "mix-juice": false,
-    "avg-speed": true,
+    "avg-speed": false,
     "chickens-cows": false,
     "sum-consec": false,
     "cube-vol": true,
@@ -196,7 +196,7 @@
     "prime-near-50": true,
     "fact-7": true,
     "hex-to-dec": true,
-    "simul-eqs": false,
+    "simul-eqs": true,
     "price-tax": false,
     "miles-per-gal": true,
     "pct-increase": true,

@@ -141,8 +141,13 @@ def validate_sql(text: str, task: dict) -> tuple[bool, str]:
         gold_rows = _run_sql(task["gold_sql"])
     except sqlite3.Error as e:
         return False, f"[gold-bug] {e}"  # shouldn't happen; gold is hand-checked
-    pred_set = pred_rows if task.get("ordered") else sorted(map(_row_key, pred_rows))
-    gold_set = gold_rows if task.get("ordered") else sorted(map(_row_key, gold_rows))
+    # Apply _row_key on both branches: float/int parity (1.0 == 1) bit me on
+    # top-3-products where the gold path returned ints but the predicted path
+    # returned floats from a SUM(quantity) cast.
+    pred_keyed = [_row_key(r) for r in pred_rows]
+    gold_keyed = [_row_key(r) for r in gold_rows]
+    pred_set = pred_keyed if task.get("ordered") else sorted(pred_keyed)
+    gold_set = gold_keyed if task.get("ordered") else sorted(gold_keyed)
     if pred_set == gold_set:
         return True, ""
     if len(pred_rows) != len(gold_rows):

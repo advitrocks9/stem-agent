@@ -111,29 +111,60 @@ class EvalResult:
 
 _NUM_RE = re.compile(r"-?\d+(?:\.\d+)?")
 _FRAC_RE = re.compile(r"-?\d+/\d+")
+# Find a number that comes right after the word "answer" (with optional
+# punctuation/words in between but on the same sentence). This lets us
+# prefer the headline number when the model writes a verbose explanation
+# after stating the answer ("Final answer rounds to 80.5 hours, where 80
+# is integer and 0.5 represents half" -> 80.5, not 0.5).
+_ANSWER_NEAR_RE = re.compile(
+    r"answer[^\d\n.]{0,40}?(-?\d+(?:\.\d+)?)",
+    re.IGNORECASE,
+)
+
+
+def _strip_trailing_zeros(num: str) -> str:
+    if "." in num:
+        num = num.rstrip("0").rstrip(".")
+        if num in ("", "-"):
+            num = "0"
+    return num
 
 
 def _norm_math_answer(s: str) -> str:
     """Pull a clean numeric or fractional or HH:MM answer out of free-form text.
 
-    Order of preference: HH:MM, a/b fraction, last number in the string.
-    Numbers are stripped of $ , and trailing zeros are normalised so that
-    '7.50' equals '7.5'.
+    Order of preference:
+      1. HH:MM clock answers.
+      2. a/b fractions.
+      3. The first number that appears right after the word "answer".
+      4. The number in the last sentence (which catches "the total is 24.99.").
+      5. The last number anywhere in the string (legacy behaviour).
+    Numbers are stripped of $ , and trailing zeros are normalised so '7.50'
+    equals '7.5'.
     """
     s = s.strip().lower().replace("$", "").replace(",", "")
     if (m := re.search(r"\b\d{1,2}:\d{2}\b", s)):
         return m.group(0)
     if (m := _FRAC_RE.search(s)):
         return m.group(0)
+    # Verbose-output guard: model often writes "Final answer is 80.5 ..." with
+    # smaller numbers afterwards as commentary. Take the number adjacent to
+    # the word "answer" if present.
+    if (m := _ANSWER_NEAR_RE.search(s)):
+        return _strip_trailing_zeros(m.group(1))
+    # Try the last sentence; that catches "The total is $24.99." cleanly.
+    # Split on sentence punctuation only when followed by space/newline/end,
+    # otherwise we'd split decimals. Same trick for trailing punctuation.
+    trimmed = s.rstrip(".!?\n ")
+    sentences = re.split(r"[.!?\n](?=\s|$)", trimmed)
+    last_sentence = sentences[-1] if sentences else s
+    nums_last = _NUM_RE.findall(last_sentence)
+    if nums_last:
+        return _strip_trailing_zeros(nums_last[-1])
     nums = _NUM_RE.findall(s)
     if not nums:
         return s
-    last = nums[-1]
-    if "." in last:
-        last = last.rstrip("0").rstrip(".")
-        if last == "" or last == "-":
-            last = "0"
-    return last
+    return _strip_trailing_zeros(nums[-1])
 
 
 def _score_math(task: dict, output: str) -> tuple[bool, str]:

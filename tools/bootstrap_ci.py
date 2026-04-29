@@ -1,10 +1,13 @@
 """Bootstrap 95% CIs on the per-class delta (specialist - seed) over the test set.
 
-Reads saved runs from runs/{class}/seed*.json and runs the seed and specialist
-on the test set if per-task booleans aren't already saved. Resamples test
-items (with replacement) 1000 times and reports a paired-difference
-confidence interval. This handles the dominant uncertainty (small test sets)
-that plain seed-variance reporting can't.
+Reads saved runs from runs/{class}/seed*.json. Always reevaluates the seed
+and specialist specs on the current test set and writes the per-task
+pass/fail booleans plus the resulting accuracy back into the JSON. This
+catches drift between what evolve.py recorded as `seed_test_score` /
+`specialist_test_score` and what the eval harness produces today (eg after
+a fix to `_norm_math_answer` or to `validate_sql`).
+
+Resamples test items with replacement 1000 times for the paired delta CI.
 
 Run: uv run python tools/bootstrap_ci.py
 """
@@ -57,17 +60,25 @@ def main() -> None:
             d = json.loads(run_path.read_text())
             test_tasks = split(load(cls))["test"]
 
-            if "test_per_task_seed" in d and "test_per_task_specialist" in d:
-                seed_pt = d["test_per_task_seed"]
-                spec_pt = d["test_per_task_specialist"]
-            else:
-                # the older saved runs don't have per-task. Re-evaluate.
-                print(f"  ({run_path.name}: re-evaluating to get per-task)")
-                seed_pt = per_task(SeedSpec, test_tasks, cls)
-                spec_pt = per_task(d["specialist_spec"], test_tasks, cls)
-                d["test_per_task_seed"] = seed_pt
-                d["test_per_task_specialist"] = spec_pt
-                run_path.write_text(json.dumps(d, indent=2, default=str))
+            # Always reeval and write back. Cached values can disagree with
+            # the headline if eval.py or agent.py changed since the run was
+            # saved (math normalizer, sql float-int parity, etc.).
+            print(f"  ({run_path.name}: reevaluating seed + specialist)")
+            seed_pt = per_task(SeedSpec, test_tasks, cls)
+            spec_pt = per_task(d["specialist_spec"], test_tasks, cls)
+            seed_acc_now = sum(seed_pt.values()) / len(seed_pt)
+            spec_acc_now = sum(spec_pt.values()) / len(spec_pt)
+            old_seed = d.get("seed_test_score")
+            old_spec = d.get("specialist_test_score")
+            if old_seed is not None and abs(old_seed - seed_acc_now) > 1e-9:
+                print(f"    seed_test_score drift: was {old_seed:.4f}, now {seed_acc_now:.4f}")
+            if old_spec is not None and abs(old_spec - spec_acc_now) > 1e-9:
+                print(f"    specialist_test_score drift: was {old_spec:.4f}, now {spec_acc_now:.4f}")
+            d["test_per_task_seed"] = seed_pt
+            d["test_per_task_specialist"] = spec_pt
+            d["seed_test_score"] = seed_acc_now
+            d["specialist_test_score"] = spec_acc_now
+            run_path.write_text(json.dumps(d, indent=2, default=str))
 
             n = len(seed_pt)
             seed_acc = sum(seed_pt.values()) / n

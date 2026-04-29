@@ -48,7 +48,7 @@
       "hash": "21e3181c",
       "iter": 1,
       "score": 1.0,
-      "tokens": 123.58333333333333,
+      "tokens": 122.91666666666667,
       "spec": {
         "system_prompt": "Read the task and return only the requested output.",
         "validation": "results",
@@ -100,15 +100,15 @@
         "tool_policy": "validate_retry",
         "max_retries": 2
       },
-      "reason": "SQL errors like missing columns can be caught and corrected with validate_retry and results validation.",
+      "reason": "The failure indicates a SQL syntax error likely due to incorrect column references. Adding validate_retry with results validation would help catch such errors post-generation.",
       "accepted": true,
       "rejection": "",
       "on_frontier": true,
       "dev_score": 1.0,
       "n_pass": 12,
       "n_total": 12,
-      "in_tokens": 1483,
-      "out_tokens": 524,
+      "in_tokens": 1475,
+      "out_tokens": 516,
       "spec": {
         "system_prompt": "Read the task and return only the requested output.",
         "validation": "results",
@@ -118,22 +118,22 @@
     },
     {
       "iter": 2,
-      "spec_hash": "10283ea7",
+      "spec_hash": "53d72b44",
       "parent_hash": "21e3181c",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user."
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation."
       },
-      "reason": "The worker is already using results validation and validate_retry, but it is still failing with value mismatches, indicating a need for more guidance on SQL judgment. Enhancing the system prompt with specific rules and examples can help improve accuracy.",
+      "reason": "The worker is failing due to judgement errors in SQL queries, which are not addressed by validation. Adjusting the system prompt to include more specific guidance on constructing SQL queries can help improve result accuracy.",
       "accepted": true,
       "rejection": "dominated",
       "on_frontier": false,
       "dev_score": 1.0,
       "n_pass": 12,
       "n_total": 12,
-      "in_tokens": 1855,
-      "out_tokens": 435,
+      "in_tokens": 1591,
+      "out_tokens": 429,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. For filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user.",
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation.",
         "validation": "results",
         "tool_policy": "validate_retry",
         "max_retries": 2
@@ -141,22 +141,22 @@
     },
     {
       "iter": 3,
-      "spec_hash": "1a2043c5",
-      "parent_hash": "10283ea7",
+      "spec_hash": "8e32e790",
+      "parent_hash": "53d72b44",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders."
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation. For instance, ensure the WHERE clause accurately reflects the conditions specified in the prompt, and verify that the SELECT clause matches the desired output fields."
       },
-      "reason": "The worker is failing due to value mismatches, indicating a need for clearer guidelines or examples in the system prompt.",
+      "reason": "The worker is likely making well-formed SQL queries but selecting incorrect values or conditions; enhancing the prompt with specific rules and examples can guide correct decision-making.",
       "accepted": true,
       "rejection": "dominated",
       "on_frontier": false,
       "dev_score": 1.0,
       "n_pass": 12,
       "n_total": 12,
-      "in_tokens": 2083,
-      "out_tokens": 439,
+      "in_tokens": 1927,
+      "out_tokens": 436,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders.",
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation. For instance, ensure the WHERE clause accurately reflects the conditions specified in the prompt, and verify that the SELECT clause matches the desired output fields.",
         "validation": "results",
         "tool_policy": "validate_retry",
         "max_retries": 2
@@ -164,22 +164,22 @@
     },
     {
       "iter": 4,
-      "spec_hash": "c7432302",
-      "parent_hash": "1a2043c5",
+      "spec_hash": "c46a4111",
+      "parent_hash": "8e32e790",
       "edit": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders. Example: For 'How many users from the UK?', use 'SELECT COUNT(*) FROM users WHERE country = 'UK''. For 'How many orders per user?', use 'SELECT user_name, COUNT(orders) FROM orders GROUP BY user_name HAVING COUNT(orders) > 0'."
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation. For instance, ensure the WHERE clause accurately reflects the conditions specified in the prompt, and verify that the SELECT clause matches the desired output fields. Include rules for common conditions, such as checking for specific country codes or minimum order counts, and provide worked examples to clarify correct query structures."
       },
-      "reason": "The worker is consistently making judgement errors related to SQL logic, which validation cannot fix. Strengthening the system prompt with more detailed rules and worked examples should improve accuracy.",
+      "reason": "The worker is making well-formed SQL queries but with incorrect judgments, suggesting the need for more guidance on constructing queries accurately.",
       "accepted": true,
       "rejection": "dominated",
       "on_frontier": false,
       "dev_score": 1.0,
       "n_pass": 12,
       "n_total": 12,
-      "in_tokens": 2779,
-      "out_tokens": 414,
+      "in_tokens": 2263,
+      "out_tokens": 452,
       "spec": {
-        "system_prompt": "Read the task and return only the requested output. Ensure SQL queries are correctly structured and match the task requirements. For example, when counting users, use 'SELECT COUNT(*) FROM users'. When filtering by country, use 'WHERE country ='. Provide user name and order count when listing orders per user. Check if the logic matches task requirements exactly, and consider edge cases like users with zero orders. Example: For 'How many users from the UK?', use 'SELECT COUNT(*) FROM users WHERE country = 'UK''. For 'How many orders per user?', use 'SELECT user_name, COUNT(orders) FROM orders GROUP BY user_name HAVING COUNT(orders) > 0'.",
+        "system_prompt": "Read the task carefully and construct precise SQL queries to return only the requested output. Pay attention to details such as conditions and return format. Use examples from similar tasks to guide your query formulation. For instance, ensure the WHERE clause accurately reflects the conditions specified in the prompt, and verify that the SELECT clause matches the desired output fields. Include rules for common conditions, such as checking for specific country codes or minimum order counts, and provide worked examples to clarify correct query structures.",
         "validation": "results",
         "tool_policy": "validate_retry",
         "max_retries": 2

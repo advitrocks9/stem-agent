@@ -264,6 +264,8 @@ def evolve(
         save_name = f"split{split_seed}_seed{seed}.json"
     elif propose_mode != "full":
         save_name = f"{propose_mode}_seed{seed}.json"
+    elif skip_rollback:
+        save_name = f"no_rollback_seed{seed}.json"
     else:
         save_name = f"seed{seed}.json"
 

@@ -199,10 +199,12 @@ a no-op pairing on math.
 
 ### Rollback ablation
 
-Math seed 0 with `--no-rollback`: specialist test 71% vs 79% with rollback
-on. The gap is real (-8pp) and matches the failure mode the no-feedback
-ablation showed: without rollback the loop accepts a slightly worse spec
-once and then anchors on it. Saved at `runs/math/no_rollback_seed0.json`.
+Math seed 0 with `--no-rollback`: specialist test 71% vs 75% with
+rollback on. The gap is small (-4pp) on a 24-task test, but the lineage
+shows the mechanism: without rollback the loop accepts a slightly worse
+spec once (iter 2's `max_retries:4` regressed dev from 67% to 58% but
+was admitted to the archive) and then anchors on it. Saved at
+`runs/math/no_rollback_seed0.json`.
 
 ### A lineage that used the safeguards
 

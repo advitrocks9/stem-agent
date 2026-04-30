@@ -104,6 +104,35 @@ def main() -> None:
     plt.close(fig)
     print(f"wrote {out_dir / 'transfer.png'}")
 
+    # ---- Figure 3: Pareto frontier scatter ----
+    # Each saved run contributes its frontier points as (mean_in_tokens, dev
+    # score). The seed point sits at low tokens / lower score; specialists
+    # spend 2-4x the tokens for 10-30pp dev-score gains. The frontier carries
+    # 2-4 non-dominated points per run on average, not a single point.
+    fig, ax = plt.subplots(figsize=(6.5, 4.2))
+    for cls in classes:
+        for run in sorted(Path(f"runs/{cls}").glob("seed*.json")):
+            d = json.loads(run.read_text())
+            xs, ys = [], []
+            for p in d["frontier"]:
+                xs.append(p["tokens"])
+                ys.append(p["score"] * 100)
+            order = sorted(zip(xs, ys))
+            ax.plot([o[0] for o in order], [o[1] for o in order],
+                    color=colors[cls], alpha=0.6, linewidth=1.2, marker="o", markersize=5)
+    for cls in classes:
+        ax.plot([], [], color=colors[cls], label=cls, marker="o", linewidth=2)
+    ax.set_xlabel("mean prompt tokens per dev eval")
+    ax.set_ylabel("dev score (%)")
+    ax.set_xscale("log")
+    ax.set_title("Pareto frontiers across 12 saved runs")
+    ax.legend(loc="lower right", framealpha=0.9)
+    ax.grid(alpha=0.25, which="both")
+    fig.tight_layout()
+    fig.savefig(out_dir / "pareto_scatter.png", dpi=150)
+    plt.close(fig)
+    print(f"wrote {out_dir / 'pareto_scatter.png'}")
+
 
 if __name__ == "__main__":
     main()

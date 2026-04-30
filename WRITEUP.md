@@ -194,9 +194,9 @@ Random search is not the loop's performance: random hits +5 on regex
 because picking `(testcases, validate_retry, max_retries=2)` happens with
 non-trivial probability in six iters of single-field edits, but it never
 produces the math `code_exec`+prompt-nudge bundle. Failure feedback is
-load-bearing for the tool-using classes: math without it goes -8 because
-the meta-agent proposes `validate_retry+results` (the SQL shape), which is
-a no-op pairing on math.
+what carries the tool-using classes: math without it goes -8 because the
+meta-agent proposes `validate_retry+results` (the SQL shape), which is a
+no-op pairing on math.
 
 ### Rollback ablation
 

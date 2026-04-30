@@ -75,12 +75,13 @@ points (`A ≽ B iff A.score ≥ B.score and A.tokens ≤ B.tokens`, strict in
 at least one) and reject children that any existing point already
 dominates.
 
-The accepted-archive is a real Pareto frontier on this problem: across 12
-saved runs the average frontier carries 2.83 non-dominated points, and the
-seed point stays on the frontier as the cheap option in every run while
-the specialists pay 2-4x the tokens for 10-30pp dev-score gains. See
-`runs/figures/pareto_scatter.png`. The reported specialist is the
-highest-scoring archive entry, ties broken by lower tokens.
+The accepted-archive is a real Pareto frontier on this problem: across
+12 saved runs the average frontier carries 2.75 non-dominated points
+(min 1, max 5), and the seed point stays on the frontier as the cheap
+option in every run while the specialists pay 2-4x the tokens for
+10-30pp dev-score gains. See `runs/figures/pareto_scatter.png`. The
+reported specialist is the highest-scoring archive entry, ties broken
+by lower tokens.
 
 The stopping criterion is the consecutive-no-new-point count. After three
 in a row the loop terminates as a plateau. With `iters=8` this fires

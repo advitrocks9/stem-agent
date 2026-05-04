@@ -70,7 +70,7 @@ A child is rejected on three signals:
    parent's.
 
 Surviving children become points `P = (dev_score, mean in_tokens per
-eval)` in an accepted-archive. I implement Pareto dominance over those
+eval)` in an accepted-archive. I build Pareto dominance over those
 points (`A ≽ B iff A.score ≥ B.score and A.tokens ≤ B.tokens`, strict in
 at least one) and reject children that any existing point already
 dominates.

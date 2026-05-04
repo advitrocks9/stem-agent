@@ -2,6 +2,9 @@
 
 Rough notes from building stem-agent. Mostly bugs I hit and what they
 taught me. Dated when the bug got fixed, not when it was introduced.
+Dated journal kept alongside the repo; some entries precede `git init`
+on this tree (the bookend commits are 2026-04-24 and 2026-04-30) and a
+few were written up after the last commit but before submission.
 
 ---
 
@@ -186,7 +189,7 @@ Now the meta-agent's heuristic is sharp: see lots of `[value-mismatch]`,
 edit the system_prompt with rules, don't bother with retry.
 
 Re-ran 3 seeds.  Mean delta unchanged (+5pp before, ~+5pp after).
-*Variance* widened: +14, -5, +5 across seeds instead of +5, +5
+*Variance* widened: +14, 0, +5 across seeds instead of +5, +5
 before.  The meta-agent now commits more confidently to whichever
 fix the typed tag suggests.  When it's right, it's righter.  When it
 overfits dev, it overfits harder.

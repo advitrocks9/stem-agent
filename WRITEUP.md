@@ -208,11 +208,18 @@ no-op pairing on math.
 ### Rollback ablation
 
 Math seed 0 with `--no-rollback`: specialist test 71% vs 75% with
-rollback on. The gap is small (-4pp) on a 24-task test, but the lineage
-shows the mechanism: without rollback the loop accepts a slightly worse
-spec once (iter 2's `max_retries:4` regressed dev from 67% to 58% but
-was admitted to the archive) and then anchors on it. Saved at
-`runs/math/no_rollback_seed0.json`.
+rollback on. The gap is small (-4pp) on a 24-task test. Reading
+`runs/math/no_rollback_seed0.json`, the lineage doesn't actually
+exercise the rollback path: no child's dev score lands strictly below
+its parent's. What the no-rollback run does instead is roll a softer
+iter-1 system prompt ("Read the task and use python_exec if needed")
+than the with-rollback run's iter-1 prompt ("Use python_exec to compute
+the answer accurately"), then burn iters 4-5 on `max_retries:6`
+parse-rejections with no productive fallback. So this seed is a fair
+report on the test-score gap but not a clean demonstration of the
+safeguard. The safeguard does fire elsewhere (`runs/math/seed1.json`
+below, three rollbacks at iters 2-4); seed 0 just happened to roll a
+mutator path that didn't trigger it.
 
 ### A lineage that used the safeguards
 

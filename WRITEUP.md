@@ -160,20 +160,27 @@ the loop did not invent gains where there weren't any.
 
 ### Cross-class transfer (test sets)
 
-Each cell is the best-of-3-seeds specialist on the named class.
+Each cell picks the best-dev-score specialist across 3 seeds (not best
+test, which would put the same number on both sides of the diagonal).
 
 | spec | regex | json | math | sql |
 |---|---:|---:|---:|---:|
 | seed              | 71% | 43% | 62% | 92% |
-| regex specialist  | **81%** | 43% | 62% | 92% |
-| json specialist   | 67% | **57%** | 62% | 92% |
-| math specialist   | 67% | 33% | **83%** | 92% |
+| regex specialist  | **81%** | 48% | 67% | 92% |
+| json specialist   | 67% | 48% | 71% | 92% |
+| math specialist   | 67% | 33% | **79%** | 92% |
 | sql specialist    | 71% | 43% | 62% | **100%** |
 
-The diagonal is the best entry in every column. Off-diagonals fall back
-toward seed; the math specialist drops 10pp on json (33 vs seed 43)
-because its `code_exec`+python prompt is irrelevant there and clutters the
-worker's input.
+The regex, math, and sql diagonals are the best entry in their column.
+The json column ties at 48% between the json specialist and the regex
+specialist; the json specialist still beats seed by 5pp but doesn't
+out-transfer the regex one, which is the loop's weakest result and
+consistent with the headline (json gain has the widest CI). Off-diagonals
+mostly fall toward seed; the math specialist drops 10pp on json
+(33 vs seed 43) because its `code_exec`+python prompt is irrelevant
+there and clutters the worker's input. Picking by dev cost the math
+diagonal 4pp (the seed-1 specialist had a higher test score but the
+seed-0 dev score was equal, so the tie-break stayed at seed 0).
 
 ![transfer matrix](runs/figures/transfer.png)
 

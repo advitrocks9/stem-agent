@@ -18,14 +18,19 @@ from eval import evaluate, load, split
 
 
 def best_specialist(task_class: str) -> dict:
-    """Pick the highest-test-score specialist across all saved seeds."""
+    """Pick the highest-dev-score specialist across all saved seeds.
+
+    Dev not test: selecting by test would put the same numbers on both
+    sides of the comparison for the diagonal, since the matrix is then
+    evaluated on each class's test set.
+    """
     runs = sorted(Path(f"runs/{task_class}").glob("seed*.json"))
     if not runs:
         raise SystemExit(f"no runs for class {task_class}; run stem.py first")
     best = None
     for p in runs:
         s = json.loads(p.read_text())
-        if best is None or s["specialist_test_score"] > best["specialist_test_score"]:
+        if best is None or s["specialist_dev_score"] > best["specialist_dev_score"]:
             best = s
     return best["specialist_spec"]
 

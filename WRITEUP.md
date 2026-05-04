@@ -119,15 +119,23 @@ on critical-heavy failures and learned "everything is critical".
 
 Three seeds per class, with the worker held at T=0.0 so the seed score is
 a per-class constant. Numbers below are paired re-evaluations of seed and
-specialist on the same test items. Bootstrap 95% CIs come from resampling
-test items 1000 times per seed.
+specialist on the same test items. Δ ± is the cross-seed sample SD;
+the 95% CI column is a paired test-item bootstrap (1000 resamples per
+seed, mean of the seed-level lo/hi bounds, full per-seed table in
+`runs/bootstrap_summary.json`).
 
-| class | seed test | hand strong | specialist | Δ vs seed | per-seed Δ |
-|---|---:|---:|---:|---:|---|
-| regex | 71% | 76% | 83% ± 3 | **+11 ± 2.7** | +14, +10, +10 |
-| json  | 43% | 48% | 49% ± 7 | **+6 ± 7.3**  | +14, +0, +5  |
-| math  | 62% | 100% | 75% ± 8 | **+12 ± 8.3** | +12, +21, +4 |
-| sql   | 92% | 100% | 97% ± 5 | **+6 ± 4.8**  | +8, +8, +0   |
+| class | seed test | hand strong | specialist | Δ vs seed | 95% CI | per-seed Δ |
+|---|---:|---:|---:|---:|---:|---|
+| regex | 71% | 76% | 83% ± 3 | **+11 ± 2.7** | [0, +25] | +14, +10, +10 |
+| json  | 43% | 48% | 49% ± 7 | **+6 ± 7.3**  | [-16, +29] | +14, +0, +5  |
+| math  | 62% | 100% | 75% ± 8 | **+12 ± 8.3** | [-10, +36] | +12, +21, +4 |
+| sql   | 92% | 100% | 97% ± 5 | **+6 ± 4.8**  | [0, +17] | +8, +8, +0   |
+
+The json and math CIs cross zero. The cross-seed mean Δ is positive in
+both cases, but a single 21-task or 24-task held-out can't rule out "no
+gain on this seed". The regex and sql CIs sit at or above zero; those
+are the two classes where the finding is statistically stable on a
+per-seed basis as well as across seeds.
 
 The hand-strong column is a 10-minute hand-written spec scored on the same
 test, written by me as the strongest baseline I'd ship without any
@@ -142,10 +150,6 @@ while the meta-agent's specialist averages 75%.** The hand prompt says
 the meta-agent's nudge is shorter and the worker invokes `python_exec`
 inconsistently. This is the real hole in the loop and section A2 below
 unpacks it.
-
-The cross-seed mean is what carries the differentiation claim. Per-seed
-bootstrap CIs straddle zero on json and sql because the test sets are
-12-21 tasks (small for a paired proportion test).
 
 Same seed, same mutator, four different specialist shapes. Regex enables
 the testcase validator and a small retry budget. Math switches to
